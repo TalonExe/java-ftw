@@ -1,5 +1,6 @@
-package com.talon.testing;
+package com.talon.testing.controllers;
 
+import com.talon.testing.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 

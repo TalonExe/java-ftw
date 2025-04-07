@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import com.talon.testing.Employee;
+import com.talon.testing.models.Employee;
 
 /**
  * JavaFX App
