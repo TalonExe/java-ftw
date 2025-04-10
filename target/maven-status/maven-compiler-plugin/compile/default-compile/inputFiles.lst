@@ -1,5 +1,8 @@
 /home/talon/NetBeansProjects/testing/src/main/java/module-info.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/PrimaryController.java
+/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/Item.java
 /home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/App.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/Employee.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/SecondaryController.java
+/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/controllers/PrimaryController.java
+/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/controllers/SecondaryController.java
+/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/Employee.java
+/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/SalesManager.java
+/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/User.java

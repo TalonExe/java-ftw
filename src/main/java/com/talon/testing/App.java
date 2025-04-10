@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import com.talon.testing.models.SalesManager;
 import com.talon.testing.models.Employee;
 
 /**
@@ -33,7 +34,7 @@ public class App extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    static public void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
@@ -63,6 +64,9 @@ public class App extends Application {
     public static void main(String[] args) {
         try {
             loadData();
+            SalesManager hh = new SalesManager();
+            System.out.println(hh.getAllowedPermissions());
+            
         } catch (IOException e) {
             System.err.print(e);
         }
