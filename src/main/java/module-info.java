@@ -5,6 +5,7 @@ module com.talon.testing {
 
     opens com.talon.testing to javafx.fxml;
     opens com.talon.testing.controllers to javafx.fxml;
+    opens com.talon.testing.models to com.google.gson;
     
     exports com.talon.testing.models to com.google.gson;
     exports com.talon.testing.controllers to javafx.fxml;

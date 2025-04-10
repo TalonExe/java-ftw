@@ -6,19 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.lang.reflect.Type;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import java.io.IOException;
-import java.io.InputStreamReader;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import com.talon.testing.models.SalesManager;
-import com.talon.testing.models.Employee;
+import com.talon.testing.models.Item;
 
 /**
  * JavaFX App
@@ -42,30 +33,16 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-    
-    private static void loadData() throws IOException {
-        
-        Map<String, Employee> employeeMap = new HashMap<>();
-        // Load employees from JSON
-        Gson gson = new Gson();
-        try (var inputStream = Employee.class.getResourceAsStream("/data/example.txt")) {
-            if (inputStream == null) {
-                throw new IOException("File not found: /data/employeeList.json");
-            }
-            try (InputStreamReader reader = new InputStreamReader(inputStream)) {
-                Type userType = new TypeToken<Map<String, Employee>>() {}.getType();
-                employeeMap = gson.fromJson(reader, userType);
-            }
-        }
-        
-        System.out.println(employeeMap);
-    }
 
     public static void main(String[] args) {
         try {
-            loadData();
+            Item.loadItems();
             SalesManager hh = new SalesManager();
             System.out.println(hh.getAllowedPermissions());
+            
+            Item newItem = new Item("IT001", "Laptop", "Business laptop", "1200.00", "50", "10", "2025-04-10");
+            boolean added = Item.addItem(newItem);
+            System.out.println(added);
             
         } catch (IOException e) {
             System.err.print(e);
