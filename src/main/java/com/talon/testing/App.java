@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import com.talon.testing.models.SalesManager;
 import com.talon.testing.models.Item;
+import com.talon.testing.models.Supplier;
 
 /**
  * JavaFX App
@@ -36,7 +37,8 @@ public class App extends Application {
 
     public static void main(String[] args) {
         try {
-            Item.loadItems();
+            System.out.println(Supplier.loadSuppliers());
+            System.out.println(Item.loadItems());
             SalesManager hh = new SalesManager();
             System.out.println(hh.getAllowedPermissions());
             

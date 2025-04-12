@@ -1,8 +1,8 @@
 com/talon/testing/models/Employee.class
 com/talon/testing/App.class
-com/talon/testing/utils/GsonUtils.class
+com/talon/testing/models/Supplier.class
+com/talon/testing/models/Supplier$1.class
 com/talon/testing/controllers/SecondaryController.class
-com/talon/testing/utils/GsonUtils$1.class
 com/talon/testing/models/Item.class
 module-info.class
 com/talon/testing/models/SalesManager.class
