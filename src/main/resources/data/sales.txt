@@ -1,0 +1,51 @@
+{
+  {
+    "salesId": "SLS0001",
+    "itemCode": "GRC001",
+    "quantitySold": 25,
+    "salesDate": "2025-03-01",
+    "salesManagerId": "SM001"
+  },
+  {
+    "salesId": "SLS0002",
+    "itemCode": "GRC002",
+    "quantitySold": 30,
+    "salesDate": "2025-03-01",
+    "salesManagerId": "SM001"
+  },
+  {
+    "salesId": "SLS0003",
+    "itemCode": "FRS001",
+    "quantitySold": 15,
+    "salesDate": "2025-03-01",
+    "salesManagerId": "SM001"
+  },
+  {
+    "salesId": "SLS0004",
+    "itemCode": "FRS002",
+    "quantitySold": 18,
+    "salesDate": "2025-03-01",
+    "salesManagerId": "SM001"
+  },
+  {
+    "salesId": "SLS0005",
+    "itemCode": "DRY001",
+    "quantitySold": 22,
+    "salesDate": "2025-03-01",
+    "salesManagerId": "SM001"
+  },
+  {
+    "salesId": "SLS0006",
+    "itemCode": "GRC001",
+    "quantitySold": 20,
+    "salesDate": "2025-03-02",
+    "salesManagerId": "SM001"
+  },
+  {
+    "salesId": "SLS0007",
+    "itemCode": "GRC002",
+    "quantitySold": 25,
+    "salesDate": "2025-03-02",
+    "salesManagerId": "SM001"
+  }
+}

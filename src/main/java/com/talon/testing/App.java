@@ -11,7 +11,7 @@ import java.io.IOException;
 import com.talon.testing.models.SalesManager;
 import com.talon.testing.models.Item;
 import com.talon.testing.models.Supplier;
-
+import com.talon.testing.utils.Router;
 /**
  * JavaFX App
  */
@@ -21,6 +21,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        Router router = Router.getInstance();
+        router.setPrimaryStage(stage);
+        
+        router.loadScene("login", "/primary.fxml");
+        
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
         stage.show();
