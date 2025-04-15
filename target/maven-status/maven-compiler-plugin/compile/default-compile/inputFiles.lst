@@ -1,9 +1,8 @@
-/home/talon/NetBeansProjects/testing/src/main/java/module-info.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/Item.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/App.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/controllers/PrimaryController.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/Supplier.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/controllers/SecondaryController.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/Employee.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/SalesManager.java
-/home/talon/NetBeansProjects/testing/src/main/java/com/talon/testing/models/User.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/SalesManager.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/User.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/controllers/SecondaryController.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/controllers/PrimaryController.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/App.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/Item.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/Supplier.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/module-info.java
