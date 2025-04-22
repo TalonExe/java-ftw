@@ -1,0 +1,11 @@
+[
+  {
+    "userId": 1,
+    "username": "john123",
+    "password": "hashedPasswordHere",
+    "email": "john@example.com",
+    "phoneNumber": "0123456789",
+    "userType": "Administrator",
+    "createTime": "2025-04-20T10:00:00"
+  }
+]
