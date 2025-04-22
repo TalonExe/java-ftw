@@ -30,7 +30,7 @@ public class SalesManager extends User {
    }
    
    public SalesManager(String userId, String username, String password, String fullName, String email, String phoneNumber){
-       super(userId, username, password, fullName, email, phoneNumber, "SM");
+       super(userID, username, password, fullName, email, phoneNumber, "SM");
    }
    
    public boolean hasPermission(String action) {
