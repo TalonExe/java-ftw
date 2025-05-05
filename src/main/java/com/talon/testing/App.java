@@ -11,22 +11,15 @@ import java.io.IOException;
 import com.talon.testing.models.SalesManager;
 import com.talon.testing.models.Item;
 import com.talon.testing.models.Supplier;
-import com.talon.testing.utils.Router;
-/**
- * JavaFX App
- */
+import static javafx.application.Application.launch;
+
 public class App extends Application {
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        Router router = Router.getInstance();
-        router.setPrimaryStage(stage);
-        
-        router.loadScene("login", "/primary.fxml");
-        
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("PurchaseManagerPage"), 640, 480); // Changed from "primary" to "PurchaseManagerPage"
         stage.setScene(scene);
         stage.show();
     }
@@ -46,15 +39,14 @@ public class App extends Application {
             System.out.println(Item.loadItems());
             SalesManager hh = new SalesManager();
             System.out.println(hh.getAllowedPermissions());
-            
+
             Item newItem = new Item("IT001", "Laptop", "Business laptop", "1200.00", "50", "10", "2025-04-10");
             boolean added = Item.addItem(newItem);
             System.out.println(added);
-            
+
         } catch (IOException e) {
             System.err.print(e);
         }
         launch();
     }
-
 }
