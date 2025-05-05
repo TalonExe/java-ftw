@@ -26,6 +26,11 @@
             <version>2.12.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.17.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
