@@ -1,9 +1,13 @@
 com/talon/testing/App.class
+com/talon/testing/models/UserType.class
 com/talon/testing/models/Supplier.class
+com/talon/testing/controllers/UserController$1.class
 com/talon/testing/models/Supplier$1.class
 com/talon/testing/controllers/SecondaryController.class
+com/talon/testing/controllers/UserController.class
 com/talon/testing/models/Item.class
 module-info.class
+com/talon/testing/models/BasicUser.class
 com/talon/testing/models/SalesManager.class
 com/talon/testing/controllers/PrimaryController.class
 com/talon/testing/models/Item$1.class

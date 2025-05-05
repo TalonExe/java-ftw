@@ -23,14 +23,14 @@ public abstract class User {
     
     }
 
-    public User(String userID, String username, String password, String email, String phoneNumber, UserType userType, LocalDateTime createTime) {
+    public User(String userID, String username, String password, String email, String phoneNumber, UserType userType) {
         this.userID = userID;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.userType = userType;
-        this.createTime = createTime;
+        this.createTime = LocalDateTime.now();
     }
 
     public String getUserID() { 
@@ -73,8 +73,8 @@ public abstract class User {
     public void setUserType(UserType userType) { 
         this.userType = userType; 
     }
-    public void setCreateTime(LocalDateTime createTime) { 
-        this.createTime = createTime; 
+    public void setCreateTime() { 
+        this.createTime = LocalDateTime.now(); 
     }
 
     public abstract boolean hasPermission(String action);

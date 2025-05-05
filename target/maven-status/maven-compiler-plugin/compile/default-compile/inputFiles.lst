@@ -1,8 +1,11 @@
 /Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/SalesManager.java
 /Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/User.java
 /Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/controllers/SecondaryController.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/UserType.java
 /Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/controllers/PrimaryController.java
 /Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/App.java
 /Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/Item.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/BasicUser.java
+/Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/controllers/UserController.java
 /Users/Shared/java-ftw/java-ftw/src/main/java/com/talon/testing/models/Supplier.java
 /Users/Shared/java-ftw/java-ftw/src/main/java/module-info.java
