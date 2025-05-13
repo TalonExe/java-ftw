@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="PO Approval" onAction="#handlePOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Finance Report" onAction="#handleFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Purchase Requisitions" onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#handleProcessPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+        </VBox>
+    </left>
+    
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Text text="Finance Report" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+            
+            <TableView fx:id="salesTableView" style="-fx-padding: 10;">
+                <columns>
+                    <TableColumn text="Sales ID" prefWidth="100" fx:id="salesIdColumn"/>
+                    <TableColumn text="Item Code" prefWidth="100" fx:id="itemCodeColumn"/>
+                    <TableColumn text="Quantity Sold" prefWidth="100" fx:id="quantitySoldColumn"/>
+                    <TableColumn text="Sales Date" prefWidth="120" fx:id="salesDateColumn"/>
+                    <TableColumn text="Manager ID" prefWidth="100" fx:id="managerIdColumn"/>
+                </columns>
+            </TableView>
+            
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Generate PDF Report" onAction="#generatePDFReport" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

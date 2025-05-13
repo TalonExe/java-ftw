@@ -86,7 +86,7 @@ public class Sales {
             }
         }
         
-        return supplierMap;
+        return salesMap;
     }
     
 }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="PO Approval" onAction="#handlePOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Finance Report" onAction="#handleFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Purchase Requisitions" onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#handleProcessPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold;"/>
+        </VBox>
+    </left>
+    
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Text text="Process Payment to Suppliers" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+            
+            <TabPane>
+                <Tab text="By Supplier">
+                    <VBox spacing="10">
+                        <TableView fx:id="supplierTableView" style="-fx-padding: 10;">
+                            <columns>
+                                <TableColumn text="Supplier ID" prefWidth="100" fx:id="supplierIdColumn"/>
+                                <TableColumn text="Supplier Name" prefWidth="200" fx:id="supplierNameColumn"/>
+                                <TableColumn text="Contact Person" prefWidth="150" fx:id="contactPersonColumn"/>
+                                <TableColumn text="Email" prefWidth="200" fx:id="emailColumn"/>
+                                <TableColumn text="Phone" prefWidth="120" fx:id="phoneColumn"/>
+                            </columns>
+                        </TableView>
+                        
+                        <Text text="Purchase Orders for Selected Supplier:" style="-fx-font-weight: bold;"/>
+                        <TableView fx:id="supplierPOTableView" style="-fx-padding: 10;">
+                            <columns>
+                                <TableColumn text="PO ID" prefWidth="100" fx:id="poIdColumn"/>
+                                <TableColumn text="Requisition ID" prefWidth="120" fx:id="prIdColumn"/>
+                                <TableColumn text="Date" prefWidth="120" fx:id="poDateColumn"/>
+                                <TableColumn text="Status" prefWidth="120" fx:id="poStatusColumn"/>
+                                <TableColumn text="Approved" prefWidth="100" fx:id="poApprovedColumn"/>
+                                <TableColumn text="Action" prefWidth="150" fx:id="poActionColumn"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+                
+                <Tab text="All Approved POs">
+                    <TableView fx:id="approvedPOTableView" style="-fx-padding: 10;">
+                        <columns>
+                            <TableColumn text="PO ID" prefWidth="100" fx:id="allPoIdColumn"/>
+                            <TableColumn text="Supplier" prefWidth="200" fx:id="allPoSupplierColumn"/>
+                            <TableColumn text="Requisition ID" prefWidth="120" fx:id="allPrIdColumn"/>
+                            <TableColumn text="Date" prefWidth="120" fx:id="allPoDateColumn"/>
+                            <TableColumn text="Status" prefWidth="120" fx:id="allPoStatusColumn"/>
+                            <TableColumn text="Action" prefWidth="150" fx:id="allPoActionColumn"/>
+                        </columns>
+                    </TableView>
+                </Tab>
+            </TabPane>
+            
+            <VBox fx:id="poDetailsBox" spacing="10" style="-fx-padding: 10; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-border-radius: 5;">
+                <Text text="Selected PO Items:" style="-fx-font-weight: bold;"/>
+                <TableView fx:id="poItemsTableView" style="-fx-padding: 5;">
+                    <columns>
+                        <TableColumn text="Item Code" prefWidth="100" fx:id="poItemCodeColumn"/>
+                        <TableColumn text="Quantity" prefWidth="80" fx:id="poQuantityColumn"/>
+                    </columns>
+                </TableView>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Process Payment" onAction="#processPayment" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
