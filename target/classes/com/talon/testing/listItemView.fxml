@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="873.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="itemsTableView" prefHeight="873.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="itemCode" prefWidth="163.0" text="Item ID" />
+          <TableColumn fx:id="itemName" prefWidth="213.0" text="Item Name" />
+          <TableColumn fx:id="description" prefWidth="205.0" text="Description" />
+          <TableColumn fx:id="unitPrice" prefWidth="148.0" text="Unit Price" />
+          <TableColumn fx:id="currentStock" prefWidth="133.0" text="Current Stock" />
+          <TableColumn fx:id="minimumStock" prefWidth="140.0" text="Minimum Stock" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

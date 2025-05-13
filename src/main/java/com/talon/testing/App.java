@@ -19,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("PurchaseManagerPage"), 640, 480); // Changed from "primary" to "PurchaseManagerPage"
+        scene = new Scene(loadFXML("PurchaseManagerPage"), 1310, 873); // Changed from "primary" to "PurchaseManagerPage"
         stage.setScene(scene);
         stage.show();
     }

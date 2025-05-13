@@ -1,6 +1,7 @@
 com\talon\testing\models\Supplier.class
 com\talon\testing\utils\Router.class
 com\talon\testing\App.class
+com\talon\testing\controllers\PurchaseManagerController.class
 com\talon\testing\models\User.class
 com\talon\testing\controllers\SecondaryController.class
 com\talon\testing\models\Item$1.class
@@ -10,4 +11,5 @@ module-info.class
 com\talon\testing\models\Supplier$1.class
 com\talon\testing\models\Item.class
 com\talon\testing\models\Sales.class
+com\talon\testing\controllers\PurchaseManagerController$Supplier.class
 com\talon\testing\models\SalesManager.class
