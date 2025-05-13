@@ -13,12 +13,12 @@
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button onAction="#updatePOStatus" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
-            <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
-            <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Daily Sales Entry" />
-            <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
-            <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PR" />
-            <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Daily Sales Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PR" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
         </VBox>
     </left>
     <center>

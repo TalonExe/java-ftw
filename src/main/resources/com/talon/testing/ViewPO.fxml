@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Daily Sales Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PR" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
+        </VBox>
+    </left>
+    
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="View PO" />
+            
+            <TableView fx:id="requisitionTableView" style="-fx-padding: 10;">
+                <columns>
+                    <TableColumn fx:id="POIDColumn" prefWidth="120" text="PO ID" />
+                    <TableColumn fx:id="PmanagerIdColumn" prefWidth="100" text="Purhcase Manager ID" />
+                    <TableColumn fx:id="PRIDColumn" prefWidth="120" text="PR ID" />
+                    <TableColumn fx:id="SupplierIDColumn" prefWidth="120" text="Supplier ID" />
+                    <TableColumn fx:id="AmountColumn" prefWidth="100" text="Total Amount" />
+                    <TableColumn fx:id="StatusColumn" prefWidth="120" text="Status" />
+                    <TableColumn fx:id="createdateColumn" prefWidth="120" text="Create At" />
+                </columns>
+            </TableView>
+            
+            <HBox alignment="CENTER_RIGHT" spacing="10" />
+        </VBox>
+    </center>
+</BorderPane>
+

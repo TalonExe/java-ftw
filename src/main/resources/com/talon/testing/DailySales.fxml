@@ -28,13 +28,12 @@
             <!-- Table View -->
             <TableView fx:id="poTable" prefHeight="300.0" prefWidth="800.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ccc;">
                 <columns>
-                    <TableColumn fx:id="poIdCol" prefWidth="100" text="Supplier ID" />
-                    <TableColumn fx:id="prIdCol" prefWidth="150" text="Supplier Name" />
-                    <TableColumn fx:id="statusCol" prefWidth="120.0" text="Contact Person" />
-                    <TableColumn fx:id="approvedCol" prefWidth="73.60009765625" text="Email" />
-                    <TableColumn fx:id="approvedCol1" prefWidth="129.59988403320312" text="Phone Number" />
-                    <TableColumn fx:id="approvedCol2" minWidth="0.0" prefWidth="76.0001220703125" text="Address" />
-               <TableColumn fx:id="approvedCol21" minWidth="-1.0" prefWidth="187.9998779296875" text="Registration Date" />
+                    <TableColumn fx:id="SalesIdCol" prefWidth="100" text="Sales ID" />
+                    <TableColumn fx:id="ItemIdCol" prefWidth="150" text="Item Code" />
+                    <TableColumn fx:id="QuantitySCol" prefWidth="120.0" text="Quantity Sold" />
+                    <TableColumn fx:id="SalesDateCol" prefWidth="73.60009765625" text="Sales Date" />
+                    <TableColumn fx:id="SalesManagerIDCol1" prefWidth="129.59988403320312" text="Sales Manager ID" />
+
                 </columns>
             </TableView>
             
@@ -54,36 +53,30 @@
                         <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
                         <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
                         <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
-                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
-                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
+
                     </rowConstraints>
                     
                     <!-- Item Code -->
-                    <Label text="Supplier ID" />
-                    <TextField fx:id="supplierIDField" GridPane.columnIndex="1" />
+                    <Label text="Sales ID" />
+                    <TextField fx:id="itemCodeField" GridPane.columnIndex="1" />
                     
                     <!-- Item Name -->
-                    <Label text="Supplier Name:" GridPane.rowIndex="1" />
-                    <TextField fx:id="SupplierNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label text="Item Code" GridPane.rowIndex="1" />
+                    <TextField fx:id="itemNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     
                     <!-- Description -->
-                    <Label text="Contact Person" GridPane.rowIndex="2" />
-                    <TextField fx:id="ContactPersonField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Label text="Quantity Sold" GridPane.rowIndex="2" />
+                    <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     
                     <!-- Unit Price -->
-                    <Label text="Email" GridPane.rowIndex="3" />
-                    <TextField fx:id="EmailField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <Label text="Sales Date" GridPane.rowIndex="3" />
+                    <TextField fx:id="unitPriceField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     
                     <!-- Current Stock -->
-                    <Label text="Phone Number" GridPane.rowIndex="4" />
-                    <TextField fx:id="PhoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <Label text="Sales Manager ID" GridPane.rowIndex="4" />
+                    <TextField fx:id="currentStockField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     
-                    <!-- Minimum Stock -->
-                    <Label text="Address" GridPane.rowIndex="5" />
-                    <TextField fx:id="AddressField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                    
-                    <Label text="Registration Date" GridPane.rowIndex="6" />
-                    <TextField fx:id="DateField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
                     
                 </GridPane>
                 
@@ -97,3 +90,4 @@
         </VBox>
     </center>
 </BorderPane>
+
