@@ -1,0 +1,19 @@
+{
+  "reportId": "FINREP001",
+  "date": "2025-05-11",
+  "approvedOrders": [
+    {
+      "purchaseOrderId": "PO002",
+      "totalCost": "240.00",
+      "paymentStatus": "Completed"
+    }
+  ],
+  "pendingOrders": [
+    {
+      "purchaseOrderId": "PO001",
+      "estimatedCost": "2550.00",
+      "paymentStatus": "Pending"
+    }
+  ]
+}
+

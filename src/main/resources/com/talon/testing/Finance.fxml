@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane fx:id="mainTabPane" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FinanceManagerController">
+    <tabs>
+        <Tab fx:id="poApprovalTab" text="PO Approval">
+            <content>
+                <VBox spacing="10.0">
+                    <Label text="Pending Purchase Orders" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <TableView fx:id="pendingPOTable" prefHeight="300.0" prefWidth="750.0">
+                        <columns>
+                            <TableColumn fx:id="poIdColumn" prefWidth="100.0" text="PO ID"/>
+                            <TableColumn fx:id="prIdColumn" prefWidth="100.0" text="PR ID"/>
+                            <TableColumn fx:id="orderDateColumn" prefWidth="150.0" text="Order Date"/>
+                            <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status"/>
+                        </columns>
+                    </TableView>
+                    
+                    <VBox fx:id="poDetailsBox" spacing="5.0" style="-fx-border-color: lightgray; -fx-border-width: 1px; -fx-padding: 10px;">
+                        <Label text="PO Details" style="-fx-font-weight: bold;"/>
+                        <HBox spacing="10.0">
+                            <Label text="PO Number:"/>
+                            <Label fx:id="selectedPONumber" text=""/>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <Label text="New Quantity:"/>
+                            <TextField fx:id="quantityField" prefWidth="100.0"/>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <Label text="Select Supplier:"/>
+                            <ComboBox fx:id="supplierComboBox" prefWidth="200.0"/>
+                        </HBox>
+                        <HBox spacing="10.0">
+                            <Button fx:id="approveButton" text="Approve PO" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                            <Button fx:id="modifyButton" text="Modify PO"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </content>
+        </Tab>
+        
+        <Tab fx:id="paymentProcessingTab" text="Payment Processing">
+            <content>
+                <VBox spacing="10.0">
+                    <Label text="Approved Purchase Orders" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <TableView fx:id="approvedPOTable" prefHeight="400.0" prefWidth="750.0">
+                        <columns>
+                            <TableColumn fx:id="approvedPoIdColumn" prefWidth="100.0" text="PO ID"/>
+                            <TableColumn fx:id="approvalDateColumn" prefWidth="150.0" text="Approval Date"/>
+                        </columns>
+                    </TableView>
+                    <Button fx:id="processPaymentButton" text="Process Payment" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+                </VBox>
+            </content>
+        </Tab>
+        
+        <Tab fx:id="financialReportsTab" text="Financial Reports">
+            <content>
+                <VBox spacing="10.0">
+                    <Label text="Generate Financial Report" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <HBox spacing="10.0">
+                        <Label text="Start Date:"/>
+                        <DatePicker fx:id="reportStartDate"/>
+                        <Label text="End Date:"/>
+                        <DatePicker fx:id="reportEndDate"/>
+                        <Button fx:id="generateReportButton" text="Generate Report"/>
+                    </HBox>
+                    <TextArea fx:id="reportOutput" prefHeight="400.0" prefWidth="750.0" editable="false"/>
+                </VBox>
+            </content>
+        </Tab>
+        
+        <Tab fx:id="requisitionsTab" text="Purchase Requisitions">
+            <content>
+                <VBox spacing="10.0">
+                    <Label text="Purchase Requisitions" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <TableView fx:id="requisitionsTable" prefHeight="500.0" prefWidth="750.0">
+                        <columns>
+                            <TableColumn fx:id="prIdColumn" prefWidth="100.0" text="PR ID"/>
+                            <TableColumn fx:id="requestDateColumn" prefWidth="150.0" text="Request Date"/>
+                            <TableColumn fx:id="managerIdColumn" prefWidth="100.0" text="Manager ID"/>
+                            <TableColumn fx:id="deliveryDateColumn" prefWidth="150.0" text="Delivery Date"/>
+                            <TableColumn fx:id="prStatusColumn" prefWidth="100.0" text="Status"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

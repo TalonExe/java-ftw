@@ -1,0 +1,29 @@
+[
+  {
+    "PRID": "PR001",
+    "SalesManagerID": "U002",
+    "ItemID": "I001",
+    "Quantity": 10,
+    "RequiredDate": "2025-05-20",
+    "Status": "Pending",
+    "CreatedAt": "2025-05-10 09:30:00"
+  },
+  {
+    "PRID": "PR002",
+    "SalesManagerID": "U002",
+    "ItemID": "I002",
+    "Quantity": 5,
+    "RequiredDate": "2025-05-22",
+    "Status": "Approved",
+    "CreatedAt": "2025-05-11 11:15:00"
+  },
+  {
+    "PRID": "PR003",
+    "SalesManagerID": "U004",
+    "ItemID": "I003",
+    "Quantity": 20,
+    "RequiredDate": "2025-05-25",
+    "Status": "Rejected",
+    "CreatedAt": "2025-05-12 14:00:00"
+  }
+]
