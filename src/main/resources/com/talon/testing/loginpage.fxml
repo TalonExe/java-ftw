@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="LoginController"
+            prefWidth="400" prefHeight="250"
+            style="-fx-background-color: #f0f4f8;">
+
+    <VBox alignment="CENTER"
+          spacing="14.0"
+          layoutX="50" layoutY="20"
+          prefWidth="300"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          style="-fx-padding: 20;">
+
+        <Label text="Login"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+        <TextField fx:id="usernameField" promptText="Username"
+                   style="-fx-pref-height: 36px; -fx-background-radius: 6px; -fx-padding: 0 8px;"/>
+
+        <PasswordField fx:id="passwordField" promptText="Password"
+                       style="-fx-pref-height: 36px; -fx-background-radius: 6px; -fx-padding: 0 8px;"/>
+
+        <Button text="Login"
+                onAction="#handleLogin"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6px; -fx-pref-height: 36px; -fx-cursor: hand;"/>
+
+        <Label fx:id="messageLabel"
+               wrapText="true"
+               style="-fx-text-fill: red; -fx-font-size: 12px; -fx-padding: 4 0 0 0;"/>
+
+    </VBox>
+</AnchorPane>
