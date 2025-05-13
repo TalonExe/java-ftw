@@ -6,6 +6,7 @@ com\talon\testing\controllers\FinanceManagerController$PO.class
 module-info.class
 com\talon\testing\models\DailySales.class
 com\talon\testing\models\Sales.class
+com\talon\testing\controllers\FinanceManagerController$2.class
 com\talon\testing\models\Supplier.class
 com\talon\testing\utils\Router.class
 com\talon\testing\models\Inventory.class
@@ -16,4 +17,5 @@ com\talon\testing\models\PurchaseRequisition.class
 com\talon\testing\models\Sales$1.class
 com\talon\testing\models\Supplier$1.class
 com\talon\testing\models\Item.class
+com\talon\testing\controllers\FinanceManagerController$1.class
 com\talon\testing\models\SalesManager.class

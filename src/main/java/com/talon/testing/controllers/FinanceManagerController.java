@@ -1,18 +1,25 @@
 package com.talon.testing.controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.talon.testing.models.DailySales;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.beans.property.ReadOnlyStringWrapper;
-
-import java.io.*;
-import java.util.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.*;
+import java.lang.reflect.Type;
+import java.util.*;
+import java.util.stream.Collectors;
+
 public class FinanceManagerController {
+    
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     
     //*****************************************************************//
     //*************************PO APPROVAL*****************************// 
@@ -30,7 +37,7 @@ public class FinanceManagerController {
     @FXML private Button updateQuantityButton;
 
     private final ObservableList<PO> poList = FXCollections.observableArrayList();
-    private final File poFile = new File("PO.txt");
+    private final File poFile = new File("PO.json");
     
     
     //*****************************************************************//
@@ -46,11 +53,6 @@ public class FinanceManagerController {
     
     private final ObservableList<DailySales> salesDataList = FXCollections.observableArrayList();
     
-    //*****************************************************************//
-    //******************* PR PAGE ******************************//
-    //*****************************************************************//    
-
-
     @FXML
     public void initialize() {
         //*****************************************************************//
@@ -87,68 +89,37 @@ public class FinanceManagerController {
         salesTableView.setItems(salesDataList);
     }
     
-    
-    
     //*****************************************************************//
     //*************************PO APPROVAL*****************************// 
     //*****************************************************************//
-    
-    
+    @FXML
     private void loadPOs() {
         poList.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(poFile))) {
-            String line;
-            PO currentPO = null;
+        if (!poFile.exists()) {
+            return;
+        }
 
-            while ((line = reader.readLine()) != null) {
-                if (line.equals("END")) {
-                    if (currentPO != null) {
-                        poList.add(currentPO);
-                        currentPO = null;
-                    }
-                } else if (line.contains("|")) {
-                    String[] parts = line.split("\\|");
-                    currentPO = new PO();
-                    currentPO.purchaseOrderId = parts[0];
-                    currentPO.purchaseRequisitionId = parts[1];
-                    currentPO.status = parts[2];
-                    currentPO.financeManagerApproved = Boolean.parseBoolean(parts[3]);
-                    currentPO.items = new ArrayList<>();
-                } else {
-                    if (currentPO != null) {
-                        String[] parts = line.split(",");
-                        POItem item = new POItem();
-                        item.itemCode = parts[0];
-                        item.quantity = parts[1];
-                        item.supplierId = parts[2];
-                        currentPO.items.add(item);
-                    }
-                }
+        try (Reader reader = new FileReader(poFile)) {
+            Type poListType = new TypeToken<List<PO>>() {}.getType();
+            List<PO> loadedPOs = gson.fromJson(reader, poListType);
+            if (loadedPOs != null) {
+                poList.addAll(loadedPOs);
             }
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Error", "Failed to load POs: " + e.getMessage());
         }
     }
-
+    @FXML
     private void savePOs() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(poFile))) {
-            for (PO po : poList) {
-                writer.write(po.purchaseOrderId + "|" + po.purchaseRequisitionId + "|" + po.status + "|" + po.financeManagerApproved);
-                writer.newLine();
-                for (POItem item : po.items) {
-                    writer.write(item.itemCode + "," + item.quantity + "," + item.supplierId);
-                    writer.newLine();
-                }
-                writer.write("END");
-                writer.newLine();
-            }
+        try (Writer writer = new FileWriter(poFile)) {
+            gson.toJson(poList.stream().collect(Collectors.toList()), writer);
         } catch (Exception e) {
             e.printStackTrace();
             showAlert("Error", "Failed to save POs: " + e.getMessage());
         }
     }
-
+    @FXML
     private void updatePOStatus(String newStatus) {
         PO selected = poTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
@@ -163,7 +134,7 @@ public class FinanceManagerController {
         poTable.refresh();
         showAlert("Success", "PO status updated to: " + newStatus);
     }
-
+    @FXML
     private void updateItemQuantity() {
         PO selected = poTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
@@ -213,6 +184,11 @@ public class FinanceManagerController {
         String status;
         boolean financeManagerApproved;
         List<POItem> items;
+        
+        // Empty constructor for GSON
+        public PO() {
+            items = new ArrayList<>();
+        }
     }
 
     public static class POItem {
@@ -224,55 +200,21 @@ public class FinanceManagerController {
     //*****************************************************************//
     //*************************GENERATE REPORT*************************// 
     //*****************************************************************//
-    
-    
+    @FXML
     private void loadSalesData() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("sales.txt"))) {
-            String line;
-            StringBuilder jsonContent = new StringBuilder();
-            
-            while ((line = reader.readLine()) != null) {
-                jsonContent.append(line.trim());
-            }
-            
-            // Simple parsing (since we're not using JSON library)
-            String content = jsonContent.toString();
-            content = content.substring(content.indexOf('{') + 1, content.lastIndexOf('}'));
-            
-            // Split into individual sales records
-            String[] salesRecords = content.split("(?=\\s*\"SLS\\d+\":\\s*\\{)");
-            
-            for (String record : salesRecords) {
-                if (record.trim().isEmpty()) continue;
-                
-                // Extract fields from each record
-                String salesId = extractField(record, "salesId");
-                String itemCode = extractField(record, "itemCode");
-                int quantitySold = Integer.parseInt(extractField(record, "quantitySold"));
-                String salesDate = extractField(record, "salesDate");
-                String salesManagerId = extractField(record, "salesManagerId");
-                
-                salesDataList.add(new DailySales(salesId, itemCode, quantitySold, salesDate, salesManagerId));
+        File salesFile = new File("sales.json");
+        if (!salesFile.exists()) {
+            return;
+        }
+
+        try (Reader reader = new FileReader(salesFile)) {
+            Type salesListType = new TypeToken<List<DailySales>>() {}.getType();
+            List<DailySales> loadedSales = gson.fromJson(reader, salesListType);
+            if (loadedSales != null) {
+                salesDataList.addAll(loadedSales);
             }
         } catch (IOException e) {
             showAlert("Error", "Failed to load sales data: " + e.getMessage(), AlertType.ERROR);
-        }
-    }
-    
-    private String extractField(String record, String fieldName) {
-        int startIndex = record.indexOf("\"" + fieldName + "\":") + fieldName.length() + 3;
-        if (startIndex < fieldName.length() + 3) return "";
-        
-        String remaining = record.substring(startIndex).trim();
-        if (remaining.startsWith("\"")) {
-            // String value
-            int endIndex = remaining.indexOf("\"", 1);
-            return remaining.substring(1, endIndex);
-        } else {
-            // Numeric value
-            int endIndex = remaining.indexOf(",");
-            if (endIndex == -1) endIndex = remaining.indexOf("}");
-            return remaining.substring(0, endIndex).trim();
         }
     }
     
@@ -306,7 +248,7 @@ public class FinanceManagerController {
             showAlert("Error", "Failed to generate report: " + e.getMessage(), AlertType.ERROR);
         }
     }
-    
+    @FXML
     private void showAlert(String title, String message, AlertType type) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -314,9 +256,4 @@ public class FinanceManagerController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    
-    //***********************************************************************//
-    //************************ VIEW PR *************************************//
-    //********************************************************************//
-
 }
