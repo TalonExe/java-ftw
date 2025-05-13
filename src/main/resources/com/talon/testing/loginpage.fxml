@@ -6,7 +6,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="LoginController"
+            fx:controller="com.talon.testing.controllers.loginController"
             prefWidth="400" prefHeight="250"
             style="-fx-background-color: #f0f4f8;">
 
@@ -28,7 +28,7 @@
                        style="-fx-pref-height: 36px; -fx-background-radius: 6px; -fx-padding: 0 8px;"/>
 
         <Button text="Login"
-                onAction="#handleLogin"
+                onAction="handleLogin"
                 style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6px; -fx-pref-height: 36px; -fx-cursor: hand;"/>
 
         <Label fx:id="messageLabel"
