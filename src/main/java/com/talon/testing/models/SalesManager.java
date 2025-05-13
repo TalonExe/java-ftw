@@ -26,11 +26,11 @@ public class SalesManager extends User {
     
    public SalesManager() {
        super();
-       setUserType("SM");
+       setUserType(UserType.Sales_Manager);
    }
    
-   public SalesManager(String userId, String username, String password, String fullName, String email, String phoneNumber){
-       super(userId, username, password, fullName, email, phoneNumber, "SM");
+   public SalesManager(String userId, String username, String password, String email, String phoneNumber){
+       super(userId, username, password, email, phoneNumber, UserType.Sales_Manager);
    }
    
    public boolean hasPermission(String action) {

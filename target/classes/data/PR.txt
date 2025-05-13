@@ -1,0 +1,29 @@
+{
+  "PR001": {
+    "prId": "PR001",
+    "salesManagerId": "U002",
+    "ItemID": "I001",
+    "quantity": 10,
+    "requiredDate": "2025-05-20",
+    "status": "Pending",
+    "createdAt": "2025-05-10 09:30:00"
+  },
+  "PR002":{
+    "prId": "PR002",
+    "salesManagerId": "U002",
+    "ItemID": "I002",
+    "quantity": 5,
+    "requiredDate": "2025-05-22",
+    "status": "Approved",
+    "createdAt": "2025-05-11 11:15:00"
+  },
+  "PR003":{
+    "prId": "PR003",
+    "salesManagerId": "U004",
+    "ItemID": "I003",
+    "quantity": 20,
+    "requiredDate": "2025-05-25",
+    "status": "Rejected",
+    "createdAt": "2025-05-12 14:00:00"
+  }
+}

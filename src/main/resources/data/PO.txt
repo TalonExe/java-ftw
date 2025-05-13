@@ -1,0 +1,22 @@
+{
+  "PO001": {
+    "poId": "PO001",
+    "purchaseManagerId": "U003",
+    "prId": "PR002",
+    "supplierId": "S001",
+    "quantity": 10,
+    "totalAmount": 2500.00,
+    "status": "Approved",
+    "createdAt": "2025-05-12 10:00:00"
+  },
+  "PO002": {
+    "poId": "PO002",
+    "purchaseManagerId": "U005",
+    "prId": "PR001",
+    "supplierId": "S002",
+    "quantity": 5,
+    "totalAmount": 4800.00,
+    "status": "Pending",
+    "createdAt": "2025-05-12 15:30:00"
+  }
+}

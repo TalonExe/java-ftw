@@ -40,7 +40,8 @@ public class Router {
     }
 
     public void loadScene(String name, String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/talon/testing/" + fxmlPath));
+        System.out.println(name + " " + fxmlPath);
         Parent root = loader.load();
         Scene scene = new Scene(root);
         scenes.put(name, scene);
