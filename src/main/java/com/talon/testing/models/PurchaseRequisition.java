@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 public class PurchaseRequisition {
     private String prId;
-    private LocalDate requestDate;
+    private String requestDate;
     private String salesManagerId;
     private LocalDate requiredDeliveryDate;
     private String status;

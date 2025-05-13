@@ -11,7 +11,7 @@ public class PurchaseOrder {
     private String poId;
     private String prId;
     private String supplier;
-    private LocalDate orderDate;
+    private LocalDate CreatedAt;
     private String purchaseManagerId;
     private String financeManagerId;
     private LocalDate approvalDate;

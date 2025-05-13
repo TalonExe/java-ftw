@@ -1,6 +1,6 @@
 [
   {
-    "POID": "PO001",
+    "poId": "PO001",
     "PurchaseManagerID": "U003",
     "PRID": "PR002",
     "SupplierID": "S001",

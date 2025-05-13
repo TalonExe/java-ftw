@@ -1,55 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button text="PO Approval" onAction="#handlePOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Finance Report" onAction="#handleFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Purchase Requisitions" onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold;"/>
-            <Button text="Process Payment" onAction="#handleProcessPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#handlePOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="PO Approval" />
+            <Button onAction="#handleFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Finance Report" />
+            <Button onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold;" text="Purchase Requisitions" />
+            <Button onAction="#handleProcessPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Process Payment" />
         </VBox>
     </left>
     
     <center>
         <VBox spacing="20" style="-fx-padding: 20;">
-            <Text text="Purchase Requisitions" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+            <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Purchase Requisitions" />
             
             <TableView fx:id="requisitionTableView" style="-fx-padding: 10;">
                 <columns>
-                    <TableColumn text="Requisition ID" prefWidth="120" fx:id="requisitionIdColumn"/>
-                    <TableColumn text="Manager ID" prefWidth="100" fx:id="managerIdColumn"/>
-                    <TableColumn text="Date Requested" prefWidth="120" fx:id="dateRequestedColumn"/>
-                    <TableColumn text="Required By" prefWidth="120" fx:id="requiredByColumn"/>
-                    <TableColumn text="Status" prefWidth="100" fx:id="statusColumn"/>
-                    <TableColumn text="Items Count" prefWidth="100" fx:id="itemsCountColumn"/>
+                    <TableColumn fx:id="requisitionIdColumn" prefWidth="120" text="Requisition ID" />
+                    <TableColumn fx:id="managerIdColumn" prefWidth="100" text="Manager ID" />
+                    <TableColumn fx:id="dateRequestedColumn" prefWidth="120" text="Date Requested" />
+                    <TableColumn fx:id="requiredByColumn" prefWidth="120" text="Required By" />
+                    <TableColumn fx:id="itemsCountColumn" prefWidth="100" text="Items" />
+               <TableColumn fx:id="requisitionIdColumn2" prefWidth="120" text="Quantity" />
+               <TableColumn fx:id="requisitionIdColumn1" prefWidth="120" text="Supplier" />
                 </columns>
             </TableView>
             
-            <VBox fx:id="itemDetailsBox" spacing="10" style="-fx-padding: 10; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-border-radius: 5;">
-                <Text text="Selected Requisition Items:" style="-fx-font-weight: bold;"/>
-                <TableView fx:id="itemsTableView" style="-fx-padding: 5;">
-                    <columns>
-                        <TableColumn text="Item Code" prefWidth="100" fx:id="itemCodeColumn"/>
-                        <TableColumn text="Quantity" prefWidth="80" fx:id="quantityColumn"/>
-                        <TableColumn text="Supplier ID" prefWidth="100" fx:id="supplierIdColumn"/>
-                    </columns>
-                </TableView>
-            </VBox>
-            
-            <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Approve" onAction="#approveRequisition" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
-                <Button text="Reject" onAction="#rejectRequisition" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold;"/>
-                <Button text="Generate Report" onAction="#generateReport" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;"/>
-            </HBox>
+            <HBox alignment="CENTER_RIGHT" spacing="10" />
         </VBox>
     </center>
 </BorderPane>

@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button text="PO Approval" onAction="#updatePOStatus" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Finance Report" onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#updatePOStatus" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="PO Approval" />
+            <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Finance Report" />
 <!--            <Button text="Purchase Requisitions" onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>-->
-            <Button text="Process Payment" onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Process Payment" />
+         <Button onAction="#loadSalesData" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Purchase Requisitions" />
         </VBox>
     </left>
     <center>
         <VBox spacing="10">
-            <Label text="PO Approval Dashboard" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="PO Approval Dashboard" />
             <TableView fx:id="poTable" prefHeight="400" prefWidth="600">
                 <columns>
                     <TableColumn fx:id="poIdCol" text="PO ID" />
@@ -23,18 +30,18 @@
                     <TableColumn fx:id="approvedCol" text="Approved" />
                 </columns>
             </TableView>
-            <HBox spacing="10" alignment="CENTER">
-                <Button fx:id="approveButton" text="Approve Selected PO" style="-fx-base: #4CAF50; -fx-text-fill: white;" />
-                <Button fx:id="rejectButton" text="Reject Selected PO" style="-fx-base: #F44336; -fx-text-fill: white;" />
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="approveButton" style="-fx-base: #4CAF50; -fx-text-fill: white;" text="Approve Selected PO" />
+                <Button fx:id="rejectButton" style="-fx-base: #F44336; -fx-text-fill: white;" text="Reject Selected PO" />
             </HBox>
             <VBox spacing="5" style="-fx-padding: 10; -fx-border-color: #ccc; -fx-border-width: 1; -fx-border-radius: 5;">
-                <Label text="Modify Item Quantity" style="-fx-font-weight: bold;"/>
-                <HBox spacing="5" alignment="CENTER_LEFT">
-                    <Label text="Item Code:"/>
-                    <TextField fx:id="itemCodeField" promptText="Enter item code" prefWidth="100"/>
-                    <Label text="New Quantity:"/>
-                    <TextField fx:id="quantityField" promptText="Enter quantity" prefWidth="80"/>
-                    <Button fx:id="updateQuantityButton" text="Update Quantity" style="-fx-base: #2196F3; -fx-text-fill: white;"/>
+                <Label style="-fx-font-weight: bold;" text="Modify Item Quantity" />
+                <HBox alignment="CENTER_LEFT" spacing="5">
+                    <Label text="Item Code:" />
+                    <TextField fx:id="itemCodeField" prefWidth="100" promptText="Enter item code" />
+                    <Label text="New Quantity:" />
+                    <TextField fx:id="quantityField" prefWidth="80" promptText="Enter quantity" />
+                    <Button fx:id="updateQuantityButton" style="-fx-base: #2196F3; -fx-text-fill: white;" text="Update Quantity" />
                 </HBox>
             </VBox>
         </VBox>

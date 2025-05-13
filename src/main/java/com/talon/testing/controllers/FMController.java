@@ -21,7 +21,7 @@ public class FMController {
     private final String PO_PATH = "/data/PO.txt";
     private final String PR_PATH = "/data/PR.txt";
     
-    public static Map<String, Item> loadItems() throws IOException {
+    public static Map<String, Item> loadPO() throws IOException {
         Map<String, Item> itemMap = new HashMap<>();
         Gson gson = new Gson();
         
