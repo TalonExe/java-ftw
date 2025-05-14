@@ -4,18 +4,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="873.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <TableView fx:id="suppliersTableView" layoutX="2.0" layoutY="1.0" prefHeight="873.0" prefWidth="1003.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="1.0">
-            <columns>
-                <TableColumn fx:id="supplierId" prefWidth="100.0" text="Supplier ID" />
-                <TableColumn fx:id="supplierName" prefWidth="150.0" text="Supplier Name" />
-                <TableColumn fx:id="contactPerson" prefWidth="120.0" text="Contact Person" />
-                <TableColumn fx:id="email" prefWidth="160.0" text="Email" />
-                <TableColumn fx:id="phoneNumber" prefWidth="110.0" text="Phone Number" />
-                <TableColumn fx:id="address" prefWidth="249.0" text="Address" />
-                <TableColumn fx:id="registrationDate" prefWidth="112.0" text="Registration Date" />
-            </columns>
-        </TableView>
-    </children>
+<AnchorPane prefHeight="873.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.ListSupplierController">
+   <children>
+      <TableView fx:id="supplierTableView" prefHeight="873.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="supplierIdColumn" prefWidth="100.0" text="Supplier ID" />
+          <TableColumn fx:id="supplierNameColumn" prefWidth="200.0" text="Supplier Name" />
+          <TableColumn fx:id="contactPersonColumn" prefWidth="150.0" text="Contact Person" />
+          <TableColumn fx:id="emailColumn" prefWidth="200.0" text="Email" />
+          <TableColumn fx:id="phoneNumberColumn" prefWidth="150.0" text="Phone Number" />
+          <TableColumn fx:id="addressColumn" prefWidth="250.0" text="Address" />
+          <TableColumn fx:id="registrationDateColumn" prefWidth="150.0" text="Registration Date" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>

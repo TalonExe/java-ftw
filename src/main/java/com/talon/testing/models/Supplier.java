@@ -1,121 +1,106 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.talon.testing.models;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-import java.io.*;
-/**
- *
- * @author talon
- */
+
 public class Supplier {
-    private String supplierId;
-    private String supplierName;
-    private String contactPerson;
-    private String email;
-    private String phoneNumber;
-    private String address;
-    private String registrationDate;
-    
-    // File path for items storage
-    private static final String ITEMS_FILE_PATH = "/data/suppliers.txt";
-    // Type token for Map<String, Item>
-    private static final Type ITEM_MAP_TYPE = new TypeToken<Map<String, Item>>() {}.getType();
-    
+    private final SimpleStringProperty supplierId;
+    private final SimpleStringProperty supplierName;
+    private final SimpleStringProperty contactPerson;
+    private final SimpleStringProperty email;
+    private final SimpleStringProperty phoneNumber;
+    private final SimpleStringProperty address;
+    private final SimpleStringProperty registrationDate;
+
     public Supplier(String supplierId, String supplierName, String contactPerson, String email, String phoneNumber, String address, String registrationDate) {
-        setSupplierId(supplierId);
-        setSupplierName(supplierName);
-        setContactPerson(contactPerson);
-        setEmail(email);
-        setPhoneNumber(phoneNumber);
-        setAddress(address);
-        setRegistrationDate(registrationDate);
+        this.supplierId = new SimpleStringProperty(supplierId);
+        this.supplierName = new SimpleStringProperty(supplierName);
+        this.contactPerson = new SimpleStringProperty(contactPerson);
+        this.email = new SimpleStringProperty(email);
+        this.phoneNumber = new SimpleStringProperty(phoneNumber);
+        this.address = new SimpleStringProperty(address);
+        this.registrationDate = new SimpleStringProperty(registrationDate);
     }
-    
-    public String getSupplierId(){
-        return this.supplierId;
+
+    public String getSupplierId() {
+        return supplierId.get();
     }
-    
-    public void setSupplierId(String supplierId){
-        this.supplierId = supplierId;
+
+    public SimpleStringProperty supplierIdProperty() {
+        return supplierId;
     }
-    
-    public String getSupplierName(){
-        return this.supplierName;
+
+    public String getSupplierName() {
+        return supplierName.get();
     }
-    
-    public void setSupplierName(String supplierName){
-        this.supplierName = supplierName;
+
+    public SimpleStringProperty supplierNameProperty() {
+        return supplierName;
     }
-    
-    public String getContactPerson(){
-        return this.contactPerson;
+
+    public String getContactPerson() {
+        return contactPerson.get();
     }
-    
-    public void setContactPerson(String contactPerson){
-        this.contactPerson = contactPerson;
+
+    public SimpleStringProperty contactPersonProperty() {
+        return contactPerson;
     }
-    
-    public String getEmail(){
-        return this.email;
+
+    public String getEmail() {
+        return email.get();
     }
-    
-    public void setEmail(String email){
-        this.email = email;
+
+    public SimpleStringProperty emailProperty() {
+        return email;
     }
-    
-    public String getPhoneNumber(){
-        return this.phoneNumber;
+
+    public String getPhoneNumber() {
+        return phoneNumber.get();
     }
-    
-    public void setPhoneNumber(String phoneNumber){
-        this.phoneNumber = phoneNumber;
+
+    public SimpleStringProperty phoneNumberProperty() {
+        return phoneNumber;
     }
-    
-    public String getAddress(){
-        return this.address;
+
+    public String getAddress() {
+        return address.get();
     }
-    
-    public void setAddress(String address){
-        this.address = address;
+
+    public SimpleStringProperty addressProperty() {
+        return address;
     }
-    
-    public String getRegistrationDate(){
-        return this.registrationDate;
+
+    public String getRegistrationDate() {
+        return registrationDate.get();
     }
-    
-    public void setRegistrationDate(String registrationDate){
-        this.registrationDate = registrationDate;
+
+    public SimpleStringProperty registrationDateProperty() {
+        return registrationDate;
     }
-    
-    public static Map<String, Supplier> loadSuppliers() throws IOException {
-        Map<String, Supplier> supplierMap = new HashMap<>();
-        Gson gson = new Gson();
-        
-        try (var inputStream = Supplier.class.getResourceAsStream(ITEMS_FILE_PATH)) {
-            if (inputStream == null) {
-                // If file doesn't exist, return empty map
-                return supplierMap;
-            }
-            try (InputStreamReader reader = new InputStreamReader(inputStream)) {
-                supplierMap = gson.fromJson(reader, ITEM_MAP_TYPE);
-                // Handle null case if file exists but is empty or invalid
-                if (supplierMap == null) {
-                    supplierMap = new HashMap<>();
+
+    public static ObservableList<Supplier> loadSuppliers() throws IOException {
+        ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
+        try (BufferedReader br = new BufferedReader(new FileReader("D:\\APU One Drive\\OneDrive - Asia Pacific University\\Documents\\GitHub\\java-ftw\\target\\classes\\data\\suppliers.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 7) {
+                    suppliers.add(new Supplier(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(), data[4].trim(), data[5].trim(), data[6].trim()));
                 }
             }
         }
-        
-        return supplierMap;
+        return suppliers;
+    }
+
+    // You can add the addSupplier method here if needed
+    public static boolean addSupplier(Supplier supplier) throws IOException {
+        // Implementation for adding a supplier to the file would go here
+        System.out.println("Adding supplier functionality needs to be implemented.");
+        return false;
     }
 }

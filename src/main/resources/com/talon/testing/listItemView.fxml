@@ -4,16 +4,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="873.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="873.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.ListItemController">
    <children>
-      <TableView fx:id="itemsTableView" prefHeight="873.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="itemTableView" prefHeight="873.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="itemCode" prefWidth="163.0" text="Item ID" />
-          <TableColumn fx:id="itemName" prefWidth="213.0" text="Item Name" />
-          <TableColumn fx:id="description" prefWidth="205.0" text="Description" />
-          <TableColumn fx:id="unitPrice" prefWidth="148.0" text="Unit Price" />
-          <TableColumn fx:id="currentStock" prefWidth="133.0" text="Current Stock" />
-          <TableColumn fx:id="minimumStock" prefWidth="140.0" text="Minimum Stock" />
+          <TableColumn fx:id="itemIdColumn" prefWidth="100.0" text="Item ID" />
+          <TableColumn fx:id="itemNameColumn" prefWidth="200.0" text="Item Name" />
+          <TableColumn fx:id="descriptionColumn" prefWidth="300.0" text="Description" />
+          <TableColumn fx:id="unitPriceColumn" prefWidth="120.0" text="Unit Price" />
+          <TableColumn fx:id="currentStockColumn" prefWidth="120.0" text="Current Stock" />
+          <TableColumn fx:id="minimumStockColumn" prefWidth="120.0" text="Minimum Stock" />
         </columns>
       </TableView>
    </children>

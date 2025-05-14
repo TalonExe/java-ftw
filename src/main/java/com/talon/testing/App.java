@@ -8,18 +8,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import com.talon.testing.models.SalesManager;
-import com.talon.testing.models.Item;
-import com.talon.testing.models.Supplier;
-import static javafx.application.Application.launch;
-
 public class App extends Application {
 
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("PurchaseManagerPage"), 1310, 873); // Changed from "primary" to "PurchaseManagerPage"
+        scene = new Scene(loadFXML("PurchaseManagerPage"), 1310, 873);
         stage.setScene(scene);
         stage.show();
     }
@@ -34,19 +29,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        try {
-            System.out.println(Supplier.loadSuppliers());
-            System.out.println(Item.loadItems());
-            SalesManager hh = new SalesManager();
-            System.out.println(hh.getAllowedPermissions());
-
-            Item newItem = new Item("IT001", "Laptop", "Business laptop", "1200.00", "50", "10", "2025-04-10");
-            boolean added = Item.addItem(newItem);
-            System.out.println(added);
-
-        } catch (IOException e) {
-            System.err.print(e);
-        }
-        launch();
+        launch(args); // Only keep the launch method here
     }
 }

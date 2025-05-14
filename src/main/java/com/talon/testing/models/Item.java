@@ -1,162 +1,96 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.talon.testing.models;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-import java.io.*;
 
-
-/**
- *
- * @author talon
- */
 public class Item {
-    private String itemCode;
-    private String itemName;
-    private String description;
-    private String unitPrice;
-    private String currentStock;
-    private String minimumStock;
-    private String createDate;
-    
-    // File path for items storage
-    private static final String ITEMS_FILE_PATH = "/data/items.txt";
-    // Type token for Map<String, Item>
-    private static final Type ITEM_MAP_TYPE = new TypeToken<Map<String, Item>>() {}.getType();
-    
-    public Item(String itemCode, String itemName, String description, String unitPrice, String currentStock, String minimumStock, String createDate) {
-        setItemCode(itemCode);
-        setItemName(itemName);
-        setDescription(description);
-        setUnitPrice(unitPrice);
-        setCurrentStock(currentStock);
-        setMinimumStock(minimumStock);
-        setCreateDate(createDate);
+    private final SimpleStringProperty itemId;
+    private final SimpleStringProperty itemName;
+    private final SimpleStringProperty description;
+    private final SimpleStringProperty unitPrice;
+    private final SimpleStringProperty currentStock;
+    private final SimpleStringProperty minimumStock;
+
+    public Item(String itemId, String itemName, String description, String unitPrice, String currentStock, String minimumStock) {
+        this.itemId = new SimpleStringProperty(itemId);
+        this.itemName = new SimpleStringProperty(itemName);
+        this.description = new SimpleStringProperty(description);
+        this.unitPrice = new SimpleStringProperty(unitPrice);
+        this.currentStock = new SimpleStringProperty(currentStock);
+        this.minimumStock = new SimpleStringProperty(minimumStock);
     }
-    
-    public String getItemCode(){
-        return this.itemCode;
+
+    public String getItemId() {
+        return itemId.get();
     }
-    
-    public void setItemCode(String itemCode){
-        this.itemCode = itemCode;
+
+    public SimpleStringProperty itemIdProperty() {
+        return itemId;
     }
-    
-    public String getItemName(){
-        return this.itemName;
+
+    public String getItemName() {
+        return itemName.get();
     }
-    
-    public void setItemName(String itemName){
-        this.itemName = itemName;
+
+    public SimpleStringProperty itemNameProperty() {
+        return itemName;
     }
-    
-    public String getDescription(){
-        return this.description;
+
+    public String getDescription() {
+        return description.get();
     }
-    
-    public void setDescription(String description){
-        this.description = description;
+
+    public SimpleStringProperty descriptionProperty() {
+        return description;
     }
-    
-    public String getUnitPrice(){
-        return this.unitPrice;
+
+    public String getUnitPrice() {
+        return unitPrice.get();
     }
-    
-    public void setUnitPrice(String unitPrice){
-        this.unitPrice = unitPrice;
+
+    public SimpleStringProperty unitPriceProperty() {
+        return unitPrice;
     }
-    
-    public String getCurrentStock(){
-        return this.currentStock;
+
+    public String getCurrentStock() {
+        return currentStock.get();
     }
-    
-    public void setCurrentStock(String currentStock){
-        this.currentStock = currentStock;
+
+    public SimpleStringProperty currentStockProperty() {
+        return currentStock;
     }
-    
-    public String getMinimumStock(){
-        return this.minimumStock;
+
+    public String getMinimumStock() {
+        return minimumStock.get();
     }
-    
-    public void setMinimumStock(String minimumStock){
-        this.minimumStock = minimumStock;
+
+    public SimpleStringProperty minimumStockProperty() {
+        return minimumStock;
     }
-    
-    public String getCreateDate(){
-        return this.createDate;
-    }
-    
-    public void setCreateDate(String createDate){
-        this.createDate = createDate;
-    }
-    
-    public static Map<String, Item> loadItems() throws IOException {
-        Map<String, Item> itemMap = new HashMap<>();
-        Gson gson = new Gson();
-        
-        try (var inputStream = Item.class.getResourceAsStream(ITEMS_FILE_PATH)) {
-            if (inputStream == null) {
-                // If file doesn't exist, return empty map
-                return itemMap;
-            }
-            try (InputStreamReader reader = new InputStreamReader(inputStream)) {
-                itemMap = gson.fromJson(reader, ITEM_MAP_TYPE);
-                // Handle null case if file exists but is empty or invalid
-                if (itemMap == null) {
-                    itemMap = new HashMap<>();
+
+    public static ObservableList<Item> loadItems() throws IOException {
+        ObservableList<Item> items = FXCollections.observableArrayList();
+        try (BufferedReader br = new BufferedReader(new FileReader("D:\\APU One Drive\\OneDrive - Asia Pacific University\\Documents\\GitHub\\java-ftw\\target\\classes\\data\\items.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                if (data.length == 6) {
+                    items.add(new Item(data[0].trim(), data[1].trim(), data[2].trim(), data[3].trim(), data[4].trim(), data[5].trim()));
                 }
             }
         }
-        
-        return itemMap;
+        return items;
     }
-    
-    private static String determineFilePath() {
-        // This is a simplification - in a real app you'd determine 
-        // where you can write the file based on your application's structure
-        String basePath = System.getProperty("user.dir");
-        return basePath + "/src/main/resources" + ITEMS_FILE_PATH;
-    }
-    
-    private static void saveItems(Map<String, Item> itemMap) throws IOException {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String json = gson.toJson(itemMap, ITEM_MAP_TYPE);
-        
-        // Since we can't write directly to resources in a running app, 
-        // we determine the actual path to write to
-        String filePath = determineFilePath();
-        
-        try (FileWriter writer = new FileWriter(filePath)) {
-            writer.write(json);
-        }
-    }
-    
+
+    // You can add the addItem method here if you intend to use it within this context
     public static boolean addItem(Item item) throws IOException {
-        if (item == null || item.getItemCode() == null) {
-            return false;
-        }
-        
-        Map<String, Item> itemMap = loadItems();
-        
-        // Check if item already exists
-        if (itemMap.containsKey(item.getItemCode())) {
-            return false; // Item already exists
-        }
-        
-        // Add the new item
-        itemMap.put(item.getItemCode(), item);
-        
-        // Save updated map
-        saveItems(itemMap);
-        return true;
+        // Implementation for adding an item to the file would go here
+        System.out.println("Adding item functionality needs to be implemented.");
+        return false;
     }
 }

@@ -1,35 +1,5 @@
-{
-  "1": {
-    "itemCode": "GRC001",
-    "itemName": "Rice (5kg)",
-    "description": "Premium quality basmati rice",
-    "unitPrice": "25.50",
-    "currentStock": "150",
-    "minimumStock": "50"
-  },
-  "2": {
-    "itemCode": "GRC002",
-    "itemName": "Sugar (1kg)",
-    "description": "Fine grain white sugar",
-    "unitPrice": "5.20",
-    "currentStock": "200",
-    "minimumStock": "80"
-  },
-  "3": {
-    "itemCode": "FRS001",
-    "itemName": "Apples (1kg)",
-    "description": "Fresh red apples",
-    "unitPrice": "12.90",
-    "currentStock": "80",
-    "minimumStock": "30"
-  },
-  "IT001": {
-    "itemCode": "IT001",
-    "itemName": "Laptop",
-    "description": "Business laptop",
-    "unitPrice": "1200.00",
-    "currentStock": "50",
-    "minimumStock": "10",
-    "createDate": "2025-04-10"
-  }
-}
+IT001,Laptop,High-performance business laptop,1200.50,50,10
+IT002,Wireless Mouse,Ergonomic wireless mouse,25.99,100,25
+IT003,Mechanical Keyboard,Tactile mechanical keyboard,79.95,75,15
+IT004,Monitor,27-inch IPS monitor,299.00,30,5
+IT005,Webcam,HD webcam with microphone,49.99,60,10

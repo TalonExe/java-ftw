@@ -1,29 +1,4 @@
-{
-  "SUP001": {
-    "supplierId": "SUP001",
-    "supplierName": "Grocery Wholesalers Sdn Bhd",
-    "contactPerson": "David Lim",
-    "email": "david@grocerywholesalers.com",
-    "phoneNumber": "0311234567",
-    "address": "10, Jalan Industri 5, 40000 Shah Alam, Selangor",
-    "registrationDate": "2025-01-15"
-  },
-  "SUP002": {
-    "supplierId": "SUP002",
-    "supplierName": "Fresh Farms Malaysia",
-    "contactPerson": "Amina Abdullah",
-    "email": "amina@freshfarms.com",
-    "phoneNumber": "0322345678",
-    "address": "25, Jalan Pertanian 8, 43000 Kajang, Selangor",
-    "registrationDate": "2025-01-20"
-  },
-  "SUP003": {
-    "supplierId": "SUP003",
-    "supplierName": "Dairy Distribution Co.",
-    "contactPerson": "Raj Kumar",
-    "email": "raj@dairydist.com",
-    "phoneNumber": "0333456789",
-    "address": "5, Jalan Susu 3, 47500 Subang Jaya, Selangor",
-    "registrationDate": "2025-01-25"
-  }
-}
+SUP001,Tech Solutions Inc.,Alice Smith,alice.smith@techsolutions.com,012-3456789,123 Main Street,2024-08-15
+SUP002,Global Supplies Ltd.,Bob Johnson,bob.johnson@globalsupplies.net,03-9876543,456 Industrial Park,2023-11-20
+SUP003,Prime Distributors,Charlie Brown,charlie.brown@primedist.org,07-1122334,789 Business Avenue,2025-01-05
+SUP004,Alpha Components,Diana Lee,diana.lee@alphacomponents.com,04-5556667,101 Tech Hub,2024-05-30
