@@ -2,4 +2,4 @@ IT001,Laptop,High-performance business laptop,1200.50,50,10
 IT002,Wireless Mouse,Ergonomic wireless mouse,25.99,100,25
 IT003,Mechanical Keyboard,Tactile mechanical keyboard,79.95,75,15
 IT004,Monitor,27-inch IPS monitor,299.00,30,5
-IT005,Webcam,HD webcam with microphone,49.99,60,10
+IT005,Webcam,HD webcam with microphone,49.99,60,10,5/5/2023

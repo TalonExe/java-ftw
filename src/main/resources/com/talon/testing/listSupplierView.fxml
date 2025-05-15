@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="873.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.ListSupplierController">
    <children>
-      <TableView fx:id="supplierTableView" prefHeight="873.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="supplierTableView" prefHeight="873.0" prefWidth="1204.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-201.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="supplierIdColumn" prefWidth="100.0" text="Supplier ID" />
           <TableColumn fx:id="supplierNameColumn" prefWidth="200.0" text="Supplier Name" />
