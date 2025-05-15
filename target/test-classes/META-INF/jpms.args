@@ -1,0 +1,4 @@
+--patch-module
+com.talon.testing=_
+--add-reads
+com.talon.testing=ALL-UNNAMED

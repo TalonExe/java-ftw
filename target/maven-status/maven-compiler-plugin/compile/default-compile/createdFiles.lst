@@ -1,6 +1,5 @@
 com\talon\testing\controllers\UserManagementController.class
 com\talon\testing\models\PurchaseOrder.class
-com\talon\testing\App.class
 com\talon\testing\models\BasicUser.class
 com\talon\testing\models\Item$1.class
 com\talon\testing\models\PurchaseOrderModel.class
@@ -19,6 +18,7 @@ com\talon\testing\models\Supplier$1.class
 com\talon\testing\models\Item.class
 com\talon\testing\models\PurchaseOrderModel$1.class
 com\talon\testing\controllers\FinanceManagerController$1.class
+com\talon\testing\InventoryApp.class
 com\talon\testing\controllers\UserController$1.class
 com\talon\testing\controllers\UserController.class
 com\talon\testing\models\SalesManager.class
