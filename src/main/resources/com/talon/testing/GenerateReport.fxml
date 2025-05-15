@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-
-
-<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button text="PO Approval" onAction="#handlePOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Finance Report" onAction="#handleFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Purchase Requisitions" onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Process Payment" onAction="#handleProcessPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#handlePOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="PO Approval" />
+            <Button onAction="#handleFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Finance Report" />
+            <Button onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Purchase Requisitions" />
+            <Button onAction="#handleProcessPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Process Payment" />
         </VBox>
     </left>
     
     <center>
         <VBox spacing="20" style="-fx-padding: 20;">
-            <Text text="Finance Report" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+            <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Finance Report" />
+         <BarChart prefHeight="367.0" prefWidth="628.0">
+           <xAxis>
+             <CategoryAxis side="BOTTOM" />
+           </xAxis>
+           <yAxis>
+             <NumberAxis side="LEFT" />
+           </yAxis>
+         </BarChart>
             
-            <TableView fx:id="salesTableView" style="-fx-padding: 10;">
-                <columns>
-                    <TableColumn text="Sales ID" prefWidth="100" fx:id="salesIdColumn"/>
-                    <TableColumn text="Item Code" prefWidth="100" fx:id="itemCodeColumn"/>
-                    <TableColumn text="Quantity Sold" prefWidth="100" fx:id="quantitySoldColumn"/>
-                    <TableColumn text="Sales Date" prefWidth="120" fx:id="salesDateColumn"/>
-                    <TableColumn text="Manager ID" prefWidth="100" fx:id="managerIdColumn"/>
-                </columns>
-            </TableView>
-            
-            <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Generate PDF Report" onAction="#generatePDFReport" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button onAction="#generatePDFReport" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="Generate PDF Report" />
             </HBox>
         </VBox>
     </center>
