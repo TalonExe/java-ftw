@@ -5,6 +5,8 @@ import com.talon.testing.models.User;
 import com.talon.testing.models.UserType;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -109,15 +111,17 @@ public class UserManagementController implements Initializable {
     
     private void addUser() {
         try {
+            String hashedPassword = hashPassword(passwordField.getText());
+
             BasicUser newUser = new BasicUser(
                 userIdField.getText(),
                 usernameField.getText(),
-                passwordField.getText(),
+                hashedPassword,
                 emailField.getText(),
                 phoneField.getText(),
                 userTypeCombo.getValue()
             );
-            
+
             UserController.addUser(newUser);
             loadUserData();
             clearForm();
@@ -126,32 +130,36 @@ public class UserManagementController implements Initializable {
             showAlert("Error", "Failed to add user: " + ex.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
     
-    private void updateUser() {
-        User selectedUser = userTable.getSelectionModel().getSelectedItem();
-        if (selectedUser == null) {
-            showAlert("Warning", "Please select a user to update", Alert.AlertType.WARNING);
-            return;
-        }
-        
-        try {
-            BasicUser updatedUser = new BasicUser(
-                userIdField.getText(),
-                usernameField.getText(),
-                passwordField.getText(),
-                emailField.getText(),
-                phoneField.getText(),
-                userTypeCombo.getValue()
-            );
-            
-            UserController.updateUser(updatedUser);
-            loadUserData();
-            clearForm();
-            showAlert("Success", "User updated successfully", Alert.AlertType.INFORMATION);
-        } catch (Exception ex) {
-            showAlert("Error", "Failed to update user: " + ex.getMessage(), Alert.AlertType.ERROR);
-        }
+private void updateUser() {
+    User selectedUser = userTable.getSelectionModel().getSelectedItem();
+    if (selectedUser == null) {
+        showAlert("Warning", "Please select a user to update", Alert.AlertType.WARNING);
+        return;
     }
+
+    try {
+        String hashedPassword = hashPassword(passwordField.getText());
+
+        BasicUser updatedUser = new BasicUser(
+            userIdField.getText(),
+            usernameField.getText(),
+            hashedPassword,
+            emailField.getText(),
+            phoneField.getText(),
+            userTypeCombo.getValue()
+        );
+
+        UserController.updateUser(updatedUser);
+        loadUserData();
+        clearForm();
+        showAlert("Success", "User updated successfully", Alert.AlertType.INFORMATION);
+    } catch (Exception ex) {
+        showAlert("Error", "Failed to update user: " + ex.getMessage(), Alert.AlertType.ERROR);
+    }
+}
+
     
     private void deleteUser() {
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
@@ -168,6 +176,16 @@ public class UserManagementController implements Initializable {
         } catch (Exception ex) {
             showAlert("Error", "Failed to delete user: " + ex.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+    
+    private String hashPassword(String password) throws Exception {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashBytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
     }
     
     private void showAlert(String title, String message, Alert.AlertType type) {
