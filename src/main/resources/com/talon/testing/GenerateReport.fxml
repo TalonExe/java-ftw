@@ -11,10 +11,10 @@
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button text="PO Approval" onAction="#handlePOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Finance Report" onAction="#handleFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Purchase Requisitions" onAction="#handlePurchaseRequisitions" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Process Payment" onAction="#handleProcessPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="PO Approval" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Finance Report" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Purchase Requisitions" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
         </VBox>
     </left>
     
@@ -33,7 +33,7 @@
             </TableView>
             
             <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Generate PDF Report" onAction="#generatePDFReport" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button text="Generate PDF Report" onAction="#test" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
             </HBox>
         </VBox>
     </center>

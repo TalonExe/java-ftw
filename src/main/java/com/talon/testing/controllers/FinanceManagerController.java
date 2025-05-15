@@ -3,6 +3,7 @@ package com.talon.testing.controllers;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.talon.testing.models.PurchaseOrder;
 import com.talon.testing.models.PurchaseRequisition;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,6 +21,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class FinanceManagerController {
     private static final String PR_FILE_PATH = "/data/PR.txt";
     private static final Type PR_MAP_TYPE = new TypeToken<Map<String, PurchaseRequisition>>() {}.getType();
+    
+    private static final String PO_FILE_PATH = "/data/PO.txt";
+    private static final Type PO_MAP_TYPE = new TypeToken<Map<String, PurchaseOrder>>() {}.getType();
     
     @FXML
     private TableView<PurchaseRequisition> requisitionTableView;
