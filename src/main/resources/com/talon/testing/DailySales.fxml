@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Daily Sales Entry" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PR" />
+            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="SUPPLIER ENTRY" />
+            
+            <!-- Table View -->
+            <TableView fx:id="poTable" prefHeight="300.0" prefWidth="800.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ccc;">
+                <columns>
+                    <TableColumn fx:id="SalesIdCol" prefWidth="100" text="Sales ID" />
+                    <TableColumn fx:id="ItemIdCol" prefWidth="150" text="Item Code" />
+                    <TableColumn fx:id="QuantitySCol" prefWidth="120.0" text="Quantity Sold" />
+                    <TableColumn fx:id="SalesDateCol" prefWidth="73.60009765625" text="Sales Date" />
+                    <TableColumn fx:id="SalesManagerIDCol1" prefWidth="129.59988403320312" text="Sales Manager ID" />
+
+                </columns>
+            </TableView>
+            
+            <!-- Form for Item Input -->
+            <VBox style="-fx-padding: 15; -fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-width: 1; -fx-border-radius: 5;">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="SUPPLIER DETAILS" />
+                
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="120" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="150" prefWidth="250" />
+                    </columnConstraints>
+                    
+                    <rowConstraints>
+                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
+                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
+                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
+                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
+                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
+
+                    </rowConstraints>
+                    
+                    <!-- Item Code -->
+                    <Label text="Sales ID" />
+                    <TextField fx:id="itemCodeField" GridPane.columnIndex="1" />
+                    
+                    <!-- Item Name -->
+                    <Label text="Item Code" GridPane.rowIndex="1" />
+                    <TextField fx:id="itemNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    
+                    <!-- Description -->
+                    <Label text="Quantity Sold" GridPane.rowIndex="2" />
+                    <TextField fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    
+                    <!-- Unit Price -->
+                    <Label text="Sales Date" GridPane.rowIndex="3" />
+                    <TextField fx:id="unitPriceField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    
+                    <!-- Current Stock -->
+                    <Label text="Sales Manager ID" GridPane.rowIndex="4" />
+                    <TextField fx:id="currentStockField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    
+
+                    
+                </GridPane>
+                
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 15 0 0 0;">
+                    <Button fx:id="addButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-min-width: 80;" text="Add" />
+                    <Button fx:id="deleteButton" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-min-width: 80;" text="Delete" />
+                    <Button fx:id="clearButton" style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-min-width: 80;" text="Clear" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
+
