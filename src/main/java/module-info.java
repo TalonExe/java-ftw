@@ -3,6 +3,8 @@ module com.talon.testing {
     requires javafx.fxml;
     requires com.google.gson;
     requires MaterialFX;  // Add this line
+    requires javafx.base;
+    requires javafx.graphics;
     
     opens com.talon.testing to javafx.fxml;
     opens com.talon.testing.controllers to javafx.fxml;

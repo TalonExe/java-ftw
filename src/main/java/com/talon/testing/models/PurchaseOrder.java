@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class PurchaseOrder {
+
     private String poId;
     private String prId;
     private String supplier;
@@ -22,8 +23,8 @@ public class PurchaseOrder {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public PurchaseOrder(String poId, String prId, String supplier, LocalDate orderDate,
-                       String purchaseManagerId, String financeManagerId, LocalDate approvalDate, 
-                       String status, int quantity, String itemCode) {
+            String purchaseManagerId, String financeManagerId, LocalDate approvalDate,
+            String status, int quantity, String itemCode) {
         this.poId = poId;
         this.prId = prId;
         this.supplier = supplier;
@@ -35,24 +36,16 @@ public class PurchaseOrder {
         this.quantity = quantity;
         this.itemCode = itemCode;
     }
-    
+
     public PurchaseOrder(String poId, String prId, String supplier, String orderDateStr,
-                       String purchaseManagerId, String financeManagerId, String approvalDateStr, 
-                       String status, int quantity, String itemCode) {
-        this.poId = poId;
-        this.prId = prId;
-        this.supplier = supplier;
-        this.orderDate = LocalDate.parse(orderDateStr, DATE_FORMATTER);
-        this.purchaseManagerId = purchaseManagerId;
-        this.financeManagerId = financeManagerId;
-        this.approvalDate = approvalDateStr != null && !approvalDateStr.isEmpty() ? 
-                            LocalDate.parse(approvalDateStr, DATE_FORMATTER) : null;
-        this.status = status;
-        this.quantity = quantity;
-        this.itemCode = itemCode;
+            String purchaseManagerId, String financeManagerId, String approvalDateStr,
+            String status, int quantity, String itemCode) {
+        this(poId, prId, supplier, LocalDate.parse(orderDateStr, DATE_FORMATTER),
+                purchaseManagerId, financeManagerId,
+                approvalDateStr != null && !approvalDateStr.isEmpty() ? LocalDate.parse(approvalDateStr, DATE_FORMATTER) : null,
+                status, quantity, itemCode);
     }
 
-    // Constructor for creating a new PO
     public PurchaseOrder() {
         this.orderDate = LocalDate.now();
         this.status = "Pending";
@@ -130,19 +123,19 @@ public class PurchaseOrder {
     public void setStatus(String status) {
         this.status = status;
     }
-    
+
     public int getQuantity() {
         return quantity;
     }
-    
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
+
     public String getItemCode() {
         return itemCode;
     }
-    
+
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
     }
@@ -150,15 +143,8 @@ public class PurchaseOrder {
     @Override
     public String toString() {
         String approvalDateStr = approvalDate != null ? approvalDate.format(DATE_FORMATTER) : "";
-        return poId + "," + 
-               prId + "," + 
-               supplier + "," + 
-               orderDate.format(DATE_FORMATTER) + "," + 
-               purchaseManagerId + "," + 
-               financeManagerId + "," + 
-               approvalDateStr + "," + 
-               status + "," +
-               quantity + "," +
-               itemCode;
+        return poId + "," + prId + "," + supplier + "," + orderDate.format(DATE_FORMATTER) + ","
+                + purchaseManagerId + "," + financeManagerId + "," + approvalDateStr + ","
+                + status + "," + quantity + "," + itemCode;
     }
 }
