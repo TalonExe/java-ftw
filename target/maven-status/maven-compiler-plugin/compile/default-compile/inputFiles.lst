@@ -1,7 +1,9 @@
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\PurchaseRequisition.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\App.java
+C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\InventoryManagerModel.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\User.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\UserType.java
+C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\PurchaseOrderModel.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\utils\Router.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\Sales.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\controllers\UserManagementController.java
@@ -9,6 +11,7 @@ C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testin
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\PurchaseOrder.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\module-info.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\controllers\FinanceManagerController.java
+C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\controllers\InventoryManagerController.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\BasicUser.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\models\Item.java
 C:\Users\user\Documents\NetBeansProjects\java-ftw\src\main\java\com\talon\testing\controllers\UserController.java
