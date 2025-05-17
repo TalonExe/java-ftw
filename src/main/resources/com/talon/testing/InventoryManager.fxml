@@ -4,6 +4,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.talon.testing.controllers.InventoryManagerController">
+
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.talon.testing.controllers.InventoryManagerController">
 

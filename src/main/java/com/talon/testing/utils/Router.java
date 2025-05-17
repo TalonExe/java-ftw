@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.talon.testing.utils;
 
 import javafx.fxml.FXMLLoader;
@@ -12,10 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-/**
- *
- * @author talon
- */
+
 public class Router {
     private static Router instance;
     private Stage primaryStage;
@@ -40,8 +33,7 @@ public class Router {
     }
 
     public void loadScene(String name, String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/talon/testing/" + fxmlPath));
-        System.out.println(name + " " + fxmlPath);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath)); // Use full path
         Parent root = loader.load();
         Scene scene = new Scene(root);
         scenes.put(name, scene);
