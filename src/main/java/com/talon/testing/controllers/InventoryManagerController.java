@@ -55,7 +55,8 @@ public class InventoryManagerController {
         loadItems();
     }
 
-    private void loadItems() {
+    @FXML
+    public void loadItems() {
         itemList.clear();
         itemList.addAll(model.loadItems());
         itemTableView.setItems(itemList);
