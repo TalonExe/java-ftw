@@ -1,6 +1,7 @@
 package com.talon.testing;
 
 import com.talon.testing.controllers.FinanceManagerController;
+import com.talon.testing.controllers.POApprovalController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,13 +27,14 @@ public class App extends Application {
         router.setPrimaryStage(stage);
         
         // Load the login scene
-        router.loadScene("finance", "PR.fxml");
-        //router.loadScene("random", "PO.fxml");
+        router.loadScene("login", "LoginPage.fxml");
+        router.loadScene("PO", "PO.fxml");
+        router.loadScene("PR", "PR.fxml");
         
         stage.setTitle("Java HRM");
         stage.setWidth(1920);
         stage.setHeight(1080);
-        router.switchScene("finance");
+        router.switchScene("login");
         stage.show();
     }
 
@@ -51,6 +53,7 @@ public class App extends Application {
             System.out.println(added);
             System.out.println(UserController.loadUsers());
             System.out.println(FinanceManagerController.loadPR());
+            System.out.println(POApprovalController.loadPO());
             
         } catch (IOException e) {
             System.err.print(e);

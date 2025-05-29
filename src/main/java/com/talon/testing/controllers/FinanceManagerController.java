@@ -22,9 +22,6 @@ public class FinanceManagerController {
     private static final String PR_FILE_PATH = "/data/PR.txt";
     private static final Type PR_MAP_TYPE = new TypeToken<Map<String, PurchaseRequisition>>() {}.getType();
     
-    private static final String PO_FILE_PATH = "/data/PO.txt";
-    private static final Type PO_MAP_TYPE = new TypeToken<Map<String, PurchaseOrder>>() {}.getType();
-    
     @FXML
     private TableView<PurchaseRequisition> requisitionTableView;
     

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?> <!-- Added for explicit <Insets> tag -->
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.talon.testing.controllers.LoginController"
+            prefWidth="400" prefHeight="250"
+            style="-fx-background-color: #f0f4f8;">
+
+    <!--
+        The VBox is anchored to fill the AnchorPane.
+        Its own padding (20px on all sides) creates an inner content area.
+        alignment="CENTER" will center its children (TextFields, Button, etc.)
+        horizontally within this inner content area.
+    -->
+    <VBox alignment="CENTER"
+          spacing="14.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0">
+
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <Label text="Login"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+        <!--
+            Set maxWidth on the input fields to prevent them from stretching
+            to the VBox's full content width. A value like 280px will make them
+            look "decently sized" and centered within the VBox's content area.
+            (AnchorPane width 400 - VBox padding 20*2 = 360px available for VBox content.
+             If fields are 280px wide, (360-280)/2 = 40px margin on each side of the fields,
+             within the VBox's padded content area).
+        -->
+        <TextField fx:id="usernameField" promptText="Username"
+                   maxWidth="280"
+                   style="-fx-pref-height: 36px; -fx-background-radius: 6px; -fx-padding: 0 8px;"/>
+
+        <PasswordField fx:id="passwordField" promptText="Password"
+                       maxWidth="280"
+                       style="-fx-pref-height: 36px; -fx-background-radius: 6px; -fx-padding: 0 8px;"/>
+
+        <!--
+            For the Button, setting both prefWidth and maxWidth to the same value (e.g., 280px)
+            makes it a fixed width that matches the TextFields.
+            The VBox will then center this fixed-width button.
+        -->
+        <Button text="Login"
+                onAction="#handleLogin"
+                prefWidth="280"
+                maxWidth="280"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 6px; -fx-pref-height: 36px; -fx-cursor: hand;"/>
+
+        <Label fx:id="messageLabel"
+               wrapText="true"
+               maxWidth="280" 
+               style="-fx-text-fill: red; -fx-font-size: 12px;">
+            <padding> <!-- Using <Insets> for the top padding, consistent with VBox padding -->
+                <Insets top="4.0"/>
+            </padding>
+        </Label>
+
+    </VBox>
+</AnchorPane>

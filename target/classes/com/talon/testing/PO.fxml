@@ -3,13 +3,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.talon.testing.controllers.POApprovalController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button text="PO Approval" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Finance Report" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Purchase Requisitions" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
-            <Button text="Process Payment" onAction="#test" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="PO Approval" onAction="#switchToPOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Finance Report" onAction="#switchToFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Purchase Requisitions" onAction="#switchToPR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#switchToPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
         </VBox>
     </left>
     <center>
@@ -17,10 +17,10 @@
             <Label text="PO Approval Dashboard" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
             <TableView fx:id="poTable" prefHeight="400" prefWidth="600">
                 <columns>
-                    <TableColumn fx:id="prIdColumn" text="PO ID" />
-                    <TableColumn fx:id="itemIdColumn" text="PR ID" />
-                    <TableColumn fx:id="statusColumn" text="Status" />
-                    <TableColumn fx:id="createdAtColumn" text="Approved" />
+                    <TableColumn fx:id="poIdColumnPO" text="PO ID" />
+                    <TableColumn fx:id="prIdColumnPO" text="PR ID" />
+                    <TableColumn fx:id="statusColumnPO" text="Status" />
+                    <TableColumn fx:id="approvedColumnPO" text="Approved" />
                 </columns>
             </TableView>
             <HBox spacing="10" alignment="CENTER">

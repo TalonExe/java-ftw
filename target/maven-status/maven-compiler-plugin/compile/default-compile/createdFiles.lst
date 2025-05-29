@@ -1,8 +1,9 @@
 com/talon/testing/models/Sales$1.class
 com/talon/testing/App.class
+com/talon/testing/controllers/LoginController.class
 com/talon/testing/models/UserType.class
 com/talon/testing/models/PurchaseOrder.class
-com/talon/testing/controllers/FinanceManagerController$2.class
+com/talon/testing/controllers/LoginController$1.class
 com/talon/testing/models/Supplier$1.class
 com/talon/testing/controllers/UserController.class
 com/talon/testing/controllers/UserManagementController.class
@@ -19,3 +20,5 @@ com/talon/testing/models/PurchaseRequisition.class
 com/talon/testing/utils/Router.class
 com/talon/testing/models/SalesManager.class
 com/talon/testing/models/Sales.class
+com/talon/testing/controllers/POApprovalController$1.class
+com/talon/testing/controllers/POApprovalController.class
