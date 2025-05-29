@@ -15,6 +15,7 @@ import com.talon.testing.models.Item;
 import com.talon.testing.models.Supplier;
 import com.talon.testing.utils.Router;
 import com.talon.testing.controllers.UserController;
+import com.talon.testing.models.Sales;
 
 /**
  * JavaFX App
@@ -26,10 +27,20 @@ public class App extends Application {
         Router router = Router.getInstance();
         router.setPrimaryStage(stage);
         
-        // Load the login scene
         router.loadScene("login", "LoginPage.fxml");
-        router.loadScene("PO", "PO.fxml");
-        router.loadScene("PR", "PR.fxml");
+        // Load the login scene
+        // Finance Manager views
+        router.loadScene("PO", "FinanceManager/PO.fxml");
+        router.loadScene("PR", "FinanceManager/PR.fxml");
+        router.loadScene("Process Payment", "FinanceManager/ProcessPayment.fxml");
+        router.loadScene("Finance Report", "FinanceManager/GenerateReport.fxml");
+        //router.loadScene("PR", "PR.fxml");
+        
+        // Purchase Manager views
+        router.loadScene("Supplier List", "PurchaseManager/listSupplierView.fxml");
+        //router.loadScene("Item List", "PurchaseManager/listItemView.fxml");
+
+       // router.loadScene("PR", "FinanceManager/PR.fxml");
         
         stage.setTitle("Java HRM");
         stage.setWidth(1920);
@@ -54,6 +65,7 @@ public class App extends Application {
             System.out.println(UserController.loadUsers());
             System.out.println(FinanceManagerController.loadPR());
             System.out.println(POApprovalController.loadPO());
+            System.out.println(Sales.loadSales());
             
         } catch (IOException e) {
             System.err.print(e);

@@ -1,29 +1,20 @@
 {
   "SUP001": {
     "supplierId": "SUP001",
-    "supplierName": "Grocery Wholesalers Sdn Bhd",
-    "contactPerson": "David Lim",
-    "email": "david@grocerywholesalers.com",
-    "phoneNumber": "0311234567",
-    "address": "10, Jalan Industri 5, 40000 Shah Alam, Selangor",
-    "registrationDate": "2025-01-15"
+    "supplierName": "ACME Supplies",
+    "contactPerson": "Wile E. Coyote",
+    "email": "wile@acme.com",
+    "phoneNumber": "555-0101",
+    "address": "123 Desert Road",
+    "registrationDate": "2022-01-15"
   },
   "SUP002": {
     "supplierId": "SUP002",
-    "supplierName": "Fresh Farms Malaysia",
-    "contactPerson": "Amina Abdullah",
-    "email": "amina@freshfarms.com",
-    "phoneNumber": "0322345678",
-    "address": "25, Jalan Pertanian 8, 43000 Kajang, Selangor",
-    "registrationDate": "2025-01-20"
-  },
-  "SUP003": {
-    "supplierId": "SUP003",
-    "supplierName": "Dairy Distribution Co.",
-    "contactPerson": "Raj Kumar",
-    "email": "raj@dairydist.com",
-    "phoneNumber": "0333456789",
-    "address": "5, Jalan Susu 3, 47500 Subang Jaya, Selangor",
-    "registrationDate": "2025-01-25"
+    "supplierName": "Globex Corporation",
+    "contactPerson": "Hank Scorpio",
+    "email": "hank@globex.com",
+    "phoneNumber": "555-0202",
+    "address": "456 Evil Lair Lane",
+    "registrationDate": "2021-06-20"
   }
 }

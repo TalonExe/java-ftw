@@ -26,7 +26,7 @@ public class Sales {
     // File path for items storage
     private static final String SALES_FILE_PATH = "/data/sales.txt";
     // Type token for Map<String, Item>
-    private static final Type SALES_MAP_TYPE = new TypeToken<Map<String, Item>>() {}.getType();
+    private static final Type SALES_MAP_TYPE = new TypeToken<Map<String, Sales>>() {}.getType();
 
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
@@ -68,7 +68,7 @@ public class Sales {
         return salesManagerId;
     }
     
-    public static Map<String, Sales> loadSuppliers() throws IOException {
+    public static Map<String, Sales> loadSales() throws IOException {
         Map<String, Sales> salesMap = new HashMap<>();
         Gson gson = new Gson();
         
@@ -88,5 +88,5 @@ public class Sales {
         
         return salesMap;
     }
-    
+        
 }

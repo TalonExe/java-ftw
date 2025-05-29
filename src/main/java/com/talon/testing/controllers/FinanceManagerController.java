@@ -18,7 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class FinanceManagerController {
+public class FinanceManagerController extends Switchable{
     private static final String PR_FILE_PATH = "/data/PR.txt";
     private static final Type PR_MAP_TYPE = new TypeToken<Map<String, PurchaseRequisition>>() {}.getType();
     

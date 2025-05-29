@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 // ... other imports
 
-public class POApprovalController {
+public class POApprovalController extends Switchable{
     Router router = Router.getInstance();
 
     private static final String PO_FILE_PATH = "/data/PO.txt";
@@ -138,29 +138,6 @@ public class POApprovalController {
 
     @FXML
     public void test() { // This is for the side navigation buttons
-        System.out.println("Button clicked in POApprovalController");
-        // Implement navigation or specific actions
-    }
-    
-    @FXML
-    public void switchToFinanceReport() { // This is for the side navigation buttons
-        System.out.println("Button clicked in POApprovalController");
-        // Implement navigation or specific actions
-    }
-    
-    @FXML
-    public void switchToPOApproval() { // This is for the side navigation buttons
-        System.out.println("Button clicked in POApprovalController");
-        // Implement navigation or specific actions
-    }
-    
-    @FXML
-    public void switchToPR() { // This is for the side navigation buttons
-        router.switchScene("PR");
-    }
-    
-    @FXML
-    public void switchToPayment() { // This is for the side navigation buttons
         System.out.println("Button clicked in POApprovalController");
         // Implement navigation or specific actions
     }

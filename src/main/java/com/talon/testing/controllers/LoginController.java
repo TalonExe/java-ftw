@@ -19,7 +19,7 @@ import com.talon.testing.utils.Router;
  *
  * @author talon
  */
-public class LoginController {
+public class LoginController  extends Switchable{
     
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -47,19 +47,19 @@ public class LoginController {
 
             switch (loggedInUser.getUserType()) {
                 case Administrator:
-                    Router.getInstance().switchScene("PO");
+                    router.switchScene("PO");
                     break;
                 case Sales_Manager:
-                    Router.getInstance().switchScene("PO");
+                    router.switchScene("PO");
                     break;
                 case Finance_Manager:
-                    Router.getInstance().switchScene("PO");
+                    router.switchScene("PO");
                     break;
                 case Inventory_Manager:
-                    Router.getInstance().switchScene("PO");
+                    router.switchScene("PO");
                     break;
                 case Purchase_Manager:
-                    Router.getInstance().switchScene("PO");
+                    router.switchScene("Supplier List");
                     break;
                 default:
                     throw new AssertionError();
@@ -69,7 +69,7 @@ public class LoginController {
             messageLabel.setText("Invalid username or password.");
             messageLabel.setTextFill(Color.RED);
         }
-    } catch (IOException e) {
+    } catch (Exception e) {
         messageLabel.setText("Error accessing user data. Please try again later.");
         messageLabel.setTextFill(Color.RED);
         e.printStackTrace(); // Log the full error for debugging
