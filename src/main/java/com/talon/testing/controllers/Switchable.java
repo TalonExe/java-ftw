@@ -36,6 +36,16 @@ public class Switchable {
         router.switchScene("Process Payment");
     }
     
+    @FXML
+    public void switchToItemList() { // This is for the side navigation buttons
+        router.switchScene("Item List");
+    }
+    
+    @FXML
+    public void switchToSupplierList() { // This is for the side navigation buttons
+        router.switchScene("Supplier List");
+    }
+    
     
     public void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

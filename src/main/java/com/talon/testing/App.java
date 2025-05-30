@@ -29,6 +29,9 @@ public class App extends Application {
         
         router.loadScene("login", "LoginPage.fxml");
         // Load the login scene
+        
+        //Sales Manager views
+        router.loadScene("Create PR", "SalesManager/CreatePR.fxml");
         // Finance Manager views
         router.loadScene("PO", "FinanceManager/PO.fxml");
         router.loadScene("PR", "FinanceManager/PR.fxml");
@@ -38,7 +41,7 @@ public class App extends Application {
         
         // Purchase Manager views
         router.loadScene("Supplier List", "PurchaseManager/listSupplierView.fxml");
-        //router.loadScene("Item List", "PurchaseManager/listItemView.fxml");
+        router.loadScene("Item List", "PurchaseManager/listItemView.fxml");
 
        // router.loadScene("PR", "FinanceManager/PR.fxml");
         

@@ -13,7 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
 
-public class ListItemController {
+public class ListItemController extends Switchable{
 
     @FXML
     private TableView<Item> itemTableView;
@@ -39,15 +39,17 @@ public class ListItemController {
     @FXML
     private TableColumn<Item, String> createDateColumn; // [ADDED]
 
-    public void initialize() {
+    public void initialize() throws IOException {
         // Initialize table columns
-        itemIdColumn.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        itemIdColumn.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         currentStockColumn.setCellValueFactory(new PropertyValueFactory<>("currentStock"));
         minimumStockColumn.setCellValueFactory(new PropertyValueFactory<>("minimumStock"));
         createDateColumn.setCellValueFactory(new PropertyValueFactory<>("createDate")); // [ADDED]
+        
+        loadItemData();
     }
 
     public void loadItemData() throws IOException {

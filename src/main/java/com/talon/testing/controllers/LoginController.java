@@ -50,7 +50,7 @@ public class LoginController  extends Switchable{
                     router.switchScene("PO");
                     break;
                 case Sales_Manager:
-                    router.switchScene("PO");
+                    router.switchScene("Create PR");
                     break;
                 case Finance_Manager:
                     router.switchScene("PO");

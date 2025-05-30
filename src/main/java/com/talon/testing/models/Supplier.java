@@ -28,9 +28,9 @@ public class Supplier {
     private String registrationDate;
     
     // File path for items storage
-    private static final String ITEMS_FILE_PATH = "/data/suppliers.txt";
+    private static final String SUPPLIER_FILE_PATH = "/data/suppliers.txt";
     // Type token for Map<String, Item>
-    private static final Type ITEM_MAP_TYPE = new TypeToken<Map<String, Item>>() {}.getType();
+    private static final Type SUPPLIER_MAP_TYPE = new TypeToken<Map<String, Supplier>>() {}.getType();
     
     public Supplier(String supplierId, String supplierName, String contactPerson, String email, String phoneNumber, String address, String registrationDate) {
         setSupplierId(supplierId);
@@ -102,13 +102,13 @@ public class Supplier {
         Map<String, Supplier> supplierMap = new HashMap<>();
         Gson gson = new Gson();
         
-        try (var inputStream = Supplier.class.getResourceAsStream(ITEMS_FILE_PATH)) {
+        try (var inputStream = Supplier.class.getResourceAsStream(SUPPLIER_FILE_PATH)) {
             if (inputStream == null) {
                 // If file doesn't exist, return empty map
                 return supplierMap;
             }
             try (InputStreamReader reader = new InputStreamReader(inputStream)) {
-                supplierMap = gson.fromJson(reader, ITEM_MAP_TYPE);
+                supplierMap = gson.fromJson(reader, SUPPLIER_MAP_TYPE);
                 // Handle null case if file exists but is empty or invalid
                 if (supplierMap == null) {
                     supplierMap = new HashMap<>();
