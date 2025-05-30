@@ -56,7 +56,7 @@ public class LoginController  extends Switchable{
                     router.switchScene("PO");
                     break;
                 case Inventory_Manager:
-                    router.switchScene("PO");
+                    router.switchScene("Stock Management");
                     break;
                 case Purchase_Manager:
                     router.switchScene("Supplier List");

@@ -52,7 +52,9 @@ public class App extends Application {
         router.loadScene("View PR PM", "PurchaseManager/PR.fxml");
         router.loadScene("Create PO", "PurchaseManager/CreatePO.fxml");
 
-
+        // Inventory Manager views
+        router.loadScene("Stock Management", "InventoryManager/StockManagement.fxml");
+        
        // router.loadScene("PR", "FinanceManager/PR.fxml");
         
         stage.setTitle("Java HRM");

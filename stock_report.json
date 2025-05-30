@@ -1,0 +1,32 @@
+[
+  {
+    "itemCode": "ITM001",
+    "itemName": "Standard Bolt M6",
+    "description": "Steel bolt, M6 size, 20mm length",
+    "unitPrice": "0.10",
+    "currentStock": "5000",
+    "minimumStock": "500",
+    "createDate": "2023-01-10",
+    "supplierId": "SUP001"
+  },
+  {
+    "itemCode": "ITM002",
+    "itemName": "Heavy Duty Washer",
+    "description": "For M10 bolts",
+    "unitPrice": "0.05",
+    "currentStock": "10000",
+    "minimumStock": "1000",
+    "createDate": "2023-01-15",
+    "supplierId": "SUP001"
+  },
+  {
+    "itemCode": "ITM003",
+    "itemName": "Precision Screw S2",
+    "description": "Small electronics screw",
+    "unitPrice": "0.25",
+    "currentStock": "2000",
+    "minimumStock": "200",
+    "createDate": "2023-02-01",
+    "supplierId": "SUP002"
+  }
+]
