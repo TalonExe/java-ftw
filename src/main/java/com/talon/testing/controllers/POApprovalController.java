@@ -2,7 +2,7 @@ package com.talon.testing.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import static com.talon.testing.controllers.FinanceManagerController.loadPR;
+//import static com.talon.testing.controllers.FinanceManagerController.loadPR;
 import com.talon.testing.models.PurchaseOrder; // Assuming you have this model
 import com.talon.testing.models.PurchaseRequisition;
 import com.talon.testing.utils.Router;

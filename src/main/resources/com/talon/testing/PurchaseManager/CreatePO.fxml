@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.CreatePOController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="Create PO" onAction="#switchToCreatePO" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Supplier List" onAction="#switchToSupplierList" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Item View" onAction="#switchToItemList" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Purchase Requisition" onAction="#switchToViewPRPM" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="15" style="-fx-padding: 20;">
+            <Text text="Create Purchase Order from Approved Requisition" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+            <HBox spacing="20" VBox.vgrow="ALWAYS">
+                <!-- Section for Approved PRs -->
+                <VBox spacing="10" HBox.hgrow="ALWAYS">
+                    <Label text="Approved Purchase Requisitions:" style="-fx-font-weight: bold;"/>
+                    <TableView fx:id="approvedPRTableView" prefHeight="300.0">
+                        <columns>
+                            <TableColumn fx:id="prID_PRColumn" prefWidth="100" text="PR ID"/>
+                            <TableColumn fx:id="prItemName_PRColumn" prefWidth="150" text="Item Name"/>
+                            <TableColumn fx:id="prQuantity_PRColumn" prefWidth="80" text="Quantity"/>
+                            <TableColumn fx:id="prSupplierName_PRColumn" prefWidth="150" text="Supplier"/>
+                            <TableColumn fx:id="prCreatedAt_PRColumn" prefWidth="100" text="PR Date"/>
+                        </columns>
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                    </TableView>
+                    <Button fx:id="createPOButton" text="Create PO from Selected PR" onAction="#handleCreatePOFromPR" disable="true"/>
+                </VBox>
+
+                <!-- Section for Generated/Existing POs -->
+                <VBox spacing="10" HBox.hgrow="ALWAYS">
+                    <Label text="Generated Purchase Orders:" style="-fx-font-weight: bold;"/>
+                    <TableView fx:id="purchaseOrderTableView" prefHeight="300.0">
+                        <columns>
+                            <TableColumn fx:id="poID_POColumn" prefWidth="100" text="PO ID"/>
+                            <TableColumn fx:id="poPRID_POColumn" prefWidth="100" text="Orig. PR ID"/>
+                            <TableColumn fx:id="poSupplier_POColumn" prefWidth="150" text="Supplier"/>
+                            <TableColumn fx:id="poDate_POColumn" prefWidth="100" text="PO Date"/>
+                            <TableColumn fx:id="poStatus_POColumn" prefWidth="120" text="PO Status"/>
+                        </columns>
+                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                    </TableView>
+                    <HBox spacing="10" alignment="CENTER_RIGHT">
+                        <Button fx:id="updatePOButton" text="Update Selected PO Status" onAction="#handleUpdatePOStatus" disable="true"/>
+                        <Button fx:id="deletePOButton" text="Delete Selected PO" onAction="#handleDeletePO" disable="true" style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <!-- Optional: Form for PO Details when updating -->
+            <VBox fx:id="poDetailsPane" spacing="10" style="-fx-padding: 10; -fx-border-color: #ccc; -fx-border-width: 1; -fx-border-radius: 5;" visible="false" managed="false">
+                <Label text="Selected PO Details (Update Status):" style="-fx-font-weight: bold;"/>
+                <GridPane hgap="10" vgap="5">
+                    <Label text="PO ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="poDetailIdField" editable="false" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label text="Current Status:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="poDetailCurrentStatusField" editable="false" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label text="New Status:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="poDetailNewStatusComboBox" prefWidth="200" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <!-- Add fields for financeManagerId and approvalDate if PO approval happens here -->
+                    <Button fx:id="savePOChangesButton" text="Save PO Changes" onAction="#handleSavePOChanges" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </GridPane>
+            </VBox>
+
+        </VBox>
+    </center>
+</BorderPane>

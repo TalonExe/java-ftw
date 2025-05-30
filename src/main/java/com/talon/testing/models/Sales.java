@@ -19,10 +19,17 @@ import java.util.Map;
 public class Sales {
     private String salesId;
     private String itemCode;
-    private String quantitySold;
+    private int quantitySold;
     private String salesDate;
     private String salesManagerId;
     
+    public Sales(String salesId, String itemCode, int quantitySold, String salesDate, String salesManagerId){
+        this.salesId = salesId;
+        this.itemCode = itemCode;
+        this.quantitySold = quantitySold;
+        this.salesDate = salesDate;
+        this.salesManagerId = salesManagerId;
+    }
     // File path for items storage
     private static final String SALES_FILE_PATH = "/data/sales.txt";
     // Type token for Map<String, Item>
@@ -32,7 +39,7 @@ public class Sales {
         this.itemCode = itemCode;
     }
 
-    public void setQuantitySold(String quantitySold) {
+    public void setQuantitySold(int quantitySold) {
         this.quantitySold = quantitySold;
     }
 
@@ -52,7 +59,7 @@ public class Sales {
         return itemCode;
     }
 
-    public String getQuantitySold() {
+    public int getQuantitySold() {
         return quantitySold;
     }
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<!--<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.talon.testing.controllers.InventoryManagerController">-->
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.talon.testing.controllers.InventoryManagerController">
+
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button onAction="#loadItems" text="View All Items"
+                    style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" />
+            <Button onAction="#viewLowStock" text="View Low Stock"
+                    style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150;" />
+            <Button onAction="#updateStock" text="Update Stock"
+                    style="-fx-background-color: #5bc0de; -fx-text-fill: white; -fx-min-width: 150;" />
+            <Button onAction="#updateStockFromApprovedPOs" text="Stock from PO"
+                    style="-fx-background-color: #f0ad4e; -fx-text-fill: white; -fx-min-width: 150;" />
+            <Button onAction="#generateStockReport" text="Generate Report"
+                    style="-fx-background-color: #5cb85c; -fx-text-fill: white; -fx-min-width: 150;" />
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Inventory Manager Dashboard" />
+
+            <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+                <tabs>
+                    <Tab text="All Items">
+                        <TableView fx:id="itemTableView" style="-fx-padding: 10;">
+                            <columns>
+                                <TableColumn fx:id="itemCodeColumn" prefWidth="100" text="Item Code" />
+                                <TableColumn fx:id="itemNameColumn" prefWidth="150" text="Item Name" />
+                                <TableColumn fx:id="descriptionColumn" prefWidth="200" text="Description" />
+                                <TableColumn fx:id="unitPriceColumn" prefWidth="100" text="Unit Price" />
+                                <TableColumn fx:id="currentStockColumn" prefWidth="100" text="Current Stock" />
+                                <TableColumn fx:id="minimumStockColumn" prefWidth="100" text="Min Stock" />
+                                <TableColumn fx:id="createDateColumn" prefWidth="120" text="Created" />
+                            </columns>
+                        </TableView>
+                    </Tab>
+
+                    <Tab text="Low Stock Items">
+                        <TableView fx:id="lowStockTableView" style="-fx-padding: 10;">
+                            <columns>
+                                <TableColumn fx:id="lowItemCodeColumn" prefWidth="100" text="Item Code" />
+                                <TableColumn fx:id="lowItemNameColumn" prefWidth="150" text="Item Name" />
+                                <TableColumn fx:id="lowDescriptionColumn" prefWidth="200" text="Description" />
+                                <TableColumn fx:id="lowUnitPriceColumn" prefWidth="100" text="Unit Price" />
+                                <TableColumn fx:id="lowCurrentStockColumn" prefWidth="100" text="Current Stock" />
+                                <TableColumn fx:id="lowMinimumStockColumn" prefWidth="100" text="Min Stock" />
+                                <TableColumn fx:id="lowCreateDateColumn" prefWidth="120" text="Created" />
+                            </columns>
+                        </TableView>
+                    </Tab>
+                </tabs>
+            </TabPane>
+        </VBox>
+    </center>
+</BorderPane>

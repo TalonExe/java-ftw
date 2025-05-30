@@ -16,6 +16,7 @@ import com.talon.testing.models.Supplier;
 import com.talon.testing.utils.Router;
 import com.talon.testing.controllers.UserController;
 import com.talon.testing.models.Sales;
+import java.time.LocalDate;
 
 /**
  * JavaFX App
@@ -32,6 +33,12 @@ public class App extends Application {
         
         //Sales Manager views
         router.loadScene("Create PR", "SalesManager/CreatePR.fxml");
+        router.loadScene("Supplier Entry", "SalesManager/SupplierEntry.fxml");
+        router.loadScene("View PO", "SalesManager/PO.fxml");
+        router.loadScene("View PR", "SalesManager/PR.fxml");
+        router.loadScene("Item Entry", "SalesManager/ItemEntry.fxml");
+        router.loadScene("Sales Entry", "SalesManager/DailySales.fxml");
+        
         // Finance Manager views
         router.loadScene("PO", "FinanceManager/PO.fxml");
         router.loadScene("PR", "FinanceManager/PR.fxml");
@@ -42,6 +49,9 @@ public class App extends Application {
         // Purchase Manager views
         router.loadScene("Supplier List", "PurchaseManager/listSupplierView.fxml");
         router.loadScene("Item List", "PurchaseManager/listItemView.fxml");
+        router.loadScene("View PR PM", "PurchaseManager/PR.fxml");
+        router.loadScene("Create PO", "PurchaseManager/CreatePO.fxml");
+
 
        // router.loadScene("PR", "FinanceManager/PR.fxml");
         
@@ -61,12 +71,8 @@ public class App extends Application {
             System.out.println(Item.loadItems());
             SalesManager hh = new SalesManager();
             System.out.println(hh.getAllowedPermissions());
-            
-            Item newItem = new Item("IT001", "Laptop", "Business laptop", "1200.00", "50", "10", "2025-04-10");
-            boolean added = Item.addItem(newItem);
-            System.out.println(added);
             System.out.println(UserController.loadUsers());
-            System.out.println(FinanceManagerController.loadPR());
+            System.out.println(FinanceManagerController.loadPRsFromFileStatic());
             System.out.println(POApprovalController.loadPO());
             System.out.println(Sales.loadSales());
             

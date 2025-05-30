@@ -1,54 +1,41 @@
 package com.talon.testing.models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class POItem {
     private String itemCode;
     private int quantity;
+    private String unitPrice; // Price of the item at the time of PO creation (as String)
+    private String itemNameDisplay; // Optional: For display within PO details if needed
 
-    // Constructor for new POItem
-    public POItem(String itemCode, int quantity) {
+    public POItem(String itemCode, String itemNameDisplay, int quantity, String unitPrice) {
         this.itemCode = itemCode;
+        this.itemNameDisplay = itemNameDisplay;
         this.quantity = quantity;
+        this.unitPrice = unitPrice;
     }
 
-    // No-arg constructor for Gson/deserialization if needed (ensure fields are set later)
+    // No-arg constructor for Gson
     public POItem() {
-        this.itemCode = "";
-        this.quantity = 0;
     }
 
+    // Getters
+    public String getItemCode() { return itemCode; }
+    public String getItemNameDisplay() { return itemNameDisplay; }
+    public int getQuantity() { return quantity; }
+    public String getUnitPrice() { return unitPrice; }
 
-    // --- itemCode ---
-    public String getItemCode() {
-        return this.itemCode;
-    }
-    public void setItemCode(String value) {
-        this.itemCode = value;
-    }
-    public String itemCodeProperty() {
-        return this.itemCode;
-    }
-
-    // --- quantity ---
-    public int getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(int value) {
-        this.quantity = value;
-    }
-    public int quantityProperty() {
-        return quantity;
-    }
+    // Setters
+    public void setItemCode(String itemCode) { this.itemCode = itemCode; }
+    public void setItemNameDisplay(String itemNameDisplay) { this.itemNameDisplay = itemNameDisplay; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setUnitPrice(String unitPrice) { this.unitPrice = unitPrice; }
 
     @Override
     public String toString() {
         return "POItem{" +
-               "itemCode=" + itemCode +
+               "itemCode='" + itemCode + '\'' +
+               ", itemName='" + itemNameDisplay + '\'' +
                ", quantity=" + quantity +
+               ", unitPrice='" + unitPrice + '\'' +
                '}';
     }
 }

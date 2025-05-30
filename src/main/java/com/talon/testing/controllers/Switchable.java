@@ -46,6 +46,45 @@ public class Switchable {
         router.switchScene("Supplier List");
     }
     
+    @FXML
+    public void switchToCreatePR() { // This is for the side navigation buttons
+        router.switchScene("Create PR");
+    }
+    
+    @FXML
+    public void switchToSupplierEntry() { // This is for the side navigation buttons
+        router.switchScene("Supplier Entry");
+    }
+    
+    @FXML
+    public void switchToViewPR() { // This is for the side navigation buttons
+        router.switchScene("View PR");
+    }
+    
+    @FXML
+    public void switchToViewPO() { // This is for the side navigation buttons
+        router.switchScene("View PO");
+    }
+    
+    @FXML
+    public void switchToItemEntry() { // This is for the side navigation buttons
+        router.switchScene("Item Entry");
+    }
+    
+    @FXML
+    public void switchToSalesEntry() { // This is for the side navigation buttons
+        router.switchScene("Sales Entry");
+    }
+    
+    @FXML
+    public void switchToViewPRPM() { // This is for the side navigation buttons
+        router.switchScene("View PR PM");
+    }
+    
+    @FXML
+    public void switchToCreatePO() { // This is for the side navigation buttons
+        router.switchScene("Create PO");
+    }
     
     public void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

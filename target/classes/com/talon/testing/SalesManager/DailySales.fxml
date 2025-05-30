@@ -10,20 +10,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+<BorderPane xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.DailySalesController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
-            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
-            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Daily Sales Entry" />
-            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
-            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PR" />
-            <Button onAction="#" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
+            <Button onAction="#switchToItemEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#switchToSupplierEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#switchToSalesEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Daily Sales Entry" />
+            <Button onAction="#switchToCreatePR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#switchToViewPR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PR" />
+            <Button onAction="#switchToViewPO" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
         </VBox>
     </left>
     <center>
         <VBox spacing="10" style="-fx-padding: 10;">
-            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="SUPPLIER ENTRY" />
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="SALES ENTRY" />
             
             <!-- Table View -->
             <TableView fx:id="poTable" prefHeight="300.0" prefWidth="800.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ccc;">
@@ -42,19 +42,6 @@
                 <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="SUPPLIER DETAILS" />
                 
                 <GridPane hgap="10" vgap="10">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="NEVER" minWidth="100" prefWidth="120" />
-                        <ColumnConstraints hgrow="ALWAYS" minWidth="150" prefWidth="250" />
-                    </columnConstraints>
-                    
-                    <rowConstraints>
-                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
-                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
-                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
-                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
-                        <RowConstraints minHeight="30" prefHeight="30" vgrow="NEVER" />
-
-                    </rowConstraints>
                     
                     <!-- Item Code -->
                     <Label text="Sales ID" />

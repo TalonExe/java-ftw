@@ -1,29 +1,202 @@
 {
-  "PR001": {
-    "prId": "PR001",
-    "salesManagerId": "U002",
-    "ItemID": "I001",
-    "quantity": 10,
-    "requiredDate": "2025-05-20",
-    "status": "Pending",
-    "createdAt": "2025-05-10 09:30:00"
-  },
-  "PR002":{
-    "prId": "PR002",
-    "salesManagerId": "U002",
-    "ItemID": "I002",
-    "quantity": 5,
-    "requiredDate": "2025-05-22",
+  "PR00001": {
+    "prId": "PR00001",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM001",
+    "itemNameDisplay": "Standard Bolt M6",
+    "supplierNameDisplay": "ACME Supplies",
+    "quantity": 500,
     "status": "Approved",
-    "createdAt": "2025-05-11 11:15:00"
+    "createdAt": "2023-10-01"
   },
-  "PR003":{
-    "prId": "PR003",
-    "salesManagerId": "U004",
-    "ItemID": "I003",
-    "quantity": 20,
-    "requiredDate": "2025-05-25",
+  "PR00002": {
+    "prId": "PR00002",
+    "salesManagerId": "SM002",
+    "ItemID": "ITM003",
+    "itemNameDisplay": "Precision Screw S2",
+    "supplierNameDisplay": "Beta Components",
+    "quantity": 200,
+    "status": "Pending",
+    "createdAt": "2023-10-05"
+  },
+  "PR00003": {
+    "prId": "PR00003",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM002",
+    "itemNameDisplay": "Heavy Duty Washer",
+    "supplierNameDisplay": "ACME Supplies",
+    "quantity": 1000,
+    "status": "Processed to PO",
+    "createdAt": "2023-10-08"
+  },
+  "PR00004": {
+    "prId": "PR00004",
+    "salesManagerId": "SM003",
+    "ItemID": "ITM004",
+    "itemNameDisplay": "Industrial Adhesive",
+    "supplierNameDisplay": "ChemCo",
+    "quantity": 50,
+    "status": "Approved",
+    "createdAt": "2023-10-12"
+  },
+  "PR00005": {
+    "prId": "PR00005",
+    "salesManagerId": "SM002",
+    "ItemID": "ITM005",
+    "itemNameDisplay": "Safety Goggles",
+    "supplierNameDisplay": "SafeGear Inc.",
+    "quantity": 150,
     "status": "Rejected",
-    "createdAt": "2025-05-12 14:00:00"
+    "createdAt": "2023-10-15"
+  },
+  "PR00006": {
+    "prId": "PR00006",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM001",
+    "itemNameDisplay": "Standard Bolt M6",
+    "supplierNameDisplay": "ACME Supplies",
+    "quantity": 250,
+    "status": "Pending",
+    "createdAt": "2023-10-18"
+  },
+  "PR00007": {
+    "prId": "PR00007",
+    "salesManagerId": "SM003",
+    "ItemID": "ITM006",
+    "itemNameDisplay": "Cutting Tool Insert",
+    "supplierNameDisplay": "Precision Parts Ltd.",
+    "quantity": 30,
+    "status": "Approved",
+    "createdAt": "2023-10-22"
+  },
+  "PR00008": {
+    "prId": "PR00008",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM003",
+    "itemNameDisplay": "Precision Screw S2",
+    "supplierNameDisplay": "Beta Components",
+    "quantity": 100,
+    "status": "Processed to PO",
+    "createdAt": "2023-10-25"
+  },
+  "PR00009": {
+    "prId": "PR00009",
+    "salesManagerId": "SM002",
+    "ItemID": "ITM004",
+    "itemNameDisplay": "Industrial Adhesive",
+    "supplierNameDisplay": "ChemCo",
+    "quantity": 75,
+    "status": "Pending",
+    "createdAt": "2023-10-28"
+  },
+  "PR00010": {
+    "prId": "PR00010",
+    "salesManagerId": "SM003",
+    "ItemID": "ITM005",
+    "itemNameDisplay": "Safety Goggles",
+    "supplierNameDisplay": "SafeGear Inc.",
+    "quantity": 200,
+    "status": "Approved",
+    "createdAt": "2023-11-01"
+  },
+  "PR00011": {
+    "prId": "PR00011",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM002",
+    "itemNameDisplay": "Heavy Duty Washer",
+    "supplierNameDisplay": "ACME Supplies",
+    "quantity": 300,
+    "status": "Pending",
+    "createdAt": "2023-11-03"
+  },
+  "PR00012": {
+    "prId": "PR00012",
+    "salesManagerId": "SM002",
+    "ItemID": "ITM006",
+    "itemNameDisplay": "Cutting Tool Insert",
+    "supplierNameDisplay": "Precision Parts Ltd.",
+    "quantity": 60,
+    "status": "Approved",
+    "createdAt": "2023-11-05"
+  },
+  "PR00013": {
+    "prId": "PR00013",
+    "salesManagerId": "SM003",
+    "ItemID": "ITM001",
+    "itemNameDisplay": "Standard Bolt M6",
+    "supplierNameDisplay": "ACME Supplies",
+    "quantity": 400,
+    "status": "Processed to PO",
+    "createdAt": "2023-11-08"
+  },
+  "PR00014": {
+    "prId": "PR00014",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM005",
+    "itemNameDisplay": "Safety Goggles",
+    "supplierNameDisplay": "SafeGear Inc.",
+    "quantity": 120,
+    "status": "Rejected",
+    "createdAt": "2023-11-10"
+  },
+  "PR00015": {
+    "prId": "PR00015",
+    "salesManagerId": "SM002",
+    "ItemID": "ITM004",
+    "itemNameDisplay": "Industrial Adhesive",
+    "supplierNameDisplay": "ChemCo",
+    "quantity": 90,
+    "status": "Pending",
+    "createdAt": "2023-11-12"
+  },
+  "PR00016": {
+    "prId": "PR00016",
+    "salesManagerId": "SM003",
+    "ItemID": "ITM003",
+    "itemNameDisplay": "Precision Screw S2",
+    "supplierNameDisplay": "Beta Components",
+    "quantity": 150,
+    "status": "Approved",
+    "createdAt": "2023-11-15"
+  },
+  "PR00017": {
+    "prId": "PR00017",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM006",
+    "itemNameDisplay": "Cutting Tool Insert",
+    "supplierNameDisplay": "Precision Parts Ltd.",
+    "quantity": 45,
+    "status": "Pending",
+    "createdAt": "2023-11-18"
+  },
+  "PR00018": {
+    "prId": "PR00018",
+    "salesManagerId": "SM002",
+    "ItemID": "ITM001",
+    "itemNameDisplay": "Standard Bolt M6",
+    "supplierNameDisplay": "ACME Supplies",
+    "quantity": 600,
+    "status": "Processed to PO",
+    "createdAt": "2023-11-20"
+  },
+  "PR00019": {
+    "prId": "PR00019",
+    "salesManagerId": "SM003",
+    "ItemID": "ITM002",
+    "itemNameDisplay": "Heavy Duty Washer",
+    "supplierNameDisplay": "ACME Supplies",
+    "quantity": 750,
+    "status": "Approved",
+    "createdAt": "2023-11-22"
+  },
+  "PR00020": {
+    "prId": "PR00020",
+    "salesManagerId": "SM001",
+    "ItemID": "ITM004",
+    "itemNameDisplay": "Industrial Adhesive",
+    "supplierNameDisplay": "ChemCo",
+    "quantity": 100,
+    "status": "Pending",
+    "createdAt": "2023-11-25"
   }
 }

@@ -1,35 +1,32 @@
 {
-  "1": {
-    "itemCode": "GRC001",
-    "itemName": "Rice (5kg)",
-    "description": "Premium quality basmati rice",
-    "unitPrice": "25.50",
-    "currentStock": "150",
-    "minimumStock": "50"
+  "ITM001": {
+    "itemCode": "ITM001",
+    "itemName": "Standard Bolt M6",
+    "description": "Steel bolt, M6 size, 20mm length",
+    "unitPrice": "0.10",
+    "currentStock": "5000",
+    "minimumStock": "500",
+    "createDate": "2023-01-10",
+    "supplierId": "SUP001"  // <-- ADD THIS
   },
-  "2": {
-    "itemCode": "GRC002",
-    "itemName": "Sugar (1kg)",
-    "description": "Fine grain white sugar",
-    "unitPrice": "5.20",
-    "currentStock": "200",
-    "minimumStock": "80"
+  "ITM002": {
+    "itemCode": "ITM002",
+    "itemName": "Heavy Duty Washer",
+    "description": "For M10 bolts",
+    "unitPrice": "0.05",
+    "currentStock": "10000",
+    "minimumStock": "1000",
+    "createDate": "2023-01-15",
+    "supplierId": "SUP001"  // <-- ADD THIS
   },
-  "3": {
-    "itemCode": "FRS001",
-    "itemName": "Apples (1kg)",
-    "description": "Fresh red apples",
-    "unitPrice": "12.90",
-    "currentStock": "80",
-    "minimumStock": "30"
-  },
-  "IT001": {
-    "itemCode": "IT001",
-    "itemName": "Laptop",
-    "description": "Business laptop",
-    "unitPrice": "1200.00",
-    "currentStock": "50",
-    "minimumStock": "10",
-    "createDate": "2025-04-10"
+  "ITM003": {
+    "itemCode": "ITM003",
+    "itemName": "Precision Screw S2",
+    "description": "Small electronics screw",
+    "unitPrice": "0.25",
+    "currentStock": "2000",
+    "minimumStock": "200",
+    "createDate": "2023-02-01",
+    "supplierId": "SUP002"  // <-- ADD THIS
   }
 }

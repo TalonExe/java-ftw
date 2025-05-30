@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+  <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="Create PO" onAction="#switchToCreatePO" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Supplier List" onAction="#switchToSupplierList" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Item View" onAction="#switchToItemList" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Purchase Requisition" onAction="#switchToViewPRPM" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+        </VBox>
+    </left>
+    
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Text style="-fx-font-size: 24; -fx-font-weight: bold;" text="Purchase Requisitions" />
+            
+            <TableView fx:id="requisitionTableView" style="-fx-padding: 10;">
+                <columns>
+                    <TableColumn fx:id="prIdColumn" prefWidth="120" text="Requisition ID" />
+                    <TableColumn fx:id="managerIdColumn" prefWidth="100" text="Manager ID" />
+                    <TableColumn fx:id="itemIdColumn" prefWidth="120" text="Date Requested" />
+                    <TableColumn fx:id="quantityColumn" prefWidth="120" text="Required By" />
+                    <TableColumn fx:id="statusColumn" prefWidth="100" text="Items" />
+                    <TableColumn fx:id="createdAtColumn" prefWidth="120" text="Quantity" />
+                </columns>
+            </TableView>
+            
+            <HBox alignment="CENTER_RIGHT" spacing="10" />
+        </VBox>
+    </center>
+</BorderPane>
