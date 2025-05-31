@@ -23,7 +23,7 @@
             <Button onAction="#switchToItemEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
             <Button onAction="#switchToSalesEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Sales Entry" />
             <!-- Add your Logout button here if it's part of the main menu -->
-            <Button fx:id="logoutButton" onAction="#test" text="Logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold; margin-top: 20px;"/>
+            <Button fx:id="logoutButton" onAction="#handleLogout" text="Logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold; margin-top: 20px;"/>
         </VBox>
         </VBox>
     </left>

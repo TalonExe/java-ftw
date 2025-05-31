@@ -148,6 +148,32 @@ public class Switchable {
         alert.showAndWait();
     }
     
+    @FXML
+    protected void handleLogout(ActionEvent event) {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Logout");
+        confirmation.setHeaderText(null);
+        confirmation.setContentText("Are you sure you want to logout?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            AppContext.clearCurrentUser(); // Clear the global user session
+
+            try {
+                // Use the router to switch to the "Login" scene.
+                // Ensure "Login" is a scene key you've registered with your Router
+                // during application startup (e.g., router.loadScene("Login", "LoginView.fxml");)
+                router.switchScene("login");
+            } catch (Exception e) { // Catch a more general Exception from router if it doesn't specify IOException
+                // Show an alert because direct UI interaction from base class is okay here
+                showAlert(Alert.AlertType.ERROR, "Logout Error",
+                          "Could not return to the login screen: " + e.getMessage());
+                e.printStackTrace(); // Log the full error for debugging
+            }
+        }
+    }
+    
      @FXML
     private void test(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -155,30 +181,4 @@ public class Switchable {
         // Example: if(clickedButton.getText().equals("Item Entry")) { /* load Item Entry FXML */ }
     }
 
-    /**
-     * Handles logout. This method can now be in the base class.
-     * The FXML for the logout button should have onAction="#handleLogout".
-     * Ensure the logoutButton itself is injected if this method is to be used directly,
-     * or ensure subclasses call this if they have their own @FXML logoutButton.
-     */
-    @FXML // Make it usable by FXML if the logout button is part of a base FXML structure controlled by Switchable
-    protected void handleLogout(ActionEvent event) { // Made protected
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to logout?", ButtonType.YES, ButtonType.NO);
-        confirmation.setTitle("Confirm Logout");
-        confirmation.setHeaderText(null);
-        Optional<ButtonType> result = confirmation.showAndWait();
-
-        if (result.isPresent() && result.get() == ButtonType.YES) {
-            AppContext.clearCurrentUser();
-            try {
-                // Use the changeScene method, assuming it's part of Switchable
-                router.switchScene("Login"); // Path to your login FXML
-            } catch (Exception e) {
-                showAlert(Alert.AlertType.ERROR, "Logout Error", "Could not return to the login screen: " + e.getMessage());
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    
 }
