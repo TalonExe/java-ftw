@@ -2,44 +2,47 @@ package com.talon.testing.controllers;
 
 import com.talon.testing.models.POItem;
 import com.talon.testing.models.PurchaseOrder;
-import com.talon.testing.models.Supplier; // Make sure Supplier model is available
+import com.talon.testing.models.Supplier;
+import com.talon.testing.models.StockTransaction; // Import StockTransaction
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable; // IMPORT THIS
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-// Removed FXML Loader, Parent, Scene, Stage as they are for navigation which Switchable might handle
-// import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
-import java.util.HashMap; // For initializing maps if null
+import java.util.HashMap;
+import java.util.List; // For loading transactions
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class ProcessPaymentController extends Switchable implements Initializable { // IMPLEMENT Initializable
+public class ProcessPaymentController extends Switchable implements Initializable {
 
-    // --- FXML Injections ---
+    // --- FXML Injections for Supplier Tab ---
     @FXML private TableView<Supplier> supplierTableView;
     @FXML private TableColumn<Supplier, String> supplierIdColumn;
     @FXML private TableColumn<Supplier, String> supplierNameColumn;
     @FXML private TableColumn<Supplier, String> contactPersonColumn;
     @FXML private TableColumn<Supplier, String> emailColumn;
-    @FXML private TableColumn<Supplier, String> addressColumn;
-    @FXML private TableColumn<Supplier, String> phoneColumn; // In FXML, maps to Supplier.phoneNumber
+    @FXML private TableColumn<Supplier, String> phoneColumn;
+    // @FXML private TableColumn<Supplier, String> addressColumn; // Add if in FXML
 
     @FXML private TableView<PurchaseOrder> supplierPOTableView;
     @FXML private TableColumn<PurchaseOrder, String> poIdColumn;
-    @FXML private TableColumn<PurchaseOrder, String> prIdColumn; // In FXML, maps to PurchaseOrder.prId
-    @FXML private TableColumn<PurchaseOrder, String> poDateColumn; // In FXML, maps to PurchaseOrder.orderDate
+    @FXML private TableColumn<PurchaseOrder, String> prIdColumn;
+    @FXML private TableColumn<PurchaseOrder, String> poDateColumn;
     @FXML private TableColumn<PurchaseOrder, String> poStatusColumn;
-    @FXML private TableColumn<PurchaseOrder, Boolean> poApprovedColumn; // Custom cell factory will handle this
+    @FXML private TableColumn<PurchaseOrder, String> poApprovedColumn; // Changed generic to String for text display
     @FXML private TableColumn<PurchaseOrder, Void> poActionColumn;
 
+    // --- FXML Injections for All Approved POs Tab ---
     @FXML private TableView<PurchaseOrder> approvedPOTableView;
     @FXML private TableColumn<PurchaseOrder, String> allPoIdColumn;
     @FXML private TableColumn<PurchaseOrder, String> allPoSupplierColumn;
@@ -48,44 +51,72 @@ public class ProcessPaymentController extends Switchable implements Initializabl
     @FXML private TableColumn<PurchaseOrder, String> allPoStatusColumn;
     @FXML private TableColumn<PurchaseOrder, Void> allPoActionColumn;
 
+    // --- FXML Injections for PO Details Pane ---
     @FXML private VBox poDetailsBox;
     @FXML private TableView<POItem> poItemsTableView;
     @FXML private TableColumn<POItem, String> poItemCodeColumn;
+    @FXML private TableColumn<POItem, String> poItemNameDisplayColumn; // Added
     @FXML private TableColumn<POItem, Integer> poQuantityColumn;
-    // You might want to add a column for unit price in POItem display:
-    // @FXML private TableColumn<POItem, String> poItemPriceColumn;
+    @FXML private TableColumn<POItem, String> poItemUnitPriceColumn;   // Added
+
+    // --- FXML Injections for Stock Transactions Table ---
+    @FXML private TableView<StockTransaction> stockTransactionsTableView;
+    @FXML private TableColumn<StockTransaction, String> stItemCodeCol;
+    @FXML private TableColumn<StockTransaction, String> stItemNameCol;
+    @FXML private TableColumn<StockTransaction, String> stTypeCol;
+    @FXML private TableColumn<StockTransaction, Integer> stQtyChangeCol;
+    @FXML private TableColumn<StockTransaction, Integer> stStockAfterCol;
+    @FXML private TableColumn<StockTransaction, String> stTimestampCol;
+    @FXML private TableColumn<StockTransaction, String> stUserCol;
+    @FXML private Button processPaymentButton;
 
 
     // --- Data Collections (Instance Variables) ---
     private ObservableList<Supplier> allSuppliersData = FXCollections.observableArrayList();
-    private Map<String, Supplier> allSuppliersMapCache; // Cache for suppliers
+    private Map<String, Supplier> allSuppliersMapCache;
 
-    private ObservableList<PurchaseOrder> allPOsMasterData = FXCollections.observableArrayList(); // Holds ALL POs loaded
-    private Map<String, PurchaseOrder> allPOsMapCache; // Cache for all POs
+    private ObservableList<PurchaseOrder> allPOsMasterData = FXCollections.observableArrayList();
+    private Map<String, PurchaseOrder> allPOsMapCache;
 
     private ObservableList<PurchaseOrder> supplierPOsData = FXCollections.observableArrayList();
     private ObservableList<PurchaseOrder> allApprovedPOsData = FXCollections.observableArrayList();
     private ObservableList<POItem> selectedPOItemsData = FXCollections.observableArrayList();
+    private ObservableList<StockTransaction> poStockTransactionsData = FXCollections.observableArrayList();
+    private List<StockTransaction> allStockTransactionsCache; // All transactions loaded once
 
     private PurchaseOrder currentlySelectedPO;
 
-    @Override // ADDED @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) { // Correct signature
-        loadMasterSupplierData(); // Load suppliers first for PO loading dependency
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadMasterSupplierData();
+        loadAllStockTransactions(); // Load these early
 
         configureSupplierTable();
         configureSupplierPOTable();
         configureApprovedPOTable();
         configurePOItemsTable();
+        configureStockTransactionsTable(); // Configure the new table
 
-        loadInitialPOData(); // Load POs after suppliers are available
+        loadInitialPOData();
 
-        // Add listeners for table selections
+        setupTableSelectionListeners();
+
+        if (poDetailsBox != null) {
+            poDetailsBox.setVisible(false);
+            poDetailsBox.setManaged(false);
+        }
+        // onAction for processPaymentButton is set in FXML
+    }
+
+    private void setupTableSelectionListeners() {
         if (supplierTableView != null) {
             supplierTableView.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> {
                     if (newSelection != null) {
                         loadPOsForSupplier(newSelection);
+                        clearPODetails();
+                    } else {
+                        supplierPOsData.clear(); // Clear POs if no supplier selected
                         clearPODetails();
                     }
                 });
@@ -98,17 +129,16 @@ public class ProcessPaymentController extends Switchable implements Initializabl
             approvedPOTableView.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldSelection, newSelection) -> handlePOTableSelection(newSelection));
         }
-
-        if (poDetailsBox != null) {
-            poDetailsBox.setVisible(false);
-            poDetailsBox.setManaged(false);
-        }
     }
 
     private void handlePOTableSelection(PurchaseOrder newSelection) {
         if (newSelection != null) {
-            showPODetails(newSelection);
             currentlySelectedPO = newSelection;
+            showPODetails(currentlySelectedPO);
+            // Highlight the selected PO in both tables if it exists in both
+            if (supplierPOTableView.getItems().contains(newSelection)) supplierPOTableView.getSelectionModel().select(newSelection);
+            if (approvedPOTableView.getItems().contains(newSelection)) approvedPOTableView.getSelectionModel().select(newSelection);
+
         } else {
             clearPODetails();
         }
@@ -116,51 +146,55 @@ public class ProcessPaymentController extends Switchable implements Initializabl
 
     private void loadMasterSupplierData() {
         try {
-            allSuppliersMapCache = Supplier.loadSuppliers(); // From Supplier.java
+            allSuppliersMapCache = Supplier.loadSuppliers();
             if (allSuppliersMapCache != null) {
                 allSuppliersData.setAll(allSuppliersMapCache.values());
             } else {
-                allSuppliersMapCache = new HashMap<>(); // Ensure not null
+                allSuppliersMapCache = new HashMap<>();
                 allSuppliersData.clear();
             }
         } catch (IOException e) {
             showAlert(Alert.AlertType.ERROR, "Supplier Load Error", "Could not load suppliers: " + e.getMessage());
-            allSuppliersMapCache = new HashMap<>(); // Ensure not null on error
+            allSuppliersMapCache = new HashMap<>();
         }
     }
 
+    private void loadAllStockTransactions() {
+        try {
+            allStockTransactionsCache = StockTransaction.loadTransactions();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Transaction Load Error", "Could not load stock transactions: " + e.getMessage());
+            allStockTransactionsCache = FXCollections.observableArrayList();
+        }
+        if (allStockTransactionsCache == null) allStockTransactionsCache = FXCollections.observableArrayList();
+    }
 
     private void configureSupplierTable() {
         if (supplierIdColumn != null) supplierIdColumn.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
         if (supplierNameColumn != null) supplierNameColumn.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
         if (contactPersonColumn != null) contactPersonColumn.setCellValueFactory(new PropertyValueFactory<>("contactPerson"));
         if (emailColumn != null) emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-        if (phoneColumn != null) phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber")); // Supplier model uses phoneNumber
-        if (addressColumn != null) addressColumn.setCellValueFactory(new PropertyValueFactory<>("address")); // Assuming Supplier has address
-        // if (registrationDateColumn != null) registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate")); // Assuming Supplier has registrationDate
-
+        if (phoneColumn != null) phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        // if (addressColumn != null) addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         if (supplierTableView != null) supplierTableView.setItems(allSuppliersData);
     }
 
     private void configureSupplierPOTable() {
         if (poIdColumn != null) poIdColumn.setCellValueFactory(new PropertyValueFactory<>("poId"));
-        if (prIdColumn != null) prIdColumn.setCellValueFactory(new PropertyValueFactory<>("prId")); // PO has prId
-        if (poDateColumn != null) poDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate")); // PO has orderDate
+        if (prIdColumn != null) prIdColumn.setCellValueFactory(new PropertyValueFactory<>("prId"));
+        if (poDateColumn != null) poDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         if (poStatusColumn != null) poStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
         if (poApprovedColumn != null) {
-            // Custom cell for boolean. PurchaseOrder needs an isApproved() method.
-            poApprovedColumn.setCellValueFactory(new PropertyValueFactory<>("approved")); // This relies on PO having an isApproved() -> Boolean getter
+            poApprovedColumn.setCellValueFactory(new PropertyValueFactory<>("status")); // Base on status
             poApprovedColumn.setCellFactory(col -> new TableCell<>() {
                 @Override
-                protected void updateItem(Boolean item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
+                protected void updateItem(String itemStatus, boolean empty) { // item is status string
+                    super.updateItem(itemStatus, empty);
+                    if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                         setText(null);
                     } else {
-                         // If PurchaseOrder's isApproved() returns boolean, this works.
-                         // Or, directly get the PurchaseOrder object and call its isApproved() method.
-                        PurchaseOrder po = getTableView().getItems().get(getIndex());
-                        setText(po.isConsideredApprovedForPayment()? "Yes" : "No");
+                        PurchaseOrder po = (PurchaseOrder) getTableRow().getItem();
+                        setText(po.isConsideredApprovedForPayment() ? "Yes" : "No");
                     }
                 }
             });
@@ -171,7 +205,7 @@ public class ProcessPaymentController extends Switchable implements Initializabl
 
     private void configureApprovedPOTable() {
         if (allPoIdColumn != null) allPoIdColumn.setCellValueFactory(new PropertyValueFactory<>("poId"));
-        if (allPoSupplierColumn != null) allPoSupplierColumn.setCellValueFactory(new PropertyValueFactory<>("supplierNameDisplay")); // PO has supplierNameDisplay
+        if (allPoSupplierColumn != null) allPoSupplierColumn.setCellValueFactory(new PropertyValueFactory<>("supplierNameDisplay"));
         if (allPrIdColumn != null) allPrIdColumn.setCellValueFactory(new PropertyValueFactory<>("prId"));
         if (allPoDateColumn != null) allPoDateColumn.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         if (allPoStatusColumn != null) allPoStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
@@ -181,76 +215,77 @@ public class ProcessPaymentController extends Switchable implements Initializabl
 
     private void configurePOItemsTable() {
         if (poItemCodeColumn != null) poItemCodeColumn.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        if (poItemNameDisplayColumn != null) poItemNameDisplayColumn.setCellValueFactory(new PropertyValueFactory<>("itemNameDisplay"));
         if (poQuantityColumn != null) poQuantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        // If you add unit price to POItem display:
-        // if (poItemPriceColumn != null) poItemPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        if (poItemUnitPriceColumn != null) poItemUnitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         if (poItemsTableView != null) poItemsTableView.setItems(selectedPOItemsData);
+    }
+
+    private void configureStockTransactionsTable() {
+        if (stockTransactionsTableView != null) {
+            stItemCodeCol.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+            stItemNameCol.setCellValueFactory(new PropertyValueFactory<>("itemNameDisplay"));
+            stTypeCol.setCellValueFactory(new PropertyValueFactory<>("transactionType"));
+            stQtyChangeCol.setCellValueFactory(new PropertyValueFactory<>("quantityChange"));
+            stStockAfterCol.setCellValueFactory(new PropertyValueFactory<>("stockLevelAfterTransaction"));
+            stTimestampCol.setCellValueFactory(new PropertyValueFactory<>("transactionTimestamp"));
+            stUserCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+            stockTransactionsTableView.setItems(poStockTransactionsData);
+        }
     }
 
     private void addSelectPOButtonToTable(TableColumn<PurchaseOrder, Void> column, TableView<PurchaseOrder> tableView) {
         column.setCellFactory(param -> new TableCell<>() {
-            private final Button actionButton = new Button(); // Text set dynamically
+            private final Button actionButton = new Button();
             {
                 actionButton.setOnAction(event -> {
-                    PurchaseOrder po = getTableView().getItems().get(getIndex());
-                    tableView.getSelectionModel().select(po); // Ensure row is selected
-                    // Action depends on status (view details or select for payment)
-                    showPODetails(po); // Always show details for now
-                    currentlySelectedPO = po;
+                    if (getTableRow() != null && getTableRow().getItem() != null) {
+                        PurchaseOrder po = (PurchaseOrder) getTableRow().getItem();
+                        tableView.getSelectionModel().select(po);
+                        handlePOTableSelection(po); // Use common handler
+                    }
                 });
             }
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
+                if (empty || getTableRow() == null || getTableRow().getItem() == null) {
+                    setGraphic(null); setText(null);
                 } else {
-                    PurchaseOrder po = getTableView().getItems().get(getIndex());
-                    if (po.isConsideredApprovedForPayment()&& !"Paid".equalsIgnoreCase(po.getStatus()) && !"Processed".equalsIgnoreCase(po.getStatus()) && !"Cancelled".equalsIgnoreCase(po.getStatus())) {
-                        actionButton.setText("Pay/Details");
-                        setGraphic(actionButton);
-                    } else if (!po.isConsideredApprovedForPayment()&& !"Paid".equalsIgnoreCase(po.getStatus()) && !"Processed".equalsIgnoreCase(po.getStatus()) && !"Cancelled".equalsIgnoreCase(po.getStatus())){
-                        actionButton.setText("View Details");
-                        setGraphic(actionButton);
+                    PurchaseOrder po = (PurchaseOrder) getTableRow().getItem();
+                    if (po.isConsideredApprovedForPayment() && !"Paid".equalsIgnoreCase(po.getStatus()) && !"Processed".equalsIgnoreCase(po.getStatus()) && !"Cancelled".equalsIgnoreCase(po.getStatus())) {
+                        actionButton.setText("Pay/Details"); setGraphic(actionButton); setText(null);
+                    } else if (!"Paid".equalsIgnoreCase(po.getStatus()) && !"Processed".equalsIgnoreCase(po.getStatus()) && !"Cancelled".equalsIgnoreCase(po.getStatus())) {
+                        actionButton.setText("View Details"); setGraphic(actionButton); setText(null);
                     } else {
-                        setText(po.getStatus()); // Show status like "Paid", "Cancelled"
-                        setGraphic(null);
+                        setText(po.getStatus()); setGraphic(null);
                     }
                 }
             }
         });
     }
 
-    private void loadInitialPOData() { // Renamed from loadInitialData
+    private void loadInitialPOData() {
         try {
-            // allSuppliersMapCache should be loaded by now from loadMasterSupplierData()
-            if (allSuppliersMapCache == null) {
-                System.err.println("Supplier map cache is null in loadInitialPOData. Load suppliers first.");
-                loadMasterSupplierData(); // Attempt to load if not already
-            }
-            allPOsMapCache = PurchaseOrder.loadPOs(this.allSuppliersMapCache); // Pass supplier map
+            if (allSuppliersMapCache == null) loadMasterSupplierData();
+            allPOsMapCache = PurchaseOrder.loadPOs(this.allSuppliersMapCache);
             if (allPOsMapCache == null) allPOsMapCache = new HashMap<>();
-
             allPOsMasterData.setAll(allPOsMapCache.values());
 
-            // Populate "All Approved POs" tab
             allApprovedPOsData.setAll(
                 allPOsMasterData.stream()
-                    // Filter by status OR by calling isApproved() method on PurchaseOrder
-                    .filter(PurchaseOrder::isConsideredApprovedForPayment) // Assumes PO.isApproved() checks relevant statuses
+                    .filter(PurchaseOrder::isConsideredApprovedForPayment)
+                    .filter(po -> !"Paid".equalsIgnoreCase(po.getStatus()) && !"Processed".equalsIgnoreCase(po.getStatus()) && !"Cancelled".equalsIgnoreCase(po.getStatus())) // Show only those needing payment
                     .collect(Collectors.toList())
             );
-
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Data Load Error", "Failed to load PO data: " + e.getMessage());
-            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "PO Load Error", "Failed to load PO data: " + e.getMessage());
         }
     }
 
     private void loadPOsForSupplier(Supplier supplier) {
         supplierPOsData.setAll(
-            allPOsMasterData.stream() // Filter from the master list of all POs
+            allPOsMasterData.stream()
                 .filter(po -> po.getSupplierId() != null && po.getSupplierId().equals(supplier.getSupplierId()))
                 .collect(Collectors.toList())
         );
@@ -258,7 +293,8 @@ public class ProcessPaymentController extends Switchable implements Initializabl
 
     private void showPODetails(PurchaseOrder po) {
         if (po != null && poDetailsBox != null && poItemsTableView != null) {
-            selectedPOItemsData.setAll(po.getItems()); // Assumes PO.getItems() returns ObservableList<POItem>
+            selectedPOItemsData.setAll(po.getItems());
+            loadStockTransactionsForPO(po.getPoId());
             poDetailsBox.setVisible(true);
             poDetailsBox.setManaged(true);
         } else {
@@ -266,19 +302,34 @@ public class ProcessPaymentController extends Switchable implements Initializabl
         }
     }
 
+    private void loadStockTransactionsForPO(String poId) {
+        poStockTransactionsData.clear();
+        if (poId == null || allStockTransactionsCache == null) return;
+        poStockTransactionsData.addAll(
+            allStockTransactionsCache.stream()
+                .filter(st -> poId.equals(st.getPoId()) && "PO_RECEIPT".equals(st.getTransactionType()))
+                .collect(Collectors.toList())
+        );
+        if (stockTransactionsTableView != null) stockTransactionsTableView.refresh();
+    }
+
     private void clearPODetails() {
         if (selectedPOItemsData != null) selectedPOItemsData.clear();
+        if (poStockTransactionsData != null) poStockTransactionsData.clear();
         if (poDetailsBox != null) {
             poDetailsBox.setVisible(false);
             poDetailsBox.setManaged(false);
         }
         currentlySelectedPO = null;
+        // Clear selection from tables to avoid re-triggering
+        if(supplierPOTableView != null) supplierPOTableView.getSelectionModel().clearSelection();
+        if(approvedPOTableView != null) approvedPOTableView.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void handleProcessPayment(ActionEvent event) {
         if (currentlySelectedPO == null) {
-            showAlert(Alert.AlertType.WARNING, "No PO Selected", "Please select a Purchase Order to process payment.");
+            showAlert(Alert.AlertType.WARNING, "No PO Selected", "Please select a PO to process payment.");
             return;
         }
         if (!currentlySelectedPO.isConsideredApprovedForPayment()) {
@@ -286,57 +337,58 @@ public class ProcessPaymentController extends Switchable implements Initializabl
              return;
         }
         if ("Paid".equalsIgnoreCase(currentlySelectedPO.getStatus()) || "Processed".equalsIgnoreCase(currentlySelectedPO.getStatus())) {
-            showAlert(Alert.AlertType.INFORMATION, "Payment Process", "PO " + currentlySelectedPO.getPoId() + " has already been paid/processed.");
+            showAlert(Alert.AlertType.INFORMATION, "Payment Process", "PO " + currentlySelectedPO.getPoId() + " already paid/processed.");
             return;
         }
         if ("Cancelled".equalsIgnoreCase(currentlySelectedPO.getStatus())) {
-            showAlert(Alert.AlertType.ERROR, "Payment Process", "PO " + currentlySelectedPO.getPoId() + " is cancelled and cannot be paid.");
+            showAlert(Alert.AlertType.ERROR, "Payment Process", "PO " + currentlySelectedPO.getPoId() + " is cancelled.");
             return;
         }
 
+        // Stock Verification (Example)
+        boolean stockReceiptsFound = !poStockTransactionsData.isEmpty();
+        if (!stockReceiptsFound && !currentlySelectedPO.getItems().isEmpty()) {
+            Alert confirmNoStock = new Alert(Alert.AlertType.CONFIRMATION,
+                    "No stock receipt transactions recorded for PO " + currentlySelectedPO.getPoId() + ".\n" +
+                    "Proceed with payment anyway?", ButtonType.YES, ButtonType.NO);
+            confirmNoStock.setTitle("Stock Verification");
+            Optional<ButtonType> result = confirmNoStock.showAndWait();
+            if (result.isEmpty() || result.get() == ButtonType.NO) {
+                showAlert(Alert.AlertType.INFORMATION, "Payment Cancelled", "Payment cancelled by user due to no stock receipt.");
+                return;
+            }
+        }
+        // More detailed item by item quantity check could be added here if needed.
 
-        // --- Simulate actual payment processing ---
         System.out.println("Processing payment for PO: " + currentlySelectedPO.getPoId() +
-                           " for Supplier: " + currentlySelectedPO.getSupplierNameDisplay()); // Use supplierNameDisplay
-
-        // Update PO status in memory
+                           " for Supplier: " + currentlySelectedPO.getSupplierNameDisplay());
         String oldStatus = currentlySelectedPO.getStatus();
         currentlySelectedPO.setStatus("Paid");
-        // Update finance manager and approval date if applicable for "Paid" status
-        // currentlySelectedPO.setFinanceManagerId("USER_FINANCE_01"); // Example: Logged in finance user
-        // currentlySelectedPO.setApprovalDate(LocalDate.now());
 
+        if (allPOsMapCache != null) allPOsMapCache.put(currentlySelectedPO.getPoId(), currentlySelectedPO);
+        
+        // Refresh the list of "approved POs pending payment"
+        // Since it's now "Paid", it should be removed from that specific list.
+        allApprovedPOsData.remove(currentlySelectedPO);
 
-        // Update the PO in our main cache
-        if (allPOsMapCache != null) {
-            allPOsMapCache.put(currentlySelectedPO.getPoId(), currentlySelectedPO);
-        }
-
-        // Refresh tables
+        // Refresh other tables if they show this PO
         if (supplierPOTableView != null) supplierPOTableView.refresh();
-        if (approvedPOTableView != null) approvedPOTableView.refresh();
-        // The item in allPOsMasterData is the same instance, so it's also updated.
 
-        // Persist changes to file
+
         try {
-            PurchaseOrder.savePOs(allPOsMapCache); // Save the entire updated PO map
-            showAlert(Alert.AlertType.INFORMATION, "Payment Processed",
-                    "Payment for PO " + currentlySelectedPO.getPoId() + " has been processed.");
-            clearPODetails(); // Clear details and selection after processing
+            PurchaseOrder.savePOs(allPOsMapCache);
+            showAlert(Alert.AlertType.INFORMATION, "Payment Processed", "Payment for PO " + currentlySelectedPO.getPoId() + " processed.");
+            clearPODetails();
         } catch (IOException e) {
-            showAlert(Alert.AlertType.ERROR, "Save Error", "Failed to save PO after payment: " + e.getMessage());
-            // Rollback status in memory if save failed
-            currentlySelectedPO.setStatus(oldStatus);
-            if (allPOsMapCache != null) allPOsMapCache.put(currentlySelectedPO.getPoId(), currentlySelectedPO); // Put back old state
+            showAlert(Alert.AlertType.ERROR, "Save Error", "Failed to save PO: " + e.getMessage());
+            currentlySelectedPO.setStatus(oldStatus); // Rollback
+            if (allPOsMapCache != null) allPOsMapCache.put(currentlySelectedPO.getPoId(), currentlySelectedPO);
+            if (!allApprovedPOsData.contains(currentlySelectedPO) && currentlySelectedPO.isConsideredApprovedForPayment() &&
+                !"Paid".equalsIgnoreCase(oldStatus) && !"Processed".equalsIgnoreCase(oldStatus) && !"Cancelled".equalsIgnoreCase(oldStatus)) {
+                 allApprovedPOsData.add(currentlySelectedPO); // Add back if it was removed and should still be there
+            }
             if (supplierPOTableView != null) supplierPOTableView.refresh();
-            if (approvedPOTableView != null) approvedPOTableView.refresh();
             e.printStackTrace();
         }
     }
-    
-    @FXML
-    public void test(){
-        System.out.println("hi");
-    }
-
 }

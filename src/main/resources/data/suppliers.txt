@@ -1,20 +1,29 @@
 {
   "SUP001": {
     "supplierId": "SUP001",
-    "supplierName": "ACME Supplies",
+    "supplierName": "ACME Industrial",
     "contactPerson": "Wile E. Coyote",
     "email": "wile@acme.com",
     "phoneNumber": "555-0101",
-    "address": "123 Desert Road",
+    "address": "123 Desert Rd, Anytown, USA",
     "registrationDate": "2022-01-15"
   },
   "SUP002": {
     "supplierId": "SUP002",
-    "supplierName": "Globex Corporation",
-    "contactPerson": "Hank Scorpio",
-    "email": "hank@globex.com",
+    "supplierName": "Beta Components Ltd.",
+    "contactPerson": "Betty Rubble",
+    "email": "betty@beta.com",
     "phoneNumber": "555-0202",
-    "address": "456 Evil Lair Lane",
-    "registrationDate": "2021-06-20"
+    "address": "456 Bedrock Ave, Quarryville, USA",
+    "registrationDate": "2022-03-10"
+  },
+  "SUP003": {
+    "supplierId": "SUP003",
+    "supplierName": "Gamma Gadgets Inc.",
+    "contactPerson": "George Jetson",
+    "email": "george@gamma.com",
+    "phoneNumber": "555-0303",
+    "address": "789 Orbit City, Sky High",
+    "registrationDate": "2022-05-20"
   }
 }

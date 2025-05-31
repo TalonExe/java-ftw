@@ -219,13 +219,4 @@ public class DailySalesController extends Switchable {
         return true;
     }
 
-
-    // Placeholder for navigation buttons - these should have onAction="#methodName" in FXML
-    // if handled by this controller.
-    @FXML
-    private void test(ActionEvent event) {
-        Button clickedButton = (Button) event.getSource();
-        System.out.println("Action for: " + clickedButton.getText() + " (not yet implemented for navigation)");
-        // Example: if(clickedButton.getText().equals("Item Entry")) { /* load Item Entry FXML */ }
-    }
 }

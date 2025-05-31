@@ -10,19 +10,10 @@
 
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button onAction="#loadAllItemsData" text="View All Items"
-                    style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" />
-            <Button onAction="#handleViewLowStock" text="View Low Stock"
-                    style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150;" />
-            <Button onAction="#handleUpdateStock" text="Update Stock (Demo)"
-                    style="-fx-background-color: #5bc0de; -fx-text-fill: white; -fx-min-width: 150;" />
-            <Button onAction="#handleUpdateStockFromPOs" text="Receive Stock from POs"
-                    style="-fx-background-color: #f0ad4e; -fx-text-fill: white; -fx-min-width: 150;" />
-            <Button onAction="#handleGenerateReport" text="Generate Report"
-                    style="-fx-background-color: #5cb85c; -fx-text-fill: white; -fx-min-width: 150;" />
-             <!-- Add other navigation buttons from your main template if this is part of it -->
-            <Button onAction="#switchToSupplierEntry" style="-fx-background-color: #777; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Mgmt" />
-            <Button onAction="#switchToViewPRPM" style="-fx-background-color: #777; -fx-text-fill: white; -fx-min-width: 150;" text="PR Mgmt" />
+            <Button text="Generate Inventory Report" onAction="#switchToGenerateReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="View PR" onAction="#switchToViewPRIM" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Stock Management" onAction="#switchToStockManagement" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Item View" onAction="#switchToItemListIM" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
         </VBox>
     </left>
 

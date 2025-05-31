@@ -44,7 +44,6 @@ public class App extends Application {
         router.loadScene("PR", "FinanceManager/PR.fxml");
         router.loadScene("Process Payment", "FinanceManager/ProcessPayment.fxml");
         router.loadScene("Finance Report", "FinanceManager/GenerateReport.fxml");
-        //router.loadScene("PR", "PR.fxml");
         
         // Purchase Manager views
         router.loadScene("Supplier List", "PurchaseManager/listSupplierView.fxml");
@@ -54,8 +53,11 @@ public class App extends Application {
 
         // Inventory Manager views
         router.loadScene("Stock Management", "InventoryManager/StockManagement.fxml");
+        router.loadScene("Generate Report", "InventoryManager/GenerateInventoryReport.fxml");
+        router.loadScene("View PR IM", "InventoryManager/PR.fxml");
+        router.loadScene("Item List IM", "InventoryManager/listItemView.fxml");
         
-       // router.loadScene("PR", "FinanceManager/PR.fxml");
+
         
         stage.setTitle("Java HRM");
         stage.setWidth(1920);
@@ -75,7 +77,6 @@ public class App extends Application {
             System.out.println(hh.getAllowedPermissions());
             System.out.println(UserController.loadUsers());
             System.out.println(FinanceManagerController.loadPRsFromFileStatic());
-            System.out.println(POApprovalController.loadPO());
             System.out.println(Sales.loadSales());
             
         } catch (IOException e) {

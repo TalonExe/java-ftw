@@ -5,8 +5,10 @@
 package com.talon.testing.controllers;
 
 import com.talon.testing.utils.Router;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -86,11 +88,38 @@ public class Switchable {
         router.switchScene("Create PO");
     }
     
+    @FXML
+    public void switchToStockManagement() { // This is for the side navigation buttons
+        router.switchScene("Stock Management");
+    }
+    
+    @FXML
+    public void switchToGenerateReport() { // This is for the side navigation buttons
+        router.switchScene("Generate Report");
+    }
+    
+    @FXML
+    public void switchToViewPRIM() { // This is for the side navigation buttons
+        router.switchScene("View PR IM");
+    }
+    
+    @FXML
+    public void switchToItemListIM() { // This is for the side navigation buttons
+        router.switchScene("Item List IM");
+    }
+    
     public void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    
+     @FXML
+    private void test(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        System.out.println("Action for: " + clickedButton.getText() + " (not yet implemented for navigation)");
+        // Example: if(clickedButton.getText().equals("Item Entry")) { /* load Item Entry FXML */ }
     }
 }

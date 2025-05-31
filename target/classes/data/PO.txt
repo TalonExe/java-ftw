@@ -1,22 +1,82 @@
 {
-  "PO001": {
-    "poId": "PO001",
-    "purchaseManagerId": "U003",
-    "prId": "PR002",
-    "supplierId": "S001",
-    "quantity": 10,
-    "totalAmount": 2500.00,
-    "status": "Approved",
-    "createdAt": "2025-05-12 10:00:00"
+  "PO2023-103": {
+    "poId": "PO2023-103",
+    "prId": "PR2023-002",
+    "supplierId": "SUP002",
+    "supplierNameDisplay": "Beta Components Ltd.",
+    "orderDate": "2023-10-06",
+    "requiredDate": "2023-11-06",
+    "purchaseManagerId": "SM002",
+    "financeManagerId": "FM002",
+    "approvalDate": "2023-10-10",
+    "status": "Paid",
+    "items": [
+      {
+        "itemCode": "ITM002",
+        "quantity": 50,
+        "unitPrice": "12.75",
+        "itemNameDisplay": "Precision Gear"
+      }
+    ],
+    "notes": "Approved for payment. Awaiting payment processing."
   },
-  "PO002": {
-    "poId": "PO002",
-    "purchaseManagerId": "U005",
-    "prId": "PR001",
-    "supplierId": "S002",
-    "quantity": 5,
-    "totalAmount": 4800.00,
-    "status": "Pending",
-    "createdAt": "2025-05-12 15:30:00"
+  "PO2023-102": {
+    "poId": "PO2023-102",
+    "prId": "PR2023-001",
+    "supplierId": "SUP001",
+    "supplierNameDisplay": "ACME Industrial",
+    "orderDate": "2023-10-02",
+    "requiredDate": "2023-11-02",
+    "purchaseManagerId": "SM001",
+    "status": "Approved by PM",
+    "items": [
+      {
+        "itemCode": "ITM001",
+        "quantity": 20,
+        "unitPrice": "25.50",
+        "itemNameDisplay": "Heavy-Duty Widget"
+      }
+    ],
+    "notes": "Waiting for finance approval for payment."
+  },
+  "PO2023-104": {
+    "poId": "PO2023-104",
+    "prId": "PR2023-004",
+    "supplierId": "SUP003",
+    "supplierNameDisplay": "Gamma Gadgets Inc.",
+    "orderDate": "2023-10-13",
+    "requiredDate": "2023-11-13",
+    "purchaseManagerId": "SM003",
+    "status": "Generated - Pending Approval",
+    "items": [
+      {
+        "itemCode": "ITM004",
+        "quantity": 15,
+        "unitPrice": "45.00",
+        "itemNameDisplay": "Micro Controller Unit"
+      }
+    ],
+    "notes": "New PO, needs PM review."
+  },
+  "PO2023-101": {
+    "poId": "PO2023-101",
+    "prId": "PR2023-003",
+    "supplierId": "SUP001",
+    "supplierNameDisplay": "ACME Industrial",
+    "orderDate": "2023-09-18",
+    "requiredDate": "2023-10-18",
+    "purchaseManagerId": "SM001",
+    "financeManagerId": "FM001",
+    "approvalDate": "2023-09-20",
+    "status": "Paid",
+    "items": [
+      {
+        "itemCode": "ITM003",
+        "quantity": 30,
+        "unitPrice": "8.99",
+        "itemNameDisplay": "Standard Sprocket"
+      }
+    ],
+    "notes": "Payment processed via wire transfer."
   }
 }
