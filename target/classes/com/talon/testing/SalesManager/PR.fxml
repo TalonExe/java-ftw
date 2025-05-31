@@ -7,18 +7,28 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
   <left>
-        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button onAction="#switchToItemEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
-            <Button onAction="#switchToSupplierEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
-            <Button onAction="#switchToSalesEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Daily Sales Entry" />
-            <Button onAction="#switchToCreatePR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
-            <Button onAction="#switchToViewPR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PR" />
-            <Button onAction="#switchToViewPO" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
-        </VBox>
-    </left>
+          <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;"> <!-- Parent VBox for left content -->
+
+              <!-- Profile Card VBox -->
+              <fx:include source="../ProfileCard.fxml" fx:id="profileCardInclude" /> 
+
+              <!-- Navigation Menu VBox -->
+              <VBox spacing="10"> <!-- fx:id is optional here unless you target it -->
+                  <Button onAction="#switchToCreatePR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+                  <Button onAction="#switchToSupplierEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+                  <Button onAction="#switchToItemEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+                  <Button onAction="#switchToViewPO" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="View PO" />
+                  <Button onAction="#switchToSalesEntry" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Sales Entry" />
+                  <!-- Add your Logout button here if it's part of the main menu -->
+                  <Button fx:id="logoutButton" onAction="#test" text="Logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold; margin-top: 20px;"/>
+              </VBox>
+
+          </VBox>
+      </left>
     
     <center>
         <VBox spacing="20" style="-fx-padding: 20;">

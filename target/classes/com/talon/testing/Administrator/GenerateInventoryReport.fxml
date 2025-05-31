@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+        <fx:include source="../ProfileCard.fxml" fx:id="profileCardInclude" />
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="Finance Report" onAction="#switchToGenerateSalesReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#switchToProcessPaymentAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Generate Inventory Report" onAction="#switchToGenerateInventoryReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Stock Management" onAction="#switchToStockManagementAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Create PO" onAction="#switchToCreatePOAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#switchToCreatePRAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#switchToSupplierEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#switchToItemEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#switchToSalesEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Sales Entry" />
+            <!-- Add your Logout button here if it's part of the main menu -->
+            <Button fx:id="logoutButton" onAction="#test" text="Logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold; margin-top: 20px;"/>
+        </VBox>
+        </VBox>
+    </left>
+    
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <Text text="Finance Report" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+            
+            <TableView fx:id="salesTableView" style="-fx-padding: 10;">
+                <columns>
+                    <TableColumn text="Sales ID" prefWidth="100" fx:id="salesIdColumn"/>
+                    <TableColumn text="Item Code" prefWidth="100" fx:id="itemCodeColumn"/>
+                    <TableColumn text="Quantity Sold" prefWidth="100" fx:id="quantitySoldColumn"/>
+                    <TableColumn text="Sales Date" prefWidth="120" fx:id="salesDateColumn"/>
+                    <TableColumn text="Manager ID" prefWidth="100" fx:id="managerIdColumn"/>
+                </columns>
+            </TableView>
+            
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Generate PDF Report" onAction="#test" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

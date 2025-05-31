@@ -20,7 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class UserManagementController implements Initializable {
+public class UserManagementController extends Switchable implements Initializable {
 
     @FXML private TableView<User> userTable;
     @FXML private TableColumn<User, String> userIdCol;

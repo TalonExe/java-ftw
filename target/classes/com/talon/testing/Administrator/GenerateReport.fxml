@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<!-- Make sure namespace matches your project's JavaFX version (e.g., 13 or 17) -->
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceReportController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+        <fx:include source="../ProfileCard.fxml" fx:id="profileCardInclude" />
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="Finance Report" onAction="#switchToGenerateSalesReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#switchToProcessPaymentAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Generate Inventory Report" onAction="#switchToGenerateInventoryReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Stock Management" onAction="#switchToStockManagementAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Create PO" onAction="#switchToCreatePOAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#switchToCreatePRAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#switchToSupplierEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#switchToItemEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#switchToSalesEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Sales Entry" />
+            <!-- Add your Logout button here if it's part of the main menu -->
+            <Button fx:id="logoutButton" onAction="#test" text="Logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold; margin-top: 20px;"/>
+        </VBox>
+        </VBox>
+    </left>
+    
+    <center>
+        <VBox spacing="15" style="-fx-padding: 20;">
+            <Text text="Finance and Sales Report" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Chart Type:"/>
+                <ComboBox fx:id="chartTypeComboBox" prefWidth="200.0"/>
+                <Button fx:id="generatePdfButton" text="Generate PDF Report" onAction="#handleGeneratePdfReport" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- Chart Area -->
+            <BarChart fx:id="salesBarChart" title="Sales Data" prefHeight="350.0" VBox.vgrow="ALWAYS">
+                <xAxis>
+                    <CategoryAxis fx:id="xAxis" label="Category"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" label="Value"/>
+                </yAxis>
+            </BarChart>
+            
+            <Label text="Sales Data Table:" style="-fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
+            <TableView fx:id="salesTableView" prefHeight="250.0">
+                <columns>
+                    <TableColumn fx:id="salesIdColumn" prefWidth="100" text="Sales ID" />
+                    <TableColumn fx:id="itemCodeColumn" prefWidth="100" text="Item Code" />
+                    <TableColumn fx:id="quantitySoldColumn" prefWidth="110" text="Quantity Sold" />
+                    <TableColumn fx:id="salesDateColumn" prefWidth="120" text="Sales Date" />
+                    <TableColumn fx:id="managerIdColumn" prefWidth="120" text="Manager ID" />
+                </columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

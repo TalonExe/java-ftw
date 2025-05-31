@@ -5,6 +5,7 @@ com\talon\testing\controllers\CreatePRController$2.class
 com\talon\testing\controllers\POApprovalController.class
 com\talon\testing\models\StockTransaction$1.class
 com\talon\testing\models\Item$1.class
+com\talon\testing\utils\FileUtils.class
 com\talon\testing\models\PurchaseOrder$1.class
 com\talon\testing\controllers\FinanceReportController.class
 com\talon\testing\models\POItem.class
@@ -12,6 +13,7 @@ com\talon\testing\controllers\SupplierEntryController.class
 com\talon\testing\controllers\Switchable.class
 com\talon\testing\models\Supplier.class
 com\talon\testing\utils\Router.class
+com\talon\testing\controllers\ProfileCardController.class
 com\talon\testing\controllers\ProcessPaymentController.class
 com\talon\testing\controllers\CreatePRController$1.class
 com\talon\testing\controllers\StockManagementController.class
@@ -22,6 +24,7 @@ com\talon\testing\controllers\UserController$1.class
 com\talon\testing\controllers\UserController.class
 com\talon\testing\controllers\UserManagementController.class
 com\talon\testing\models\BasicUser.class
+com\talon\testing\controllers\DailySalesController$1.class
 com\talon\testing\controllers\ItemEntryController$1.class
 module-info.class
 com\talon\testing\controllers\LoginController$1.class
@@ -30,9 +33,11 @@ com\talon\testing\models\Sales.class
 com\talon\testing\controllers\ItemEntryController.class
 com\talon\testing\controllers\ProcessPaymentController$1.class
 com\talon\testing\models\PurchaseOrder$PurchaseOrderDTO.class
+com\talon\testing\utils\AppContext.class
 com\talon\testing\controllers\DailySalesController.class
 com\talon\testing\controllers\ProcessPaymentController$2.class
 com\talon\testing\models\User.class
+com\talon\testing\controllers\UserTypeAdapter.class
 com\talon\testing\controllers\CreatePRController.class
 com\talon\testing\controllers\CreatePOController.class
 com\talon\testing\models\PurchaseOrder$2.class

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.talon.testing.controllers.ProfileCardController"
+      fx:id="userProfileCardRoot" spacing="5" alignment="CENTER_LEFT" 
+      style="-fx-padding: 10; -fx-background-color: #e0e0e0; -fx-background-radius: 5; -fx-border-color: #cccccc; -fx-border-width: 1; -fx-border-radius: 5; -fx-pref-width: 170;">
+    <Label fx:id="profileUsernameLabel" text="Username: N/A" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+    <Label fx:id="profileUserTypeLabel" text="Role: N/A" style="-fx-font-size: 12px;"/>
+    <Label fx:id="profileLoginTimeLabel" text="Logged in: N/A" style="-fx-font-size: 10px; -fx-text-fill: #555555;"/>
+</VBox>

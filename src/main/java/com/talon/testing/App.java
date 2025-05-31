@@ -57,6 +57,17 @@ public class App extends Application {
         router.loadScene("View PR IM", "InventoryManager/PR.fxml");
         router.loadScene("Item List IM", "InventoryManager/listItemView.fxml");
         
+        //Administrator Views
+        router.loadScene("Manage Users", "Administrator/UserManagement.fxml");
+        router.loadScene("Create PO Admin", "Administrator/CreatePO.fxml");
+        router.loadScene("Create PR Admin", "Administrator/CreatePR.fxml");
+        router.loadScene("Generate Inventory Report Admin", "Administrator/GenerateInventoryReport.fxml");
+        router.loadScene("Item Entry Admin", "Administrator/ItemEntry.fxml");
+        router.loadScene("Process Payment Admin", "Administrator/ProcessPayment.fxml");
+        router.loadScene("Stock Management Admin", "Administrator/StockManagement.fxml");
+        router.loadScene("Supplier Entry Admin", "Administrator/SupplierEntry.fxml");
+        router.loadScene("Generate Sales Report", "Administrator/GenerateReport.fxml");
+        router.loadScene("Sales Entry Admin", "Administrator/DailySales.fxml");
 
         
         stage.setTitle("Java HRM");
@@ -75,7 +86,6 @@ public class App extends Application {
             System.out.println(Item.loadItems());
             SalesManager hh = new SalesManager();
             System.out.println(hh.getAllowedPermissions());
-            System.out.println(UserController.loadUsers());
             System.out.println(FinanceManagerController.loadPRsFromFileStatic());
             System.out.println(Sales.loadSales());
             

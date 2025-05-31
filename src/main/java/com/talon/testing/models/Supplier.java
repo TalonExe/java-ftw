@@ -3,18 +3,14 @@ package com.talon.testing.models;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Writer;
+import com.talon.testing.utils.FileUtils; // IMPORT FileUtils
+
+import java.io.*; // Keep general IO imports
 import java.lang.reflect.Type;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+// Remove unused URL, URISyntaxException if getFileFromResource is fully replaced
 
 public class Supplier {
     private String supplierId;
@@ -25,7 +21,7 @@ public class Supplier {
     private String address;
     private String registrationDate;
 
-    private static final String SUPPLIER_FILE_PATH = "/data/suppliers.txt";
+    private static final String SUPPLIER_FILENAME = "suppliers.txt"; // Renamed constant
     private static final Type SUPPLIER_MAP_TYPE = new TypeToken<Map<String, Supplier>>() {}.getType();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -39,15 +35,13 @@ public class Supplier {
         this.registrationDate = registrationDate;
     }
     
-    // No-arg constructor for Gson
     public Supplier() {}
 
-    // Getters and Setters (as you have them)
+    // Getters and Setters ... (keep as they are) ...
     public String getSupplierId() { return supplierId; }
     public void setSupplierId(String supplierId) { this.supplierId = supplierId; }
     public String getSupplierName() { return supplierName; }
     public void setSupplierName(String supplierName) { this.supplierName = supplierName; }
-    // ... other getters/setters ...
     public String getContactPerson(){ return this.contactPerson; }
     public void setContactPerson(String contactPerson){ this.contactPerson = contactPerson; }
     public String getEmail(){ return this.email; }
@@ -59,43 +53,42 @@ public class Supplier {
     public String getRegistrationDate(){ return this.registrationDate; }
     public void setRegistrationDate(String registrationDate){ this.registrationDate = registrationDate; }
 
-
     @Override
-    public String toString() { // Important for ComboBox display
+    public String toString() {
         return (supplierName != null ? supplierName : "N/A") + " (" + (supplierId != null ? supplierId : "N/A") + ")";
     }
 
     public static Map<String, Supplier> loadSuppliers() throws IOException {
         Map<String, Supplier> supplierMap = new HashMap<>();
-        try (InputStream inputStream = Supplier.class.getResourceAsStream(SUPPLIER_FILE_PATH)) {
-            if (inputStream == null) {
-                System.err.println("Supplier data file not found: " + SUPPLIER_FILE_PATH + ". Attempting to create.");
-                File file = getFileFromResource(SUPPLIER_FILE_PATH, true);
-                if (file != null && file.exists() && file.length() == 0) {
-                    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) { writer.write("{}"); }
-                } else if (file == null || !file.exists()) {
-                     System.err.println("Could not create or access Supplier file: " + SUPPLIER_FILE_PATH);
-                }
-                return supplierMap;
-            }
-            try (InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
-                supplierMap = gson.fromJson(reader, SUPPLIER_MAP_TYPE);
-                if (supplierMap == null) {
-                    supplierMap = new HashMap<>();
-                }
+        // Use FileUtils to get the file, create if not found with default content "{}"
+        File file = FileUtils.getDataFileFromProjectRoot(SUPPLIER_FILENAME, true, "{}");
+
+        if (file == null || !file.exists() || !file.canRead()) {
+            System.err.println("Cannot read supplier data file or file does not exist: " + (file != null ? file.getAbsolutePath() : SUPPLIER_FILENAME + " path problem"));
+            return supplierMap;
+        }
+        if (file.length() == 0) {
+            System.out.println(SUPPLIER_FILENAME + " is empty. Returning empty map.");
+            return supplierMap;
+        }
+
+        try (InputStream inputStream = new FileInputStream(file);
+             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
+            supplierMap = gson.fromJson(reader, SUPPLIER_MAP_TYPE);
+            if (supplierMap == null) {
+                supplierMap = new HashMap<>();
             }
         } catch (com.google.gson.JsonSyntaxException e) {
-            System.err.println("Error parsing JSON from Supplier data file: " + SUPPLIER_FILE_PATH);
-            throw new IOException("Error parsing Supplier JSON data.", e);
+            System.err.println("Error parsing JSON from Supplier data file: " + file.getAbsolutePath() + ". Error: " + e.getMessage());
+            throw new IOException("Error parsing Supplier JSON data from " + file.getAbsolutePath(), e);
         }
         return supplierMap;
     }
 
-    // Added saveSuppliers (similar to Item.saveItems)
     public static void saveSuppliers(Map<String, Supplier> supplierMap) throws IOException {
-        File file = getFileFromResource(SUPPLIER_FILE_PATH, true);
+        File file = FileUtils.getDataFileFromProjectRoot(SUPPLIER_FILENAME, true, "{}");
         if (file == null) {
-            throw new IOException("Could not get or create file for saving Suppliers at path: " + SUPPLIER_FILE_PATH);
+            throw new IOException("Could not obtain file path for saving Suppliers using filename: " + SUPPLIER_FILENAME);
         }
         try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
             gson.toJson(supplierMap, writer);
@@ -103,55 +96,5 @@ public class Supplier {
         }
     }
     
-    // The getFileFromResource helper (essential for robust file I/O)
-    // (Copied from Item.java - ideally, this would be in a shared FileUtils class)
-    private static File getFileFromResource(String resourcePath, boolean createIfNotFound) throws IOException {
-        URL resourceUrl = Supplier.class.getResource(resourcePath); // Use Supplier.class context
-        File file;
-        if (resourceUrl != null) {
-            try {
-                file = new File(resourceUrl.toURI());
-            } catch (URISyntaxException e) {
-                throw new IOException("Invalid resource URI: " + resourcePath, e);
-            }
-        } else {
-             System.out.println("Resource " + resourcePath + " not found in classpath. Trying to create in expected build output location/user dir.");
-            URL rootPath = Supplier.class.getProtectionDomain().getCodeSource().getLocation();
-            File baseDir;
-            try {
-                baseDir = new File(rootPath.toURI());
-                if (baseDir.isDirectory()) { 
-                    file = new File(baseDir.getAbsolutePath() + resourcePath);
-                } else { 
-                    file = new File(baseDir.getParentFile().getAbsolutePath() + resourcePath);
-                }
-            } catch (Exception e) {
-                System.err.println("Could not determine base directory for " + resourcePath + ". Error: " + e.getMessage() + ". Falling back to user home.");
-                String fallbackPath = System.getProperty("user.home") + File.separator + "TalonAppData" + resourcePath.replace('/', File.separatorChar);
-                file = new File(fallbackPath);
-            }
-
-            if (createIfNotFound && !file.exists()) {
-                File parentDir = file.getParentFile();
-                if (parentDir != null && !parentDir.exists()) {
-                    if (!parentDir.mkdirs()) {
-                        System.err.println("Could not create directory: " + parentDir.getAbsolutePath());
-                        return null;
-                    }
-                }
-                System.out.println("Attempting to create new file at: " + file.getAbsolutePath());
-                if (!file.createNewFile()) {
-                    System.err.println("Could not create new file: " + file.getAbsolutePath());
-                    return null;
-                }
-                System.out.println("Created new data file: " + file.getAbsolutePath());
-                if (file.length() == 0) { // Initialize with {}
-                    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
-                        writer.write("{}");
-                    }
-                }
-            }
-        }
-        return file;
-    }
+    // REMOVE the old private static File getFileFromResource method from this class
 }

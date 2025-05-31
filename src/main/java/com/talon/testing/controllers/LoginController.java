@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import com.talon.testing.models.User;
 import static com.talon.testing.models.UserType.Administrator;
+import com.talon.testing.utils.AppContext;
 import com.talon.testing.utils.Router;
 
 /**
@@ -40,14 +41,16 @@ public class LoginController  extends Switchable{
     try {
         User loggedInUser = UserController.loginUser(username, password);
         
+        
 
         if (loggedInUser != null) {
+            AppContext.setCurrentUser(loggedInUser);
             messageLabel.setText("Login successful! Welcome, " + loggedInUser.getUsername() + " (" + loggedInUser.getUserType() + ")");
             messageLabel.setTextFill(Color.GREEN); // Style for success
 
             switch (loggedInUser.getUserType()) {
                 case Administrator:
-                    router.switchScene("PO");
+                    router.switchScene("Manage Users");
                     break;
                 case Sales_Manager:
                     router.switchScene("Create PR");

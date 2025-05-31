@@ -6,10 +6,13 @@
 <BorderPane prefHeight="873.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.ListItemController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+        <fx:include source="../ProfileCard.fxml" fx:id="profileCardInclude" />
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
             <Button text="Create PO" onAction="#switchToCreatePO" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
             <Button text="Supplier List" onAction="#switchToSupplierList" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
             <Button text="Item View" onAction="#switchToItemList" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
             <Button text="Purchase Requisition" onAction="#switchToViewPRPM" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+        </VBox>
         </VBox>
     </left>
     <center>

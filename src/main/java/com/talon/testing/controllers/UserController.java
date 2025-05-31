@@ -1,191 +1,183 @@
-package com.talon.testing.controllers;
+// In UserController.java (and similarly in Item.java, Supplier.java, etc.)
+package com.talon.testing.controllers; // Or your models package
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.talon.testing.models.User; // Assuming this is your User model
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import com.talon.testing.models.User;
+import com.talon.testing.models.UserType; // Assuming you have UserTypeAdapter if needed
+import com.talon.testing.utils.FileUtils; // IMPORT THE NEW UTILITY CLASS
+
+import java.io.*;
 import java.lang.reflect.Type;
-import java.util.Collection;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-// It's good practice to use a proper logging framework, but for simplicity:
-// import java.util.logging.Level;
-// import java.util.logging.Logger;
 
 public class UserController {
-
-    private static final String USERS_FILE_PATH = "/data/user.txt"; // Path relative to resources folder
+    private static final String USERS_DATA_FILENAME = "users.txt"; // Just the filename
     private static final Type USER_MAP_TYPE = new TypeToken<Map<String, User>>() {}.getType();
-    private static final Gson gson = new Gson(); // Using default Gson for simplicity
-    // private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(UserType.class, new UserTypeAdapter()) // Keep if using
+            .setPrettyPrinting().create();
 
+    // No static initializer block needed here if FileUtils.getDataFileFromProjectRoot handles creation robustly
 
-    // Load all users
-    public static Map<String, User> loadUsers() throws IOException {
+    public static List<User> getAllUsers() throws IOException {
+        Map<String, User> userMap = loadUsersMap();
+        return new ArrayList<>(userMap.values());
+    }
+
+    private static Map<String, User> loadUsersMap() throws IOException {
         Map<String, User> userMap = new HashMap<>();
+        // Use FileUtils, pass true to create if not found, and default content "{}" for a map
+        File file = FileUtils.getDataFileFromProjectRoot(USERS_DATA_FILENAME, true, "{}");
 
-        // Try-with-resources ensures the stream is closed automatically
-        try (var inputStream = UserController.class.getResourceAsStream(USERS_FILE_PATH)) {
-            if (inputStream == null) {
-                // LOGGER.warning("User data file not found: " + USERS_FILE_PATH);
-                System.err.println("Warning: User data file not found at classpath:" + USERS_FILE_PATH + ". Returning empty user map.");
-                // Consider creating an empty file here if it's the first run and you want to save to it later.
-                // For now, just returning an empty map is fine for loading.
-                return userMap;
+        if (file == null || !file.exists() || !file.canRead()) {
+             System.err.println("Cannot read user data file or file does not exist: " + (file != null ? file.getAbsolutePath() : "null path"));
+            return userMap; // Return empty map if file fundamentally unusable
+        }
+        if (file.length() == 0) { // File exists but is empty (e.g. after creation but before writing "{}")
+            System.out.println(USERS_DATA_FILENAME + " is empty. Returning empty map.");
+            return userMap;
+        }
+
+
+        try (InputStream inputStream = new FileInputStream(file);
+             InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
+            userMap = gson.fromJson(reader, USER_MAP_TYPE);
+            if (userMap == null) { // If JSON content was "null" or invalid leading to null
+                userMap = new HashMap<>();
             }
-            try (InputStreamReader reader = new InputStreamReader(inputStream)) {
-                userMap = gson.fromJson(reader, USER_MAP_TYPE);
-                if (userMap == null) { // Handles case where file is empty or not valid JSON map
-                    userMap = new HashMap<>();
-                }
-            }
-        } catch (Exception e) { // Catch broader exceptions during file reading/parsing
-            // LOGGER.log(Level.SEVERE, "Error loading users from file: " + USERS_FILE_PATH, e);
-            System.err.println("Error loading users from file: " + USERS_FILE_PATH + " - " + e.getMessage());
-            // Depending on the severity, you might re-throw or return an empty map.
-            // For login, if data can't be loaded, no one can log in.
-            throw new IOException("Failed to load user data.", e);
+        } catch (com.google.gson.JsonSyntaxException e) {
+            System.err.println("Error parsing JSON from Users data file: " + file.getAbsolutePath() + ". Content: " + e.getMessage());
+            // Consider what to do: return empty map, throw, or try to recover/backup.
+            // For now, returning an empty map if parsing fails after file creation.
+            return new HashMap<>(); // Or throw new IOException("Corrupted user data file.", e);
         }
         return userMap;
     }
 
-    // Save users - Be cautious with getResource().getFile() if running from a JAR
-    public static void saveUsers(Map<String, User> userMap) throws IOException {
-        // This approach to get the file path might not work if running from a JAR.
-        // For writing, it's often better to use a predefined absolute path
-        // or a path relative to the application's working directory or user home.
-        java.net.URL resourceUrl = UserController.class.getResource(USERS_FILE_PATH);
-        if (resourceUrl == null) {
-            // This means the file wasn't found in the classpath. If you intend to create it:
-            // You'll need to figure out the correct absolute path in your build/output directory.
-            // For simplicity, this example assumes it exists or can be written to via an external path.
-            throw new IOException("Cannot find resource path to save users: " + USERS_FILE_PATH + ". Saving might not work correctly if packaged in a JAR.");
+    private static void saveUsersMap(Map<String, User> userMap) throws IOException {
+        // Use FileUtils, pass true to create if not found (though load should have done it), and default content "{}"
+        File file = FileUtils.getDataFileFromProjectRoot(USERS_DATA_FILENAME, true, "{}");
+        if (file == null) {
+            throw new IOException("Could not obtain file path for saving users.");
         }
 
-        File file;
-        try {
-            file = new File(resourceUrl.toURI()); // Better way to convert URL to File
-             // Ensure parent directories exist
-            File parentDir = file.getParentFile();
-            if (parentDir != null && !parentDir.exists()) {
-                if (!parentDir.mkdirs()) {
-                    throw new IOException("Could not create parent directories for " + file.getAbsolutePath());
-                }
-            }
-        } catch (java.net.URISyntaxException e) {
-            throw new IOException("Invalid URI syntax for user file path.", e);
-        }
-        
-        // Using GsonBuilder for pretty printing, easier to debug the JSON file
-        Gson gsonWriter = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(file)) {
-            gsonWriter.toJson(userMap, writer);
+        try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) { // Overwrites existing file
+            gson.toJson(userMap, writer);
+            System.out.println("Users saved to: " + file.getAbsolutePath());
         }
     }
 
-    // --- Login Method ---
+    // addUser, updateUser, deleteUser methods remain the same as they call loadUsersMap and saveUsersMap
+    public static void addUser(User user) throws IOException, IllegalArgumentException {
+        if (user == null || user.getUserID() == null || user.getUserID().trim().isEmpty()) {
+            throw new IllegalArgumentException("User or User ID cannot be null or empty.");
+        }
+        Map<String, User> userMap = loadUsersMap();
+        if (userMap.containsKey(user.getUserID())) {
+            throw new IllegalArgumentException("User with ID " + user.getUserID() + " already exists.");
+        }
+        if (user.getCreateTime() == null || user.getCreateTime().isEmpty()) {
+            user.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        }
+        userMap.put(user.getUserID(), user);
+        saveUsersMap(userMap);
+    }
+
+    public static void updateUser(User user) throws IOException, IllegalArgumentException {
+        if (user == null || user.getUserID() == null || user.getUserID().trim().isEmpty()) {
+            throw new IllegalArgumentException("User or User ID cannot be null or empty for update.");
+        }
+        Map<String, User> userMap = loadUsersMap();
+        User existingUser = userMap.get(user.getUserID());
+        if (existingUser == null) {
+            throw new IllegalArgumentException("User with ID " + user.getUserID() + " not found for update.");
+        }
+        if (user.getPassword() == null || user.getPassword().isEmpty()) {
+            user.setPassword(existingUser.getPassword());
+        }
+        if (user.getCreateTime() == null || user.getCreateTime().isEmpty()){
+            user.setCreateTime(existingUser.getCreateTime());
+        }
+        userMap.put(user.getUserID(), user);
+        saveUsersMap(userMap);
+    }
+
+    public static void deleteUser(String userId) throws IOException, IllegalArgumentException {
+        if (userId == null || userId.trim().isEmpty()) {
+            throw new IllegalArgumentException("User ID cannot be null or empty for deletion.");
+        }
+        Map<String, User> userMap = loadUsersMap();
+        if (!userMap.containsKey(userId)) {
+            throw new IllegalArgumentException("User with ID " + userId + " not found for deletion.");
+        }
+        userMap.remove(userId);
+        saveUsersMap(userMap);
+    }
+    
     /**
-     * Attempts to log in a user with the given username and password.
+     * Authenticates a user based on username and password.
+     * WARNING: This method uses plain text password comparison.
+     * In a real application, use password hashing (e.g., bcrypt).
      *
      * @param username The username to check.
-     * @param password The password to verify.
-     * @return The User object if login is successful, null otherwise.
+     * @param password The plain text password to check.
+     * @return The User object if authentication is successful, null otherwise.
      * @throws IOException If there's an error loading user data.
      */
     public static User loginUser(String username, String password) throws IOException {
-        Map<String, User> userMap = loadUsers();
+        if (username == null || username.trim().isEmpty() || password == null || password.isEmpty()) {
+            System.err.println("Username or password cannot be empty for login.");
+            return null;
+        }
 
-        if (userMap == null || userMap.isEmpty()) {
-            // LOGGER.info("No users found in the system during login attempt.");
-            System.out.println("No users found in the system.");
+        Map<String, User> userMap = loadUsersMap();
+        if (userMap.isEmpty()) {
+            System.err.println("No users found in the system during login attempt for: " + username);
             return null;
         }
 
         for (User user : userMap.values()) {
-            // Compare username (often case-insensitive for login)
-            if (user.getUsername().equalsIgnoreCase(username)) {
-                // IMPORTANT: Password comparison
-                // This is a PLAIN TEXT password comparison.
-                // In a real application, you MUST hash passwords before storing them
-                // and then hash the input password here and compare the hashes.
-                // Example: if (BCrypt.checkpw(password, user.getHashedPassword()))
+            // Case-insensitive username comparison can be more user-friendly
+            if (user.getUsername().equalsIgnoreCase(username.trim())) {
+                // --- PLAIN TEXT PASSWORD COMPARISON - NOT SECURE ---
+                // In a real application:
+                // 1. When user is created/password changed: passwordEncoder.encode(plainPassword) -> store hash
+                // 2. Here: passwordEncoder.matches(enteredPassword, user.getStoredPasswordHash())
                 if (user.getPassword().equals(password)) {
-                    // LOGGER.info("User logged in successfully: " + username);
-                    System.out.println("Login successful for: " + username);
+                    System.out.println("User " + username + " logged in successfully.");
                     return user; // Credentials match
                 } else {
-                    // LOGGER.warning("Password mismatch for user: " + username);
-                    System.out.println("Password mismatch for user: " + username);
+                    System.out.println("Password incorrect for user: " + username);
                     return null; // Username found, but password incorrect
                 }
+                // --- END OF INSECURE PASSWORD COMPARISON ---
             }
         }
-        // LOGGER.info("Username not found: " + username);
         System.out.println("Username not found: " + username);
         return null; // Username not found
     }
+}
 
-
-    // Add new user
-    public static void addUser(User user) throws IOException {
-        Map<String, User> userMap = loadUsers();
-        // IMPORTANT: If adding users, ensure the password in the 'user' object
-        // is hashed before calling this method or hash it here.
-        // e.g., user.setPassword(hashFunction(user.getPassword()));
-        if (userMap.containsKey(user.getUserID())) { // Assuming userID is the key
-            throw new IllegalArgumentException("User with ID " + user.getUserID() + " already exists.");
-        }
-        // Also check for unique username if that's a constraint
-        for (User existingUser : userMap.values()) {
-            if (existingUser.getUsername().equalsIgnoreCase(user.getUsername())) {
-                throw new IllegalArgumentException("User with username " + user.getUsername() + " already exists.");
-            }
-        }
-        userMap.put(user.getUserID(), user);
-        saveUsers(userMap);
-        // LOGGER.info("User added: " + user.getUsername());
+// Remember to include the UserTypeAdapter if you use it.
+class UserTypeAdapter extends com.google.gson.TypeAdapter<UserType> {
+    @Override
+    public void write(com.google.gson.stream.JsonWriter out, UserType value) throws IOException {
+        if (value == null) out.nullValue();
+        else out.value(value.name()); // Writes enum constant name, e.g., "Sales_Manager"
     }
-
-    // Update existing user
-    public static void updateUser(User updatedUser) throws IOException {
-        Map<String, User> userMap = loadUsers();
-        if (userMap.containsKey(updatedUser.getUserID())) {
-            // IMPORTANT: If password can be updated, ensure it's hashed.
-            userMap.put(updatedUser.getUserID(), updatedUser);
-            saveUsers(userMap);
-            // LOGGER.info("User updated: " + updatedUser.getUsername());
-        } else {
-            // LOGGER.warning("Attempted to update non-existent user: " + updatedUser.getUserID());
-            throw new IllegalArgumentException("User not found: " + updatedUser.getUserID());
-        }
-    }
-
-    // Delete a user by ID (which is the key in your map)
-    public static void deleteUser(String userID) throws IOException {
-        Map<String, User> userMap = loadUsers();
-        if (userMap.containsKey(userID)) {
-            User removedUser = userMap.remove(userID);
-            saveUsers(userMap);
-            // LOGGER.info("User deleted: " + (removedUser != null ? removedUser.getUsername() : userID));
-        } else {
-            // LOGGER.warning("Attempted to delete non-existent user: " + userID);
-            throw new IllegalArgumentException("User not found: " + userID);
-        }
-    }
-
-    // Get a single user by ID (key in your map)
-    public static User getUser(String userID) throws IOException {
-        Map<String, User> userMap = loadUsers();
-        return userMap.get(userID);
-    }
-
-    // List all users
-    public static Collection<User> getAllUsers() throws IOException {
-        Map<String, User> userMap = loadUsers();
-        return userMap.values();
+    @Override
+    public UserType read(com.google.gson.stream.JsonReader in) throws IOException {
+        if (in.peek() == com.google.gson.stream.JsonToken.NULL) { in.nextNull(); return null; }
+        String userTypeString = in.nextString();
+        try { return UserType.valueOf(userTypeString); } // Default enum parsing
+        catch (IllegalArgumentException e) { return UserType.fromString(userTypeString); } // Fallback
     }
 }

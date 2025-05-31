@@ -1,0 +1,16 @@
+{
+  "sdf": {
+    "salesId": "sdf",
+    "itemCode": "asdfas",
+    "quantitySold": 2345,
+    "salesDate": "2025-05-31",
+    "salesManagerId": "csdfs"
+  },
+  "asdfasdf": {
+    "salesId": "asdfasdf",
+    "itemCode": "ITM002",
+    "quantitySold": 2345,
+    "salesDate": "2025-05-31",
+    "salesManagerId": "sadfs"
+  }
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?> <!-- ADDED IMPORT -->
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.DailySalesController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+        <fx:include source="../ProfileCard.fxml" fx:id="profileCardInclude" />
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="Finance Report" onAction="#switchToGenerateSalesReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#switchToProcessPaymentAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Generate Inventory Report" onAction="#switchToGenerateInventoryReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Stock Management" onAction="#switchToStockManagementAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Create PO" onAction="#switchToCreatePOAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#switchToCreatePRAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#switchToSupplierEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#switchToItemEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#switchToSalesEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Sales Entry" />
+            <!-- Add your Logout button here if it's part of the main menu -->
+            <Button fx:id="logoutButton" onAction="#test" text="Logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold; margin-top: 20px;"/>
+        </VBox>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="DAILY SALES ENTRY" />
+            
+            <TableView fx:id="salesTableView" prefHeight="250.0" prefWidth="800.0"> <!-- Renamed fx:id, adjusted height -->
+                <columns>
+                    <TableColumn fx:id="SalesIdCol" prefWidth="100" text="Sales ID" />
+                    <TableColumn fx:id="ItemIdCol" prefWidth="150" text="Item Code" />
+                    <TableColumn fx:id="QuantitySCol" prefWidth="120.0" text="Quantity Sold" />
+                    <TableColumn fx:id="SalesDateCol" prefWidth="120.0" text="Sales Date" /> <!-- Adjusted width -->
+                    <TableColumn fx:id="SalesManagerIDCol1" prefWidth="150.0" text="Sales Manager ID" /> <!-- Adjusted width -->
+                </columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+            </TableView>
+            
+            <VBox style="-fx-padding: 15; -fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-width: 1; -fx-border-radius: 5;">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="SALES DETAILS" />
+                
+                <GridPane hgap="10" vgap="10">
+                    <Label text="Sales ID:" GridPane.rowIndex="0" GridPane.columnIndex="0" /> <!-- Changed label text -->
+                    <TextField fx:id="salesIdField" GridPane.rowIndex="0" GridPane.columnIndex="1" /> <!-- Changed fx:id -->
+                    
+                    <!-- Item Code TextField REPLACED with ComboBox -->
+                    <Label text="Item:" GridPane.rowIndex="1" GridPane.columnIndex="0" /> <!-- Changed label text -->
+                    <ComboBox fx:id="itemComboBox" prefWidth="250.0" GridPane.rowIndex="1" GridPane.columnIndex="1" /> <!-- NEW ComboBox -->
+                    
+                    <Label text="Quantity Sold:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                    <TextField fx:id="quantitySoldField" GridPane.rowIndex="2" GridPane.columnIndex="1" /> <!-- Changed fx:id -->
+                    
+                    <Label text="Sales Date:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+                    <TextField fx:id="salesDateField" promptText="YYYY-MM-DD" GridPane.rowIndex="3" GridPane.columnIndex="1" /> <!-- Changed fx:id -->
+                    
+                    <Label text="Sales Manager ID:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+                    <TextField fx:id="salesManagerIdField" GridPane.rowIndex="4" GridPane.columnIndex="1" /> <!-- Changed fx:id -->
+                </GridPane>
+                
+                <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 15 0 0 0;">
+                    <Button fx:id="addButton" onAction="#handleAddButtonAction" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-min-width: 80;" text="Add" />
+                    <Button fx:id="deleteButton" onAction="#handleDeleteButtonAction" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-min-width: 80;" text="Delete" />
+                    <Button fx:id="clearButton" onAction="#clearFormAction" style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-min-width: 80;" text="Clear" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

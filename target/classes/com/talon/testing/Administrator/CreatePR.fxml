@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.CreatePRController">
+    <left>
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+        <fx:include source="../ProfileCard.fxml" fx:id="profileCardInclude" />
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="Finance Report" onAction="#switchToGenerateSalesReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#switchToProcessPaymentAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Generate Inventory Report" onAction="#switchToGenerateInventoryReportAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Stock Management" onAction="#switchToStockManagementAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Create PO" onAction="#switchToCreatePOAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button onAction="#switchToCreatePRAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Create PR" />
+            <Button onAction="#switchToSupplierEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Supplier Entry" />
+            <Button onAction="#switchToItemEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Item Entry" />
+            <Button onAction="#switchToSalesEntryAdmin" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Sales Entry" />
+            <!-- Add your Logout button here if it's part of the main menu -->
+            <Button fx:id="logoutButton" onAction="#test" text="Logout" style="-fx-background-color: #d9534f; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold; margin-top: 20px;"/>
+        </VBox>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Create PR" />
+            
+            <TableView fx:id="poTable" prefHeight="200.0" prefWidth="800.0" style="-fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #ccc;">
+                <columns>
+                    <TableColumn fx:id="prIdCol" prefWidth="90" text="PR ID" />
+                    <TableColumn fx:id="SMIdCol" prefWidth="120" text="Sales Manager ID" />
+                    <!-- MODIFIED/ADDED COLUMNS FOR SUPPLIER AND ITEM NAME -->
+                    <TableColumn fx:id="supplierNameCol" prefWidth="150" text="Supplier Name" />
+                    <TableColumn fx:id="itemNameCol" prefWidth="150" text="Item Name" />
+                    <TableColumn fx:id="ItemIDCol" prefWidth="90" text="Item ID" />
+                    <!-- END OF MODIFICATION -->
+                    <TableColumn fx:id="quantityCol" prefWidth="60" text="Qty" />
+                    <TableColumn fx:id="CreatedDateCol" minWidth="0.0" prefWidth="90.0" text="Create At" />
+                    <!-- You might also want a status column -->
+                    <TableColumn fx:id="statusCol" prefWidth="80" text="Status" />
+                </columns>
+            </TableView>
+            
+            <VBox style="-fx-padding: 15; -fx-background-color: #f9f9f9; -fx-border-color: #ddd; -fx-border-width: 1; -fx-border-radius: 5;">
+                <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 0 10 0;" text="PURCHASE REQUISITION DETAILS" />
+                
+                <GridPane hgap="10" vgap="10">
+                    <Label text="PR ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="prIDField" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+                    
+                    <Label text="Sales Manager ID" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="SMIDField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                    
+                    <Label text="Supplier:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="supplierComboBox" prefWidth="250.0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    
+                    <Label text="Item:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="itemComboBox" prefWidth="250.0" GridPane.rowIndex="3" GridPane.columnIndex="1" disable="true"/>
+                    
+                    <Label text="Quantity" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <TextField fx:id="QuantityField" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+                    
+                    <Label text="Create At" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                    <TextField fx:id="CreateDateField" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+                </GridPane>
+                
+                <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 15 0 0 0;">
+                    <Button onAction="#handlePRAddButtonAction" fx:id="addButton" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-min-width: 80;" text="Add" />
+                    <Button onAction="#handlePRDeleteButtonAction" fx:id="deleteButton" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-min-width: 80;" text="Delete" />
+                    <Button onAction="#clearPRFormAction" fx:id="clearButton" style="-fx-background-color: #9E9E9E; -fx-text-fill: white; -fx-min-width: 80;" text="Clear" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>

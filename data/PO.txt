@@ -9,7 +9,7 @@
     "purchaseManagerId": "SM002",
     "financeManagerId": "FM002",
     "approvalDate": "2023-10-10",
-    "status": "Paid",
+    "status": "Approved by Finance",
     "items": [
       {
         "itemCode": "ITM002",
@@ -28,7 +28,7 @@
     "orderDate": "2023-10-02",
     "requiredDate": "2023-11-02",
     "purchaseManagerId": "SM001",
-    "status": "Approved by PM",
+    "status": "Rejected",
     "items": [
       {
         "itemCode": "ITM001",
@@ -37,7 +37,7 @@
         "itemNameDisplay": "Heavy-Duty Widget"
       }
     ],
-    "notes": "Waiting for finance approval for payment."
+    "notes": "Waiting for finance approval for payment.\nRejected by [User/Role] on 2025-05-31: it is very bad"
   },
   "PO2023-104": {
     "poId": "PO2023-104",

@@ -1,6 +1,5 @@
 {
   "1": {
-    "userId": 1,
     "username": "john123",
     "password": "a",
     "email": "john@example.com",
@@ -9,7 +8,6 @@
     "createTime": "2025-04-20T10:00:00"
   },
   "2": {
-    "userId": 2,
     "username": "sarahm",
     "password": "a",
     "email": "sarahm@example.com",
@@ -18,7 +16,6 @@
     "createTime": "2025-04-20T10:05:00"
   },
   "3": {
-    "userId": 3,
     "username": "davidf",
     "password": "a",
     "email": "davidf@example.com",
@@ -27,7 +24,6 @@
     "createTime": "2025-04-20T10:10:00"
   },
   "4": {
-    "userId": 4,
     "username": "emilyi",
     "password": "a",
     "email": "emilyi@example.com",
@@ -36,7 +32,6 @@
     "createTime": "2025-04-20T10:15:00"
   },
   "5": {
-    "userId": 5,
     "username": "kevinp",
     "password": "a",
     "email": "kevinp@example.com",

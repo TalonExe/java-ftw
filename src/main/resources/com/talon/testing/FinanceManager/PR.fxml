@@ -5,16 +5,20 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.talon.testing.controllers.FinanceManagerController">
     <left>
         <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
-            <Button onAction="#switchToPOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="PO Approval" />
-            <Button onAction="#switchToFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Finance Report" />
-            <Button onAction="#switchToPR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150; -fx-font-weight: bold;" text="Purchase Requisitions" />
-            <Button onAction="#switchToPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;" text="Process Payment" />
+        <fx:include source="../ProfileCard.fxml" fx:id="profileCardInclude" />
+        <VBox spacing="10" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+            <Button text="PO Approval" onAction="#switchToPOApproval" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Finance Report" onAction="#switchToFinanceReport" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Purchase Requisitions" onAction="#switchToPR" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+            <Button text="Process Payment" onAction="#switchToPayment" style="-fx-background-color: #4a90e2; -fx-text-fill: white; -fx-min-width: 150;"/>
+        </VBox>
         </VBox>
     </left>
     
