@@ -43,7 +43,6 @@
             </TableView>
             
             <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Generate PDF Report" onAction="#test" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
             </HBox>
         </VBox>
     </center>

@@ -36,7 +36,6 @@
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <Label text="Chart Type:"/>
                 <ComboBox fx:id="chartTypeComboBox" prefWidth="200.0"/>
-                <Button fx:id="generatePdfButton" text="Generate PDF Report" onAction="#handleGeneratePdfReport" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
             </HBox>
 
             <!-- Chart Area -->
